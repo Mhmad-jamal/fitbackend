@@ -6,14 +6,13 @@
 // Author Profile: https://codecanyon.net/user/wicombit/portfolio
 /*--------------------*/
 
-function connect($database){
-    try{
+function connect($database) {
+    try {
         $connect = new PDO('mysql:host='. $database['host'] .';dbname='. $database['db'], $database['user'], $database['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
         return $connect;
-        
-    }catch (PDOException $e){
-        return false;
-    }
+    } catch (PDOException $e) {
+
+return true;    }
 }
 
 function cleardata($data){
