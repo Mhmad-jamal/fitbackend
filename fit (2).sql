@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2023 at 04:07 PM
+-- Generation Time: Aug 06, 2023 at 04:44 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -512,10 +512,10 @@ INSERT INTO `types` (`type_id`, `type_title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usesr_goal`
+-- Table structure for table `users_goal`
 --
 
-CREATE TABLE `usesr_goal` (
+CREATE TABLE `users_goal` (
   `id` int(11) NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
@@ -524,10 +524,10 @@ CREATE TABLE `usesr_goal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `usesr_goal`
+-- Dumping data for table `users_goal`
 --
 
-INSERT INTO `usesr_goal` (`id`, `user_id`, `user_email`, `user_goal`, `created_at`) VALUES
+INSERT INTO `users_goal` (`id`, `user_id`, `user_email`, `user_goal`, `created_at`) VALUES
 (2, '$$$$$$$', 'mh@gmail.com', '[{\"componentId\":1,\"value\":2},{\"componentId\":1,\"value\":2},{\"componentId\":2,\"value\":2},{\"componentId\":3,\"value\":2},{\"componentId\":4,\"value\":2},{\"componentId\":5,\"value\":3},{\"componentId\":6,\"value\":3},{\"componentId\":7,\"value\":[]},{\"componentId\":8,\"value\":2},{\"componentId\":9,\"value\":4},{\"componentId\":10,\"value\":3},{\"componentId\":11,\"value\":3},{\"componentId\":12,\"value\":4},{\"componentId\":13,\"value\":4},{\"componentId\":14,\"value\":4},{\"componentId\":15,\"value\":3},{\"componentId\":16,\"value\":3},{\"componentId\":20,\"value\":2},{\"componentId\":23,\"value\":4},{\"componentId\":24,\"value\":4},{\"componentId\":25,\"value\":8}]', '2023-08-06 13:43:32');
 
 -- --------------------------------------------------------
@@ -949,9 +949,9 @@ INSERT INTO `workouts` (`workout_id`, `workout_title`, `workout_description`, `w
 (11, 'Ageless Muscle: Total-Body Workout', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 2, 4, NULL, NULL, 1, 1, '4 Days/Week', '1', '', 'workout_1519948891.jpg'),
 (12, 'Level Up Your Triceps Routine', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 2, 4, NULL, NULL, 1, 1, '5 Days/Week', '1', '', 'workout_1519949368.jpg'),
 (13, 'Top It Off With This Full-Body Finisher', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 1, 1, NULL, NULL, 2, 2, '3 Days/Week', '1', '', 'workout_1519949759.jpg'),
-(14, 'Real Man\'s Cardio Workout', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 1, 1, NULL, NULL, 2, 2, '4 Days/Week', '1', '', 'workout_1519949966.jpg'),
-(15, 'The Ultimate Full-Body Landmine Workout', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 1, 1, NULL, NULL, 3, 3, '3 Days/Week', '1', '', 'workout_1519950276.jpg'),
-(16, 'At-Home Cardio for Fat Loss', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 3, 1, NULL, NULL, 3, 3, '4 Days/Week', '1', 'free', 'workout_1519950433.jpg'),
+(14, 'Real Man\'s Cardio Workout', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 1, 1, NULL, 1, 2, 2, '4 Days/Week', '1', '', 'workout_1519949966.jpg'),
+(15, 'The Ultimate Full-Body Landmine Workout', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 1, 1, NULL, 1, 3, 3, '3 Days/Week', '1', '', 'workout_1519950276.jpg'),
+(16, 'At-Home Cardio for Fat Loss', '<p>When someone asks you to make a muscle, chances are you don&rsquo;t flex your traps or rise onto your toes to show off your calves. You\'re going to roll up your sleeves and flex your biceps, inviting onlookers to your own personal &ldquo;gun show.&rdquo;</p>\r\n<p>And while those arm-focused articles can prove helpful, many seem to present the same basic information, which can only take your gains so far. In an effort to help you bust through your biceps-building plateaus, we\'ve got a unique approach to promote new growth for those all-important show muscles.&nbsp;</p>', 3, 1, NULL, 1, 3, 3, '4 Days/Week', '1', 'free', 'workout_1519950433.jpg'),
 (21, 'test2', '<p>test</p>', 4, 4, 1, 1, 10, 8, 'test', '1', 'free', 'workout_1691327538.jpg');
 
 -- --------------------------------------------------------
@@ -1081,9 +1081,9 @@ ALTER TABLE `types`
   ADD PRIMARY KEY (`type_id`) USING BTREE;
 
 --
--- Indexes for table `usesr_goal`
+-- Indexes for table `users_goal`
 --
-ALTER TABLE `usesr_goal`
+ALTER TABLE `users_goal`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1193,9 +1193,9 @@ ALTER TABLE `types`
   MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `usesr_goal`
+-- AUTO_INCREMENT for table `users_goal`
 --
-ALTER TABLE `usesr_goal`
+ALTER TABLE `users_goal`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -1245,7 +1245,7 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `usesr_goal_workout`
   ADD CONSTRAINT `usesr_goal_workout_ibfk_1` FOREIGN KEY (`workout_id`) REFERENCES `workouts` (`workout_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usesr_goal_workout_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `usesr_goal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usesr_goal_workout_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users_goal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `workouts`

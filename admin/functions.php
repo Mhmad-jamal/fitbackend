@@ -280,6 +280,59 @@ return $sentence->fetchAll();
 
 /////////////////////////////////////////////////////////////////////////////////// WORKOUTS
 
+function get_workouts_by_goal($connect)
+{
+     $gender='';
+    $primary_goal='';
+    $place='';
+    $level=''; 
+    $user_id='';
+    
+
+    //test
+    $user_id='$$$$$$$';
+    ///check user last workoutby goal 
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
+    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sentence->execute();
+    
+    // Check if there are any rows returned by the query
+    if ($sentence->rowCount() > 0) {
+        $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
+     $user_goal= json_decode($user_data["user_goal"]);
+foreach ($user_goal as $key => $value) {
+    if($value->componentId==1){
+        $gender=$value->value;
+         }
+       elseif($value->componentId==2){
+            $primary_goal=$value->value;
+         }elseif ($value->componentId==3){
+            $place=$value->value;
+         }
+         elseif($value->componentId==4 )
+         {
+            $level=$value->value;
+         }
+}
+    } 
+    var_dump($gender);
+    echo "<br>";
+    var_dump($gender);
+    echo "<br>";
+
+    var_dump($gender);
+    echo "<br>";
+
+    var_dump($gender);
+
+    die();
+    
+
+    ///
+    $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1"); 
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
 function get_all_workouts($connect)
 {
     
@@ -287,7 +340,6 @@ function get_all_workouts($connect)
     $sentence->execute();
     return $sentence->fetchAll();
 }
-
 function id_workout($id_workout){
     return (int)cleardata($id_workout);
 }
