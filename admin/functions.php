@@ -12,7 +12,9 @@ function connect($database) {
         return $connect;
     } catch (PDOException $e) {
 
-return true;    }
+        $connect = new PDO('mysql:host=localhost;dbname=fit','root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
+        return $connect;
+ }
 }
 
 function cleardata($data){
@@ -78,6 +80,17 @@ function get_exercise_per_id($connect, $id){
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
+function get_all_place($connect){
+    $sentence = $connect->query("SELECT * FROM `place`");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
+function get_all_gender($connect){
+    $sentence = $connect->query("SELECT * FROM `gender`");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
+
 
 function number_exercises($connect){
 

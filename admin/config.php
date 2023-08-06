@@ -2,9 +2,8 @@
 
 /* URL PROJECT */
 
-define ('SITE_URL', 'https://react.wetherejo.com/');
+define('SITE_URL', 'http://localhost/react/');
 
-/* DATABASE CONFIGURATION */
 
 $database = array(
 'host' => 'localhost',

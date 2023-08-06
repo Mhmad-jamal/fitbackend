@@ -55,7 +55,7 @@
    </select> 
 
    <label class="control-label">Equipment</label>
-   <select class="form-control" name="workout_level" required="">
+   <select class="form-control" name="workout_equipment" required="">
     <?php foreach($equipments_lists as $equipment_list): ?>
    <option value="<?php echo $equipment_list['equipment_id']; ?>"><?php echo $equipment_list['equipment_title']; ?></option>
     <?php endforeach; ?>
@@ -70,6 +70,19 @@
    <option value="free">Free</option>
    <option value="premium">Premium</option>
    </select>
+   <label class="control-label">Place</label>
+   <select class="form-control" name="place" required="">
+   <?php foreach($place_lists as $place_list): ?>
+   <option value="<?php echo $place_list['id']; ?>"><?php echo $place_list['place_value']; ?></option>
+    <?php endforeach; ?>
+   </select> 
+   <label class="control-label">Gender</label>
+
+   <select class="form-control" name="gender" required="">
+   <?php foreach($gender_lists as $gender_list): ?>
+   <option value="<?php echo $gender_list['id']; ?>"><?php echo $gender_list['gender_value']; ?></option>
+    <?php endforeach; ?>
+   </select> 
 
    <label class="control-label">Day 1</label>
    <input type="hidden" value="1" name="day_1">

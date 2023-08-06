@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$workout_description = $_POST['workout_description'];
 	$workout_goal = cleardata($_POST['workout_goal']);
 	$workout_level = cleardata($_POST['workout_level']);
+	$workout_place=cleardata($_POST["place"]);
+	$workout_gender=cleardata($_POST["gender"]);
 	$workout_bodypart = cleardata($_POST['workout_bodypart']);
 	$workout_equipment = cleardata($_POST['workout_equipment']);
 	$workout_duration = $_POST['workout_duration'];
@@ -49,15 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	move_uploaded_file($workout_image, $workout_image_upload . 'workout_' . $renamefile);
 
+
+
 	$statment = $connect->prepare(
-		'INSERT INTO workouts (workout_id,workout_title,workout_description,workout_goal,workout_level,workout_bodypart,workout_equipment,workout_duration,workout_price,workout_status,workout_image) VALUES (null, :workout_title, :workout_description, :workout_goal, :workout_level, :workout_bodypart, :workout_equipment, :workout_duration, :workout_price, :workout_status, :workout_image)'
+		'INSERT INTO workouts (workout_id,workout_title,workout_description,workout_goal,workout_level,workout_place,workout_gender,workout_bodypart,workout_equipment,workout_duration,workout_price,workout_status,workout_image) VALUES (null, :workout_title, :workout_description, :workout_goal, :workout_level,:workout_place,:workout_gender, :workout_bodypart, :workout_equipment, :workout_duration, :workout_price, :workout_status, :workout_image)'
 		);
 
+	
 	$statment->execute(array(
 		':workout_title' => $workout_title,
 		':workout_description' => $workout_description,
 		':workout_goal' => $workout_goal,
 		':workout_level' => $workout_level,
+		':workout_place'=>$workout_place,
+		':workout_gender'=>$workout_gender,
 		':workout_bodypart' => $workout_bodypart,
 		':workout_equipment' => $workout_equipment,
 		':workout_duration' => $workout_duration,
@@ -174,6 +181,8 @@ $levels_lists = get_all_levels($connect);
 $goals_lists = get_all_goals($connect);
 $bodyparts_lists = get_all_bodyparts($connect);
 $equipments_lists = get_all_equipments($connect);
+$place_lists = get_all_place($connect);
+$gender_lists=get_all_gender($connect);
 
 require '../views/new.workout.view.php';
 require '../views/footer.view.php';
