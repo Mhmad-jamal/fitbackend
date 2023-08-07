@@ -278,61 +278,111 @@ return $sentence->fetchAll();
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////// WORKOUTS
-
-function get_workouts_by_goal($connect)
+function insert_workout($connect, $user_id,$prev_id)
 {
-     $gender='';
-    $primary_goal='';
-    $place='';
-    $level=''; 
-    $user_id='';
     
+    $gender = '';
+    $primary_goal = '';
 
-    //test
-    $user_id='$$$$$$$';
-    ///check user last workoutby goal 
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
-    
-    // Check if there are any rows returned by the query
+
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
-     $user_goal= json_decode($user_data["user_goal"]);
-foreach ($user_goal as $key => $value) {
-    if($value->componentId==1){
-        $gender=$value->value;
-         }
-       elseif($value->componentId==2){
-            $primary_goal=$value->value;
-         }elseif ($value->componentId==3){
-            $place=$value->value;
-         }
-         elseif($value->componentId==4 )
-         {
-            $level=$value->value;
-         }
+        $user_goal = json_decode($user_data["user_goal"]);
+        foreach ($user_goal as $key => $value) {
+            if ($value->componentId == 1) {
+                $gender = $value->value;
+            } elseif ($value->componentId == 2) {
+                $primary_goal = $value->value;
+            }
+        }
+
+        $gender = 1;
+
+        $Workout_id = '';
+        if($prev_id != null){
+            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_id != :prev_id AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
+
+$sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
+$sentence->execute();
+        }else {
+            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1");
+            $sentence->execute();
+        }
+       
+        $Workout_data = $sentence->fetchAll();
+        $Workout_id = $Workout_data[0]['workout_id'];
+        $statement = $connect->prepare(
+            'INSERT INTO usesr_goal_workout (user_id, workout_id) VALUES (:user_id, :workout_id)'
+        );
+        
+        $insertResult = $statement->execute(array(
+            ':user_id' => $user_id,
+            ':workout_id' => $Workout_id,
+        ));
+        
+        if ($insertResult) {
+            return $Workout_id;
+        } else {
+            return false;
+        }
+
+    }
 }
-    } 
-    var_dump($gender);
-    echo "<br>";
-    var_dump($gender);
-    echo "<br>";
+function get_workouts_by_goal($connect)
+{
+   $user_id = $_POST["user_id"];
+   $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+   $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+   $sentence->execute();
+   if ($sentence->rowCount() > 0) {
 
-    var_dump($gender);
-    echo "<br>";
+   $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+   $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+   $sentence->execute();
+   
+   if ($sentence->rowCount() > 0) {
+    $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+    $timestamp_from_db = strtotime($last_record['created_at']);
+   
+    $today = strtotime(date('Y-m-d'));
 
-    var_dump($gender);
+    $seven_days_later = strtotime('+7 days', $today);
+    $workout_id=$last_record["workout_id"];
+    if ($timestamp_from_db <= $seven_days_later) {
+       
+        $result=get_workout_per_id($connect, $workout_id);
 
-    die();
-    
+        
+    } else {
 
-    ///
-    $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1"); 
-    $sentence->execute();
-    return $sentence->fetchAll();
+        $result = insert_workout($connect, $user_id,$workout_id);
+        if($result){
+            $result=get_workout_per_id($connect, $workout_id);
+
+        }
+    }
+} else {
+    $result = insert_workout($connect, $user_id,null);
+    if($result){
+        $result=get_workout_per_id($connect, $result);
+
+    }
+
 }
+return $result;
+
+   }else {
+return false;
+
+   }
+   
+
+
+}
+
 function get_all_workouts($connect)
 {
     
