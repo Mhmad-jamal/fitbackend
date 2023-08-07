@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 06, 2023 at 04:44 PM
+-- Generation Time: Aug 07, 2023 at 02:25 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -528,7 +528,7 @@ CREATE TABLE `users_goal` (
 --
 
 INSERT INTO `users_goal` (`id`, `user_id`, `user_email`, `user_goal`, `created_at`) VALUES
-(2, '$$$$$$$', 'mh@gmail.com', '[{\"componentId\":1,\"value\":2},{\"componentId\":1,\"value\":2},{\"componentId\":2,\"value\":2},{\"componentId\":3,\"value\":2},{\"componentId\":4,\"value\":2},{\"componentId\":5,\"value\":3},{\"componentId\":6,\"value\":3},{\"componentId\":7,\"value\":[]},{\"componentId\":8,\"value\":2},{\"componentId\":9,\"value\":4},{\"componentId\":10,\"value\":3},{\"componentId\":11,\"value\":3},{\"componentId\":12,\"value\":4},{\"componentId\":13,\"value\":4},{\"componentId\":14,\"value\":4},{\"componentId\":15,\"value\":3},{\"componentId\":16,\"value\":3},{\"componentId\":20,\"value\":2},{\"componentId\":23,\"value\":4},{\"componentId\":24,\"value\":4},{\"componentId\":25,\"value\":8}]', '2023-08-06 13:43:32');
+(3, '$$$', 'test@gmaill.com', '[{\"componentId\":1,\"value\":2},{\"componentId\":1,\"value\":2},{\"componentId\":2,\"value\":2},{\"componentId\":3,\"value\":2},{\"componentId\":4,\"value\":2},{\"componentId\":5,\"value\":3},{\"componentId\":6,\"value\":3},{\"componentId\":7,\"value\":[]},{\"componentId\":8,\"value\":2},{\"componentId\":9,\"value\":4},{\"componentId\":10,\"value\":3},{\"componentId\":11,\"value\":3},{\"componentId\":12,\"value\":4},{\"componentId\":13,\"value\":4},{\"componentId\":14,\"value\":4},{\"componentId\":15,\"value\":3},{\"componentId\":16,\"value\":3},{\"componentId\":20,\"value\":2},{\"componentId\":23,\"value\":4},{\"componentId\":24,\"value\":4},{\"componentId\":25,\"value\":8}]', '2023-08-07 11:12:24');
 
 -- --------------------------------------------------------
 
@@ -538,7 +538,7 @@ INSERT INTO `users_goal` (`id`, `user_id`, `user_email`, `user_goal`, `created_a
 
 CREATE TABLE `usesr_goal_workout` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
   `workout_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -548,7 +548,9 @@ CREATE TABLE `usesr_goal_workout` (
 --
 
 INSERT INTO `usesr_goal_workout` (`id`, `user_id`, `workout_id`, `created_at`) VALUES
-(2, 2, 11, '2023-08-06 13:45:44');
+(17, '$$$', 14, '2023-08-31 12:23:05'),
+(18, '$$$', 21, '2023-08-31 12:23:15'),
+(19, '$$$', 14, '2023-08-07 12:23:36');
 
 -- --------------------------------------------------------
 
@@ -1084,7 +1086,8 @@ ALTER TABLE `types`
 -- Indexes for table `users_goal`
 --
 ALTER TABLE `users_goal`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `usesr_goal_workout`
@@ -1196,13 +1199,13 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `users_goal`
 --
 ALTER TABLE `users_goal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `usesr_goal_workout`
 --
 ALTER TABLE `usesr_goal_workout`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `workouts`
@@ -1245,7 +1248,7 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `usesr_goal_workout`
   ADD CONSTRAINT `usesr_goal_workout_ibfk_1` FOREIGN KEY (`workout_id`) REFERENCES `workouts` (`workout_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usesr_goal_workout_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users_goal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usesr_goal_workout_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users_goal` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `workouts`
