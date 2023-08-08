@@ -308,7 +308,8 @@ function insert_workout($connect, $user_id, $prev_id)
 
     $gender = '';
     $primary_goal = '';
-
+$place='';
+$level='';
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
@@ -321,6 +322,10 @@ function insert_workout($connect, $user_id, $prev_id)
                 $gender = $value->value;
             } elseif ($value->componentId == 2) {
                 $primary_goal = $value->value;
+            }elseif($value->componentId==3){
+                $place=$value->value;
+            }elseif($value->componentId==4){
+                $level=$value->value;
             }
         }
 
@@ -328,12 +333,12 @@ function insert_workout($connect, $user_id, $prev_id)
 
         $Workout_id = '';
         if ($prev_id != null) {
-            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_id != :prev_id AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
+            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workout_goal='$primary_goal' AND  workout_place='$place' AND workout_level='$level' AND workouts.workout_id != :prev_id AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
 
             $sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
             $sentence->execute();
         } else {
-            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1");
+            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workout_goal='$primary_goal' AND  workout_place='$place' AND workout_level='$level' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1");
             $sentence->execute();
         }
 
@@ -419,18 +424,19 @@ function insert_Food($connect, $user_id, $prev_id)
 
         $diet_id = '';
         if ($prev_id != null) {
-            $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE  AND diet_id='$prev_id' AND diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
+            $sentence = $connect->prepare("SELECT diets.*, categories.category_title AS category_title FROM diets, categories WHERE diet_id != :prev_id AND diet_improvement = :diet AND diets.diet_category = categories.category_id ORDER BY RAND() LIMIT 1");
 
             $sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
+            $sentence->bindParam(':diet', $diet, PDO::PARAM_STR);
             $sentence->execute();
+            
         } else {
             $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE   diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
             $sentence->execute();
         }
 
         $diet_data = $sentence->fetchAll();
-        var_dump($diet_id);
-        die();
+        
         $diet_id = $diet_data[0]['diet_id'];
         
         $statement = $connect->prepare(

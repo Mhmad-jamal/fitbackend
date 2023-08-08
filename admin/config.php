@@ -7,9 +7,9 @@ define('SITE_URL', 'http://localhost/react/');
 
 $database = array(
 'host' => 'localhost',
-'db' => 'u794101974_React',
-'user' => 'u794101974_React',
-'pass' => 'u794101974_React_123'
+'db' => 'fit',
+'user' => 'root',
+'pass' => ''
 );
 
 $email_config = array(

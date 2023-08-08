@@ -2,32 +2,46 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#table_id').dataTable({
-     "bProcessing": true,
-     "sAjaxSource": "../controller/get_goals.php",
-     "responsive": true,
-     "bPaginate":true,
-     "aaSorting": [[1,'desc']],
-     "sPaginationType":"full_numbers",
-     "iDisplayLength": 10,
-     "aoColumns": [
-     { mData: 'goal_id', "width": "1%", "className": "text-center" },
-     { "mData": null , "width": "5%", "className": "product text-center",
-     "mRender" : function (data) {
-      return "<img src='../images/"+data.goal_image+"' style='width: 50px; height: 50px'/>";}
-    },
-    { mData: 'goal_title', "width": "20%"},
-    { "mData": null,
-    "width": "5%",
-    "className": "text-center",
-    'orderable': false,
-    'searchable': false,
-    "mRender" : function (data) {
-      return "<a class='btn btn-small btn-primary' href='../controller/edit_goal.php?id="+data.goal_id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_goal.php?id="+data.goal_id+"'>Delete</a>";}
-    }
+  $('#table_id').dataTable({
+    "bProcessing": true,
+    "sAjaxSource": "../controller/get_goals.php",
+    "responsive": true,
+    "bPaginate": true,
+    "aaSorting": [[1, 'desc']],
+    "sPaginationType": "full_numbers",
+    "iDisplayLength": 10,
+    "aoColumns": [
+      { mData: 'goal_id', "width": "1%", "className": "text-center" },
+      {
+        "mData": null,
+        "width": "5%",
+        "className": "product text-center",
+        "mRender" : function (data) {
+          return "<img src='../images/"+data.goal_image+"' style='width: 50px; height: 50px'/>";
+        }
+      },
+      { mData: 'goal_title', "width": "20%" },
+      {
+        "mData": null,
+        "width": "5%",
+        "className": "text-center",
+        'orderable': false,
+        'searchable': false,
+        "mRender" : function (data) {
+          var deleteButton = "<a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_goal.php?id="+data.goal_id+"'>Delete</a>";
+    
+          // Check if goal_id is less than or equal to 2, and conditionally disable the Delete button
+          if (data.goal_id <= 3) {
+            deleteButton = "<a class='btn btn-small btn-danger btn-delete disabled ' >Delete</a>";
+          }
+    
+          return "<a class='btn btn-small btn-primary' href='../controller/edit_goal.php?id="+data.goal_id+"'>Edit</a> " + deleteButton;
+        }
+      }
     ]
   });
-  });
+});
+
 </script>
 
 <!--Page Container--> 

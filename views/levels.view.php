@@ -36,7 +36,13 @@
     'orderable': false,
     'searchable': false,
     "mRender" : function (data) {
-      return "<a class='btn btn-small btn-primary' href='../controller/edit_level.php?id="+data.level_id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_level.php?id="+data.level_id+"'>Delete</a>";}
+      const deleteButton = (data.level_id > 3)
+            ? "<a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_level.php?id="+data.level_id+"'>Delete</a>"
+            : "<a class='btn btn-small btn-danger btn-delete disabled'>Delete</a>";
+          
+          return "<a class='btn btn-small btn-primary' href='../controller/edit_level.php?id="+data.level_id+"'>Edit</a> " + deleteButton;
+        }    
+
     }
     ]
   });
