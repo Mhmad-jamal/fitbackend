@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$workout_duration = $_POST['workout_duration'];
 	$workout_price = $_POST['workout_price'];
 	$workout_status = $_POST['workout_status'];
-
+	$workout_place=cleardata($_POST["place"]);
+	$workout_gender=cleardata($_POST["gender"]);
 	$workout_id = cleardata($_POST['workout_id']);
 	$workout_image_save = $_POST['workout_image_save'];
 	$workout_image = $_FILES['workout_image'];
@@ -58,13 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 $statment = $connect->prepare(
-	"UPDATE workouts SET workout_title = :workout_title, workout_description = :workout_description, workout_goal = :workout_goal, workout_level = :workout_level, workout_bodypart = :workout_bodypart, workout_equipment = :workout_equipment, workout_duration = :workout_duration, workout_price = :workout_price, workout_status = :workout_status, workout_image = :workout_image WHERE workout_id = :workout_id"
+	"UPDATE workouts SET workout_title = :workout_title,workout_gender=:workout_gender,workout_place=:workout_place, workout_description = :workout_description, workout_goal = :workout_goal, workout_level = :workout_level, workout_bodypart = :workout_bodypart, workout_equipment = :workout_equipment, workout_duration = :workout_duration, workout_price = :workout_price, workout_status = :workout_status, workout_image = :workout_image WHERE workout_id = :workout_id"
 	);
 
 $statment->execute(array(
 
 		':workout_title' => $workout_title,
 		':workout_description' => $workout_description,
+		':workout_place'=>$workout_place,
+		':workout_gender'=>$workout_gender,
 		':workout_goal' => $workout_goal,
 		':workout_level' => $workout_level,
 		':workout_bodypart' => $workout_bodypart,
@@ -241,7 +244,8 @@ $levels_lists = get_all_levels($connect);
 $goals_lists = get_all_goals($connect);
 $bodyparts_lists = get_all_bodyparts($connect);
 $equipments_lists = get_all_equipments($connect);
-
+$place_lists = get_all_place($connect);
+$gender_lists=get_all_gender($connect);
 require '../views/edit.workout.view.php';
 require '../views/footer.view.php';
     

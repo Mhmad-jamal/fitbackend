@@ -6,30 +6,34 @@
 // Author Profile: https://codecanyon.net/user/wicombit/portfolio
 /*--------------------*/
 
-function connect($database) {
+function connect($database)
+{
     try {
-        $connect = new PDO('mysql:host='. $database['host'] .';dbname='. $database['db'], $database['user'], $database['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
+        $connect = new PDO('mysql:host=' . $database['host'] . ';dbname=' . $database['db'], $database['user'], $database['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
         return $connect;
     } catch (PDOException $e) {
 
-        $connect = new PDO('mysql:host=localhost;dbname=fit','root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
+        $connect = new PDO('mysql:host=localhost;dbname=fit', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
         return $connect;
- }
+    }
 }
 
-function cleardata($data){
+function cleardata($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
-    $data = htmlspecialchars ($data);
+    $data = htmlspecialchars($data);
     return $data;
 }
 
-function actual_page(){
-    
+function actual_page()
+{
+
     return isset($_GET['p']) ? (int)$_GET['p'] : 1;
 }
 
-function number_pages($items_per_page, $connect){
+function number_pages($items_per_page, $connect)
+{
 
     $total_places = $connect->prepare('SELECT FOUND_ROWS() AS total');
     $total_places->execute();
@@ -39,26 +43,29 @@ function number_pages($items_per_page, $connect){
     return $number_pages;
 }
 
-function get_user_information($connect){
-    $sentence = $connect->query("SELECT * FROM managers WHERE manager_email = '".$_SESSION['manager_email']."' LIMIT 1");
+function get_user_information($connect)
+{
+    $sentence = $connect->query("SELECT * FROM managers WHERE manager_email = '" . $_SESSION['manager_email'] . "' LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function activePage($currect_page){
-  $url_array =  explode('/', $_SERVER['REQUEST_URI']) ;
-  $url = end($url_array);  
-  if($currect_page == $url){
-      echo 'block'; //class name in css 
-  } 
+function activePage($currect_page)
+{
+    $url_array =  explode('/', $_SERVER['REQUEST_URI']);
+    $url = end($url_array);
+    if ($currect_page == $url) {
+        echo 'block'; //class name in css 
+    }
 }
 
-function showMenu($currect_page){
-  $url_array =  explode('/', $_SERVER['REQUEST_URI']) ;
-  $url = end($url_array);  
-  if($currect_page == $url){
-      echo 'show'; //class name in css 
-  } 
+function showMenu($currect_page)
+{
+    $url_array =  explode('/', $_SERVER['REQUEST_URI']);
+    $url = end($url_array);
+    if ($currect_page == $url) {
+        echo 'show'; //class name in css 
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////// EXERCISES
@@ -71,216 +78,234 @@ function get_all_exercises($connect)
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function id_exercise($id){
+function id_exercise($id)
+{
     return (int)cleardata($id);
 }
 
-function get_exercise_per_id($connect, $id){
+function get_exercise_per_id($connect, $id)
+{
     $sentence = $connect->query("SELECT exercises.*,equipments.equipment_title AS equipment_title, levels.level_title AS level_title, GROUP_CONCAT(bodyparts.bodypart_title) AS bodypart_title FROM exercises JOIN exercises_bodyparts ON exercises_bodyparts.exercise_id = exercises.exercise_id JOIN bodyparts ON bodyparts.bodypart_id = exercises_bodyparts.bodypart_id JOIN equipments ON exercises.exercise_equipment = equipments.equipment_id JOIN levels ON exercises.exercise_level = levels.level_id WHERE exercises.exercise_id = $id GROUP BY exercises.exercise_id LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
-function get_all_place($connect){
+function get_all_place($connect)
+{
     $sentence = $connect->query("SELECT * FROM `place`");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
-function get_all_gender($connect){
+function get_all_gender($connect)
+{
     $sentence = $connect->query("SELECT * FROM `gender`");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
 
-function number_exercises($connect){
-
-$total_numbers = $connect->prepare('SELECT * FROM exercises');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
-}
-
-function selected_exercises1($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day1 ON we_day1.exercise_id = exercises.exercise_id JOIN workouts ON we_day1.workout_id = ? GROUP BY we_day1.exercise_id ORDER BY we_day1.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises1($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day1.exercise_id FROM we_day1 WHERE we_day1.workout_id = ? GROUP BY we_day1.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises2($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day2 ON we_day2.exercise_id = exercises.exercise_id JOIN workouts ON we_day2.workout_id = ? GROUP BY we_day2.exercise_id ORDER BY we_day2.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises2($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day2.exercise_id FROM we_day2 WHERE we_day2.workout_id = ? GROUP BY we_day2.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises3($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day3 ON we_day3.exercise_id = exercises.exercise_id JOIN workouts ON we_day3.workout_id = ? GROUP BY we_day3.exercise_id ORDER BY we_day3.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises3($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day3.exercise_id FROM we_day3 WHERE we_day3.workout_id = ? GROUP BY we_day3.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises4($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day4 ON we_day4.exercise_id = exercises.exercise_id JOIN workouts ON we_day4.workout_id = ? GROUP BY we_day4.exercise_id ORDER BY we_day4.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises4($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day4.exercise_id FROM we_day4 WHERE we_day4.workout_id = ? GROUP BY we_day4.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises5($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day5 ON we_day5.exercise_id = exercises.exercise_id JOIN workouts ON we_day5.workout_id = ? GROUP BY we_day5.exercise_id ORDER BY we_day5.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises5($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day5.exercise_id FROM we_day5 WHERE we_day5.workout_id = ? GROUP BY we_day5.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises6($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day6 ON we_day6.exercise_id = exercises.exercise_id JOIN workouts ON we_day6.workout_id = ? GROUP BY we_day6.exercise_id ORDER BY we_day6.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises6($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day6.exercise_id FROM we_day6 WHERE we_day6.workout_id = ? GROUP BY we_day6.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function selected_exercises7($connect){
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day7 ON we_day7.exercise_id = exercises.exercise_id JOIN workouts ON we_day7.workout_id = ? GROUP BY we_day7.exercise_id ORDER BY we_day7.eorder ASC');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function not_selected_exercises7($connect){
-
- if (isset($_GET['id']) && !empty($_GET['id'])) {
-
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day7.exercise_id FROM we_day7 WHERE we_day7.workout_id = ? GROUP BY we_day7.exercise_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
-
-function get_exercises_list($connect){
-
-$sentence = $connect->prepare('SELECT exercises.*, GROUP_CONCAT(bodyparts.bodypart_title) AS bodypart_title FROM exercises JOIN exercises_bodyparts ON exercises_bodyparts.exercise_id = exercises.exercise_id JOIN bodyparts ON bodyparts.bodypart_id = exercises_bodyparts.bodypart_id GROUP BY exercises.exercise_id');
-$sentence->execute(array());
-return $sentence->fetchAll();
-
-}
-
-function insert_workout($connect, $user_id,$prev_id)
+function number_exercises($connect)
 {
-    
+
+    $total_numbers = $connect->prepare('SELECT * FROM exercises');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
+}
+
+function selected_exercises1($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day1 ON we_day1.exercise_id = exercises.exercise_id JOIN workouts ON we_day1.workout_id = ? GROUP BY we_day1.exercise_id ORDER BY we_day1.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises1($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day1.exercise_id FROM we_day1 WHERE we_day1.workout_id = ? GROUP BY we_day1.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises2($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day2 ON we_day2.exercise_id = exercises.exercise_id JOIN workouts ON we_day2.workout_id = ? GROUP BY we_day2.exercise_id ORDER BY we_day2.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises2($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day2.exercise_id FROM we_day2 WHERE we_day2.workout_id = ? GROUP BY we_day2.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises3($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day3 ON we_day3.exercise_id = exercises.exercise_id JOIN workouts ON we_day3.workout_id = ? GROUP BY we_day3.exercise_id ORDER BY we_day3.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises3($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day3.exercise_id FROM we_day3 WHERE we_day3.workout_id = ? GROUP BY we_day3.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises4($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day4 ON we_day4.exercise_id = exercises.exercise_id JOIN workouts ON we_day4.workout_id = ? GROUP BY we_day4.exercise_id ORDER BY we_day4.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises4($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day4.exercise_id FROM we_day4 WHERE we_day4.workout_id = ? GROUP BY we_day4.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises5($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day5 ON we_day5.exercise_id = exercises.exercise_id JOIN workouts ON we_day5.workout_id = ? GROUP BY we_day5.exercise_id ORDER BY we_day5.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises5($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day5.exercise_id FROM we_day5 WHERE we_day5.workout_id = ? GROUP BY we_day5.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises6($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day6 ON we_day6.exercise_id = exercises.exercise_id JOIN workouts ON we_day6.workout_id = ? GROUP BY we_day6.exercise_id ORDER BY we_day6.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises6($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day6.exercise_id FROM we_day6 WHERE we_day6.workout_id = ? GROUP BY we_day6.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function selected_exercises7($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises JOIN we_day7 ON we_day7.exercise_id = exercises.exercise_id JOIN workouts ON we_day7.workout_id = ? GROUP BY we_day7.exercise_id ORDER BY we_day7.eorder ASC');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function not_selected_exercises7($connect)
+{
+
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+
+        $id = intval($_GET['id']);
+
+        $sentence = $connect->prepare('SELECT exercises.exercise_title, exercises.exercise_id, exercises.exercise_image FROM exercises WHERE exercises.exercise_id NOT IN (SELECT we_day7.exercise_id FROM we_day7 WHERE we_day7.workout_id = ? GROUP BY we_day7.exercise_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
+
+function get_exercises_list($connect)
+{
+
+    $sentence = $connect->prepare('SELECT exercises.*, GROUP_CONCAT(bodyparts.bodypart_title) AS bodypart_title FROM exercises JOIN exercises_bodyparts ON exercises_bodyparts.exercise_id = exercises.exercise_id JOIN bodyparts ON bodyparts.bodypart_id = exercises_bodyparts.bodypart_id GROUP BY exercises.exercise_id');
+    $sentence->execute(array());
+    return $sentence->fetchAll();
+}
+
+function insert_workout($connect, $user_id, $prev_id)
+{
+
     $gender = '';
     $primary_goal = '';
 
@@ -302,128 +327,216 @@ function insert_workout($connect, $user_id,$prev_id)
         $gender = 1;
 
         $Workout_id = '';
-        if($prev_id != null){
+        if ($prev_id != null) {
             $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_id != :prev_id AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
 
-$sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
-$sentence->execute();
-        }else {
+            $sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
+            $sentence->execute();
+        } else {
             $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1");
             $sentence->execute();
         }
-       
+
         $Workout_data = $sentence->fetchAll();
         $Workout_id = $Workout_data[0]['workout_id'];
         $statement = $connect->prepare(
             'INSERT INTO usesr_goal_workout (user_id, workout_id) VALUES (:user_id, :workout_id)'
         );
-        
+
         $insertResult = $statement->execute(array(
             ':user_id' => $user_id,
             ':workout_id' => $Workout_id,
         ));
-        
+
         if ($insertResult) {
             return $Workout_id;
         } else {
             return false;
         }
-
     }
 }
 function get_workouts_by_goal($connect)
 {
-   $user_id = $_POST["user_id"];
-   $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
-   $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-   $sentence->execute();
-   if ($sentence->rowCount() > 0) {
+    $user_id = $_POST["user_id"];
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sentence->execute();
+    if ($sentence->rowCount() > 0) {
 
-   $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
-   $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-   $sentence->execute();
-   
-   if ($sentence->rowCount() > 0) {
-    $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
-    $timestamp_from_db = strtotime($last_record['created_at']);
-   
-    $today = strtotime(date('Y-m-d'));
+        $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+        $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sentence->execute();
 
-    $seven_days_later = strtotime('+7 days', $today);
-    $workout_id=$last_record["workout_id"];
-    if ($timestamp_from_db <= $seven_days_later) {
-       
-        $result=get_workout_per_id($connect, $workout_id);
+        if ($sentence->rowCount() > 0) {
+            $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+            $timestamp_from_db = strtotime($last_record['created_at']);
 
-        
+            $today = strtotime(date('Y-m-d'));
+
+            $seven_days_later = strtotime('+7 days', $today);
+            $workout_id = $last_record["workout_id"];
+            if ($timestamp_from_db <= $seven_days_later) {
+
+                $result = get_workout_per_id($connect, $workout_id);
+            } else {
+
+                $result = insert_workout($connect, $user_id, $workout_id);
+                if ($result) {
+                    $result = get_workout_per_id($connect, $workout_id);
+                }
+            }
+        } else {
+            $result = insert_workout($connect, $user_id, null);
+            if ($result) {
+                $result = get_workout_per_id($connect, $result);
+            }
+        }
+        return $result;
     } else {
+        return false;
+    }
+}
+function insert_Food($connect, $user_id, $prev_id)
+{
+    $user_id="$$$";
+    $diet = '';
+    $primary_goal = '';
 
-        $result = insert_workout($connect, $user_id,$workout_id);
-        if($result){
-            $result=get_workout_per_id($connect, $workout_id);
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
+    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sentence->execute();
 
+    if ($sentence->rowCount() > 0) {
+        $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
+        $user_goal = json_decode($user_data["user_goal"]);
+        foreach ($user_goal as $key => $value) {
+            if ($value->componentId == 17) {
+                $diet = $value->value;
+            }
+        }
+
+        $diet = 1;
+
+        $diet_id = '';
+        if ($prev_id != null) {
+            $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE  AND diet_id='$prev_id' AND diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
+
+            $sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
+            $sentence->execute();
+        } else {
+            $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE   diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
+            $sentence->execute();
+        }
+
+        $diet_data = $sentence->fetchAll();
+        var_dump($diet_id);
+        die();
+        $diet_id = $diet_data[0]['diet_id'];
+        
+        $statement = $connect->prepare(
+            'INSERT INTO usesr_goal_diet (user_id, diet_id) VALUES (:user_id, :diet_id)'
+        );
+        
+        $insertResult = $statement->execute(array(
+            ':user_id' => $user_id,
+            ':diet_id' => $diet_id,
+        ));
+
+        if ($insertResult) {
+            return $diet_id;
+        } else {
+            return false;
         }
     }
-} else {
-    $result = insert_workout($connect, $user_id,null);
-    if($result){
-        $result=get_workout_per_id($connect, $result);
-
-    }
-
 }
-return $result;
+function get_food_by_goal($connect)
+{
+/*     $user_id = $_POST["user_id"];
+ */    
+$user_id='$$$';
+ $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sentence->execute();
+    if ($sentence->rowCount() > 0) {
 
-   }else {
-return false;
+        $sentence = $connect->prepare("SELECT * FROM `usesr_goal_diet` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
+        $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sentence->execute();
 
-   }
-   
+        if ($sentence->rowCount() > 0) {
+            $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+            $timestamp_from_db = strtotime($last_record['created_at']);
 
+            $today = strtotime(date('Y-m-d'));
 
+            $seven_days_later = strtotime('+7 days', $today);
+            $diet_id = $last_record["diet_id"];
+            if ($timestamp_from_db <= $seven_days_later) {
+
+                $result = get_diet_per_id($connect, $diet_id);
+            } else {
+
+                $result = insert_Food($connect, $user_id, $diet_id);
+                if ($result) {
+                    $result = get_diet_per_id($connect, $diet_id);
+                }
+            }
+        } else {
+            $result = insert_Food($connect, $user_id, null);
+            if ($result) {
+                $result = get_diet_per_id($connect, $result);
+            }
+        }
+        return $result;
+    } else {
+        return false;
+    }
 }
 
 function get_all_workouts($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY workout_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY workout_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
-function id_workout($id_workout){
+function id_workout($id_workout)
+{
     return (int)cleardata($id_workout);
 }
 
-function get_workout_per_id($connect, $id_workout){
+function get_workout_per_id($connect, $id_workout)
+{
     $sentence = $connect->query("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id AND workout_id = $id_workout LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_workouts($connect){
+function number_workouts($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM workouts');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM workouts');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
-function number_workouts_by_user($connect, $id_user){
+function number_workouts_by_user($connect, $id_user)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM workouts_users WHERE ws_user = "'.$id_user.'"');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM workouts_users WHERE ws_user = "' . $id_user . '"');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 
-function get_workouts_by_user($connect, $id_user){
-    
-    $sentence = $connect->prepare("SELECT * FROM workouts WHERE workout_id IN (SELECT workouts_users.ws_workout FROM workouts_users WHERE ws_user = '".$id_user."') ORDER BY workout_id DESC"); 
+function get_workouts_by_user($connect, $id_user)
+{
+
+    $sentence = $connect->prepare("SELECT * FROM workouts WHERE workout_id IN (SELECT workouts_users.ws_workout FROM workouts_users WHERE ws_user = '" . $id_user . "') ORDER BY workout_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
@@ -432,105 +545,112 @@ function get_workouts_by_user($connect, $id_user){
 
 function get_all_posts($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT posts.*,tags.tag_title AS tag_title FROM posts,tags WHERE posts.post_tag = tags.tag_id ORDER BY post_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT posts.*,tags.tag_title AS tag_title FROM posts,tags WHERE posts.post_tag = tags.tag_id ORDER BY post_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_post($id_post){
+function id_post($id_post)
+{
     return (int)cleardata($id_post);
 }
 
-function get_post_per_id($connect, $id_post){
+function get_post_per_id($connect, $id_post)
+{
     $sentence = $connect->query("SELECT posts.*,tags.tag_title AS tag_title FROM posts,tags WHERE post_id = $id_post AND posts.post_tag = tags.tag_id LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_posts($connect){
+function number_posts($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM posts');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM posts');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// PRODUCTS
 
 function get_all_products($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT products.*,types.type_title AS type_title FROM products,types WHERE products.product_type = types.type_id ORDER BY product_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT products.*,types.type_title AS type_title FROM products,types WHERE products.product_type = types.type_id ORDER BY product_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_product($id_product){
+function id_product($id_product)
+{
     return (int)cleardata($id_product);
 }
 
-function get_product_per_id($connect, $id_product){
+function get_product_per_id($connect, $id_product)
+{
     $sentence = $connect->query("SELECT products.*,types.type_title AS type_title FROM products,types WHERE product_id = $id_product AND products.product_type = types.type_id LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_products($connect){
+function number_products($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM products');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM products');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// DIETS
 
 function get_all_diets($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diets.diet_category = categories.category_id ORDER BY diet_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diets.diet_category = categories.category_id ORDER BY diet_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_diet($id_diet){
+function id_diet($id_diet)
+{
     return (int)cleardata($id_diet);
 }
 
-function get_diet_per_id($connect, $id_diet){
+function get_diet_per_id($connect, $id_diet)
+{
     $sentence = $connect->query("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diet_id = $id_diet AND diets.diet_category = categories.category_id LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_diets($connect){
+function number_diets($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM diets');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM diets');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
-function number_diets_by_user($connect, $id_user){
+function number_diets_by_user($connect, $id_user)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM diets_users WHERE du_user = "'.$id_user.'"');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM diets_users WHERE du_user = "' . $id_user . '"');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
-function get_diets_by_user($connect, $id_user){
-    
-    $sentence = $connect->prepare("SELECT * FROM diets WHERE diet_id IN (SELECT diets_users.du_diet FROM diets_users WHERE du_user = '".$id_user."') ORDER BY diet_id DESC"); 
+function get_diets_by_user($connect, $id_user)
+{
+
+    $sentence = $connect->prepare("SELECT * FROM diets WHERE diet_id IN (SELECT diets_users.du_diet FROM diets_users WHERE du_user = '" . $id_user . "') ORDER BY diet_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
@@ -539,137 +659,147 @@ function get_diets_by_user($connect, $id_user){
 
 function get_all_equipments($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM equipments ORDER BY equipment_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM equipments ORDER BY equipment_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_equipment($id_equipment){
+function id_equipment($id_equipment)
+{
     return (int)cleardata($id_equipment);
 }
 
-function get_equipment_per_id($connect, $id_equipment){
+function get_equipment_per_id($connect, $id_equipment)
+{
     $sentence = $connect->query("SELECT * FROM equipments WHERE equipment_id = $id_equipment LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_equipments($connect){
+function number_equipments($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM equipments');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM equipments');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// LEVELS
 
 function get_all_levels($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM levels ORDER BY level_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM levels ORDER BY level_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_level($id_level){
+function id_level($id_level)
+{
     return (int)cleardata($id_level);
 }
 
-function get_level_per_id($connect, $id_level){
+function get_level_per_id($connect, $id_level)
+{
     $sentence = $connect->query("SELECT * FROM levels WHERE level_id = $id_level LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_levels($connect){
+function number_levels($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM levels');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM levels');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// TYPES
 
 function get_all_types($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM types ORDER BY type_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM types ORDER BY type_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_type($id_type){
+function id_type($id_type)
+{
     return (int)cleardata($id_type);
 }
 
-function get_type_per_id($connect, $id_type){
+function get_type_per_id($connect, $id_type)
+{
     $sentence = $connect->query("SELECT * FROM types WHERE type_id = $id_type LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_types($connect){
+function number_types($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM types');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM types');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// CATEGORIES
 
 function get_all_categories($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM categories ORDER BY category_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM categories ORDER BY category_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_category($id_category){
+function id_category($id_category)
+{
     return (int)cleardata($id_category);
 }
 
-function get_category_per_id($connect, $id_category){
+function get_category_per_id($connect, $id_category)
+{
     $sentence = $connect->query("SELECT * FROM categories WHERE category_id = $id_category LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_categories($connect){
+function number_categories($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM categories');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM categories');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// MANAGERS
 
 function get_all_managers($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM managers ORDER BY manager_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM managers ORDER BY manager_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_manager($id_manager){
+function id_manager($id_manager)
+{
     return (int)cleardata($id_manager);
 }
 
-function get_manager_per_id($connect, $id_manager){
+function get_manager_per_id($connect, $id_manager)
+{
     $sentence = $connect->query("SELECT * FROM managers WHERE manager_id = $id_manager LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
@@ -680,116 +810,124 @@ function get_manager_per_id($connect, $id_manager){
 
 function get_all_tags($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM tags ORDER BY tag_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM tags ORDER BY tag_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_tag($id_tag){
+function id_tag($id_tag)
+{
     return (int)cleardata($id_tag);
 }
 
-function get_tag_per_id($connect, $id_tag){
+function get_tag_per_id($connect, $id_tag)
+{
     $sentence = $connect->query("SELECT * FROM tags WHERE tag_id = $id_tag LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_tags($connect){
+function number_tags($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM tags');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM tags');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// GOALS
 
 function get_all_goals($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM goals ORDER BY goal_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM goals ORDER BY goal_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_goal($id_goal){
+function id_goal($id_goal)
+{
     return (int)cleardata($id_goal);
 }
 
-function get_goal_per_id($connect, $id_goal){
+function get_goal_per_id($connect, $id_goal)
+{
     $sentence = $connect->query("SELECT * FROM goals WHERE goal_id = $id_goal LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_goals($connect){
+function number_goals($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM goals');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM goals');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 /////////////////////////////////////////////////////////////////////////////////// BODYPARTS
 
 function get_all_bodyparts($connect)
 {
-    
-    $sentence = $connect->prepare("SELECT * FROM bodyparts ORDER BY bodypart_id DESC"); 
+
+    $sentence = $connect->prepare("SELECT * FROM bodyparts ORDER BY bodypart_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function id_bodypart($id_bodypart){
+function id_bodypart($id_bodypart)
+{
     return (int)cleardata($id_bodypart);
 }
 
-function get_bodypart_per_id($connect, $id_bodypart){
+function get_bodypart_per_id($connect, $id_bodypart)
+{
     $sentence = $connect->query("SELECT * FROM bodyparts WHERE bodypart_id = $id_bodypart LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
 
-function number_bodyparts($connect){
+function number_bodyparts($connect)
+{
 
-$total_numbers = $connect->prepare('SELECT * FROM bodyparts');
-$total_numbers->execute(array());
-$total_numbers->fetchAll();
-$total = $total_numbers->rowCount();
-return $total;
-
+    $total_numbers = $connect->prepare('SELECT * FROM bodyparts');
+    $total_numbers->execute(array());
+    $total_numbers->fetchAll();
+    $total = $total_numbers->rowCount();
+    return $total;
 }
 
 
-function selected_bodyparts($connect){
+function selected_bodyparts($connect)
+{
 
-if (isset($_GET['id']) && !empty($_GET['id'])) {
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
 
-$id = intval($_GET['id']);
+        $id = intval($_GET['id']);
 
-$sentence = $connect->prepare('SELECT bodyparts.bodypart_title, bodyparts.bodypart_id, bodyparts.bodypart_image FROM bodyparts JOIN exercises_bodyparts ON exercises_bodyparts.bodypart_id = bodyparts.bodypart_id JOIN exercises ON exercises_bodyparts.exercise_id = ? GROUP BY exercises_bodyparts.bodypart_id');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
+        $sentence = $connect->prepare('SELECT bodyparts.bodypart_title, bodyparts.bodypart_id, bodyparts.bodypart_image FROM bodyparts JOIN exercises_bodyparts ON exercises_bodyparts.bodypart_id = bodyparts.bodypart_id JOIN exercises ON exercises_bodyparts.exercise_id = ? GROUP BY exercises_bodyparts.bodypart_id');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
 
-}}
+function not_selected_bodyparts($connect)
+{
 
-function not_selected_bodyparts($connect){
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
 
- if (isset($_GET['id']) && !empty($_GET['id'])) {
+        $id = intval($_GET['id']);
 
-$id = intval($_GET['id']);
-
-$sentence = $connect->prepare('SELECT bodyparts.bodypart_title, bodyparts.bodypart_id, bodyparts.bodypart_image FROM bodyparts WHERE bodyparts.bodypart_id NOT IN (SELECT exercises_bodyparts.bodypart_id FROM exercises_bodyparts WHERE exercises_bodyparts.exercise_id = ? GROUP BY exercises_bodyparts.bodypart_id)');
-$sentence->execute([$id]);
-return $sentence->fetchAll();
-
-}}
+        $sentence = $connect->prepare('SELECT bodyparts.bodypart_title, bodyparts.bodypart_id, bodyparts.bodypart_image FROM bodyparts WHERE bodyparts.bodypart_id NOT IN (SELECT exercises_bodyparts.bodypart_id FROM exercises_bodyparts WHERE exercises_bodyparts.exercise_id = ? GROUP BY exercises_bodyparts.bodypart_id)');
+        $sentence->execute([$id]);
+        return $sentence->fetchAll();
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////// CUSTOMS
@@ -797,21 +935,22 @@ return $sentence->fetchAll();
 
 function get_all_settings($connect)
 {
-    
-    $sentence = $connect->query("SELECT * FROM settings"); 
+
+    $sentence = $connect->query("SELECT * FROM settings");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
 function get_all_strings($connect)
 {
-    
-    $sentence = $connect->query("SELECT * FROM strings"); 
+
+    $sentence = $connect->query("SELECT * FROM strings");
     $sentence->execute();
     return $sentence->fetchAll();
 }
 
-function fecha($fecha){
+function fecha($fecha)
+{
 
     $timestamp = strtotime($fecha);
     $meses = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -823,7 +962,8 @@ function fecha($fecha){
     return $fecha;
 }
 
-function time_ago($date) {
+function time_ago($date)
+{
     if (empty($date)) {
         return "-";
     }
@@ -831,11 +971,11 @@ function time_ago($date) {
     $lengths = array("60", "60", "24", "7", "4.35", "12", "10");
     $now = time();
     $uni_date = strtotime($date);
-// check validity of date
+    // check validity of date
     if (empty($uni_date)) {
         return "-";
     }
-// is it future date or past date
+    // is it future date or past date
     if ($now > $uni_date) {
         $difference = $now - $uni_date;
         $tense = "ago";
@@ -848,9 +988,7 @@ function time_ago($date) {
     }
     $difference = round($difference);
     if ($difference != 1) {
-        $periods[$j].= "s";
+        $periods[$j] .= "s";
     }
     return "$difference $periods[$j] {$tense}";
 }
-
-?>

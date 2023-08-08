@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$diet_carbs = cleardata($_POST['diet_carbs']);
 	$diet_protein = cleardata($_POST['diet_protein']);
 	$diet_fat = cleardata($_POST['diet_fat']);
+	$diet_improvement=cleardata(($_POST["diet_improvement"]));
 	$diet_time = cleardata($_POST['diet_time']);
 	$diet_featured = cleardata($_POST['diet_featured']);
 	$diet_status = cleardata($_POST['diet_status']);
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 $statment = $connect->prepare(
-	'UPDATE diets SET diet_title = :diet_title, diet_description = :diet_description, diet_ingredients = :diet_ingredients, diet_category = :diet_category, diet_directions = :diet_directions, diet_calories = :diet_calories, diet_carbs = :diet_carbs, diet_protein = :diet_protein, diet_fat = :diet_fat, diet_time = :diet_time, diet_servings = :diet_servings, diet_featured = :diet_featured, diet_status = :diet_status, diet_price = :diet_price, diet_image = :diet_image WHERE diet_id = :diet_id'
+	'UPDATE diets SET diet_title = :diet_title, diet_description = :diet_description, diet_ingredients = :diet_ingredients, diet_category = :diet_category, diet_directions = :diet_directions, diet_calories = :diet_calories, diet_carbs = :diet_carbs, diet_protein = :diet_protein, diet_fat = :diet_fat,diet_improvement=:diet_improvement, diet_time = :diet_time, diet_servings = :diet_servings, diet_featured = :diet_featured, diet_status = :diet_status, diet_price = :diet_price, diet_image = :diet_image WHERE diet_id = :diet_id'
 	);
 
 $statment->execute(array(
@@ -60,6 +61,7 @@ $statment->execute(array(
 		':diet_carbs' => $diet_carbs,
 		':diet_protein' => $diet_protein,
 		':diet_fat' => $diet_fat,
+		':diet_improvement'=>$diet_improvement,
 		':diet_time' => $diet_time,
 		':diet_servings' => $diet_servings,
 		':diet_featured' => $diet_featured,

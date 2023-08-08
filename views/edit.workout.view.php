@@ -93,6 +93,21 @@
     }
     ?>
   </select>
+   <label class="control-label">Place</label>
+   <select class="form-control" name="place" required="">
+   <?php foreach($place_lists as $place_list): ?>
+   <option value="<?php echo $place_list['id']; ?>"><?php echo $place_list['place_value']; ?></option>
+    <?php endforeach; ?>
+   </select> 
+   <label class="control-label">Gender</label>
+
+   <select class="form-control" name="gender" required="">
+   <?php foreach($gender_lists as $gender_list): ?>
+    <option value="<?php echo $gender_list['id']; ?>" <?php if ($gender_list["id"] == $workout['workout_gender']) echo 'selected'; ?>>
+    <?php echo $gender_list['gender_value']; ?>
+</option>
+    <?php endforeach; ?>
+   </select> 
    
    <div class="row">
     <div class="col-11">
