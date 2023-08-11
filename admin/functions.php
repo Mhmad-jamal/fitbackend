@@ -400,8 +400,7 @@ function get_workouts_by_goal($connect)
         }
         return $result;
     } else {
-        var_dump($user_id);
-        die();
+        
         return false;
     }
 }
