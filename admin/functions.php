@@ -332,7 +332,7 @@ $level='';
 
         $Workout_id = '';
         if ($prev_id != null) {
-            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workout_goal='$primary_goal' AND  workout_place='$place' AND workout_level='$level' AND workouts.workout_id != :prev_id AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
+            $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workout_goal='$primary_goal' AND  workout_place='$place' AND workout_level='$level' AND workouts.workout_id !='$prev_id' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() LIMIT 1");
 
             $sentence->execute();
         } else {
