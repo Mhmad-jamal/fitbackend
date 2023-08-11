@@ -2,14 +2,14 @@
 
 /* URL PROJECT */
 
-define('SITE_URL', 'http://localhost/react/');
+define('SITE_URL', 'http://appadmin.mohannad-theeb.com/');
 
 
 $database = array(
 'host' => 'localhost',
-'db' => 'fit',
-'user' => 'root',
-'pass' => ''
+'db' => 'mohannadtheeb_admin',
+'user' => 'mohannadtheeb_admin',
+'pass' => 'mohannadtheeb_admin'
 );
 
 $email_config = array(
