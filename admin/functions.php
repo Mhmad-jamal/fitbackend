@@ -377,11 +377,12 @@ function get_workouts_by_goal($connect)
         $sentence->execute();
 
         if ($sentence->rowCount() > 0) {
-            var_dump($sentence->rowCount());
+          
+            $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+            var_dump($last_record);
             var_dump($sentence->execute());
 
 die();
-            $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
             $timestamp_from_db = strtotime($last_record['created_at']);
 
             $today = strtotime(date('Y-m-d'));
