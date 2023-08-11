@@ -363,8 +363,6 @@ $level='';
 function get_workouts_by_goal($connect)
 {
     $user_id = $_POST["user_id"];
-    var_dump($user_id);
-    die();
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
