@@ -379,7 +379,7 @@ function get_workouts_by_goal($connect)
         if ($sentence->rowCount() > 0) {
           
             $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
-            var_dump($last_record);
+            var_dump($user_id);
             var_dump($sentence->execute());
 
 die();
