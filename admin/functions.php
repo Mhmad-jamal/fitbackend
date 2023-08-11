@@ -328,12 +328,7 @@ $level='';
                 $level=$value->value;
             }
         }
-var_dump($gender);
 
-var_dump($primary_goal);
-var_dump($place);
-var_dump($level);
-die();
 
         $Workout_id = '';
         if ($prev_id != null) {
