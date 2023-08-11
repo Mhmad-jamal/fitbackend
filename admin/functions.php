@@ -328,7 +328,12 @@ $level='';
                 $level=$value->value;
             }
         }
+var_dump($gender);
 
+var_dump($primary_goal);
+var_dump($place);
+var_dump($level);
+die();
 
         $Workout_id = '';
         if ($prev_id != null) {
@@ -435,8 +440,6 @@ function insert_Food($connect, $user_id, $prev_id)
         } else {
             $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE   diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
             $sentence->execute();
-            var_dump($sentence->execute());
-            die();
         }
 
         $diet_data = $sentence->fetchAll();
