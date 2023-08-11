@@ -305,8 +305,7 @@ function get_exercises_list($connect)
 
 function insert_workout($connect, $user_id, $prev_id)
 {
-var_dump($user_id);
-die();
+
     $gender = '';
     $primary_goal = '';
 $place='';
@@ -317,6 +316,8 @@ $level='';
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
         $user_goal = json_decode($user_data["user_goal"]);
+        var_dump(  $user_data);
+        var_dump($user_goal);
         foreach ($user_goal as $key => $value) {
             if ($value->componentId == 1) {
                 $gender = $value->value;
@@ -329,7 +330,6 @@ $level='';
             }
         }
 
-        $gender = 1;
 
         $Workout_id = '';
         if ($prev_id != null) {
