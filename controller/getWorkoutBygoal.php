@@ -9,7 +9,7 @@ $data = get_workouts_by_goal($connect);
 if($data){
 $results = array(
     "sEcho" => 1,
-    "response" => 200,
+    "status" => 200,
     "message" => 'data retrive succsessfully',
 
     "iTotalRecords" => count($data),
@@ -17,7 +17,7 @@ $results = array(
     "aaData"=>$data);
 }else {
     $results = array(
-        "response" => 201,
+        "status" => 201,
         "message" => 'user not found',
        );
 }
