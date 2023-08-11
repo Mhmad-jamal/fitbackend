@@ -305,7 +305,8 @@ function get_exercises_list($connect)
 
 function insert_workout($connect, $user_id, $prev_id)
 {
-
+var_dump($user_id);
+die();
     $gender = '';
     $primary_goal = '';
 $place='';
