@@ -310,8 +310,7 @@ function insert_workout($connect, $user_id, $prev_id)
     $primary_goal = '';
 $place='';
 $level='';
-    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
-    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id'");
     $sentence->execute();
 
     if ($sentence->rowCount() > 0) {
@@ -376,10 +375,7 @@ function get_workouts_by_goal($connect)
         if ($sentence->rowCount() > 0) {
           
             $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
-            var_dump($user_id);
-            var_dump($sentence->execute());
-
-die();
+           
             $timestamp_from_db = strtotime($last_record['created_at']);
 
             $today = strtotime(date('Y-m-d'));
@@ -397,7 +393,6 @@ die();
                 }
             }
         } else {
-            var_dump("here");
             $result = insert_workout($connect, $user_id, null);
             if ($result) {
                 $result = get_workout_per_id($connect, $result);
