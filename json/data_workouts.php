@@ -28,6 +28,7 @@ require './app_core.php';
 	}
 
 	if(getParamsGoal()){
+		
 
         $sqlQuery .= " AND workouts.workout_goal = '".getParamsGoal()."'";
 	}
