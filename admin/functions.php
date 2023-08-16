@@ -432,14 +432,13 @@ function insert_Food($connect, $user_id, $prev_id)
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
         $user_goal = json_decode($user_data["user_goal"]);
         foreach ($user_goal as $key => $value) {
+            var_dump($value);
+            
             if ($value->componentId == 17) {
                 $diet = $value->value;
             }
         }
-        var_dump('here');
-        var_dump( $user_goal);
-        
-        var_dump($diet);
+    
 
         die();
         if($diet=='' || $diet ==2){
