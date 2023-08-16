@@ -316,8 +316,7 @@ $level='';
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
         $user_goal = json_decode($user_data["user_goal"]);
-        var_dump("here");
-        die();
+       
         foreach ($user_goal as $key => $value) {
             if ($value->componentId == 1) {
                 $gender = $value->value;
@@ -328,6 +327,10 @@ $level='';
             }elseif($value->componentId==4){
                 $level=$value->value;
             }
+        }
+        if($gender=='' || $primary_goal=='' || $place=='' ||$level==''){
+            var_dump("sss")
+            return false;
         }
 
 
