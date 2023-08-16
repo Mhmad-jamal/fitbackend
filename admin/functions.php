@@ -440,7 +440,8 @@ function insert_Food($connect, $user_id, $prev_id)
         if($diet=='' || $diet ==2){
             return false;
         }
-        
+        var_dump($diet);
+        die();
 
         $diet_id = '';
         if ($prev_id != null) {
