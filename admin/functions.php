@@ -366,7 +366,8 @@ function get_workouts_by_goal($connect)
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
     $sentence->execute();
   
-
+var_dump("here");
+die();
     if ($sentence->rowCount() > 0) {
 
         $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
