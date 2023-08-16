@@ -436,6 +436,8 @@ function insert_Food($connect, $user_id, $prev_id)
                 $diet = $value->value;
             }
         }
+        var_dump($user_goal);
+
         var_dump($diet);
         die();
         if($diet==''){
