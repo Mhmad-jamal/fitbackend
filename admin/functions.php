@@ -437,8 +437,10 @@ function insert_Food($connect, $user_id, $prev_id)
             }
         }
         var_dump('here');
-        var_dump($diet);
+        var_dump( $user_goal);
         
+        var_dump($diet);
+
         die();
         if($diet=='' || $diet ==2){
             return false;
