@@ -443,10 +443,9 @@ function insert_Food($connect, $user_id, $prev_id)
 
         $diet_id = '';
         if ($prev_id != null) {
-            $sentence = $connect->prepare("SELECT diets.*, categories.category_title AS category_title FROM diets, categories WHERE diet_id != '$prev_id' AND diet_improvement = :diet AND diets.diet_category = categories.category_id ORDER BY RAND() LIMIT 1");
+            $sentence = $connect->prepare("SELECT diets.*, categories.category_title AS category_title FROM diets, categories WHERE diet_id != '$prev_id' AND diet_improvement = '$diet' AND diets.diet_category = categories.category_id ORDER BY RAND() LIMIT 1");
 
-            $sentence->bindParam(':prev_id', $prev_id, PDO::PARAM_INT);
-            $sentence->bindParam(':diet', $diet, PDO::PARAM_STR);
+           
             $sentence->execute();
             
         } else {
