@@ -329,7 +329,7 @@ $level='';
             }
         }
         if($gender=='' || $primary_goal=='' || $place=='' ||$level==''){
-            var_dump("sss")
+            var_dump("sss");
             return false;
         }
 
