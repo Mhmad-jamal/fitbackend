@@ -329,7 +329,7 @@ $level='';
             }
         }
         if($gender=='' || $primary_goal=='' || $place=='' ||$level==''){
-            var_dump("sss");
+        
             return false;
         }
 
@@ -343,17 +343,23 @@ $level='';
             $sentence = $connect->prepare("SELECT workouts.*, goals.goal_title AS goal_title, levels.level_title AS level_title, equipments.equipment_title AS equipment_title, bodyparts.bodypart_title AS bodypart_title FROM workouts,goals,levels,equipments,bodyparts WHERE workouts.workout_gender='$gender' AND workout_goal='$primary_goal' AND  workout_place='$place' AND workout_level='$level' AND workouts.workout_goal = goals.goal_id AND workouts.workout_level = levels.level_id AND workouts.workout_equipment = equipments.equipment_id AND workouts.workout_bodypart = bodyparts.bodypart_id ORDER BY RAND() limit 1");
             $sentence->execute();
         }
-
         $Workout_data = $sentence->fetchAll();
-        $Workout_id = $Workout_data[0]['workout_id'];
-        $statement = $connect->prepare(
-            'INSERT INTO usesr_goal_workout (user_id, workout_id) VALUES (:user_id, :workout_id)'
-        );
 
-        $insertResult = $statement->execute(array(
-            ':user_id' => $user_id,
-            ':workout_id' => $Workout_id,
-        ));
+        if (count($Workout_data) > 0) {
+            $Workout_id = $Workout_data[0]['workout_id'];
+            $statement = $connect->prepare(
+                'INSERT INTO usesr_goal_workout (user_id, workout_id) VALUES (:user_id, :workout_id)'
+            );
+    
+            $insertResult = $statement->execute(array(
+                ':user_id' => $user_id,
+                ':workout_id' => $Workout_id,
+            ));
+        }
+        else {
+            $insertResult=false;
+        }
+       
 
         if ($insertResult) {
             return $Workout_id;
