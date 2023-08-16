@@ -420,7 +420,7 @@ else{
 }
 function insert_Food($connect, $user_id, $prev_id)
 {
-    $user_id="$$$";
+    $user_id=$_POST['user_id'];
     $diet = '';
     $primary_goal = '';
 
@@ -437,7 +437,9 @@ function insert_Food($connect, $user_id, $prev_id)
             }
         }
 
-        $diet = 1;
+        if($diet==''){
+            return false;
+        }
 
         $diet_id = '';
         if ($prev_id != null) {
@@ -453,9 +455,12 @@ function insert_Food($connect, $user_id, $prev_id)
         }
 
         $diet_data = $sentence->fetchAll();
-        
+        if (count($diet_data) > 0) {
+
         $diet_id = $diet_data[0]['diet_id'];
-        
+        }else {
+            return false;
+        }
         $statement = $connect->prepare(
             'INSERT INTO usesr_goal_diet (user_id, diet_id) VALUES (:user_id, :diet_id)'
         );
@@ -474,9 +479,9 @@ function insert_Food($connect, $user_id, $prev_id)
 }
 function get_food_by_goal($connect)
 {
-/*     $user_id = $_POST["user_id"];
- */    
-$user_id='$$$';
+     $user_id = $_POST["user_id"];
+     
+
  $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
