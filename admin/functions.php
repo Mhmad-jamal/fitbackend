@@ -430,7 +430,10 @@ function insert_Food($connect, $user_id, $prev_id)
 
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
+      var_dump($user_data["user_goal"]);
+      die();
         $user_goal = json_decode($user_data["user_goal"]);
+
         foreach ($user_goal as $key => $value) {
             var_dump($value);
 
@@ -485,8 +488,7 @@ function get_food_by_goal($connect)
 {
      $user_id = $_POST["user_id"];
      
-var_dump($user_id);
-die();
+
  $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
