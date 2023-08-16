@@ -436,7 +436,10 @@ function insert_Food($connect, $user_id, $prev_id)
                 $diet = $value->value;
             }
         }
+        var_dump('here');
+        var_dump($diet);
         
+        die();
         if($diet=='' || $diet ==2){
             return false;
         }
@@ -486,8 +489,7 @@ function get_food_by_goal($connect)
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sentence->execute();
     if ($sentence->rowCount() > 0) {
-        var_dump('here');
-        die();
+     
 
         $sentence = $connect->prepare("SELECT * FROM `usesr_goal_diet` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
         $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
