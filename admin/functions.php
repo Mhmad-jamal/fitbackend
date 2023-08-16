@@ -316,7 +316,8 @@ $level='';
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
         $user_goal = json_decode($user_data["user_goal"]);
-      
+        var_dump("here");
+        die();
         foreach ($user_goal as $key => $value) {
             if ($value->componentId == 1) {
                 $gender = $value->value;
@@ -366,8 +367,7 @@ function get_workouts_by_goal($connect)
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
     $sentence->execute();
   
-var_dump("here");
-die();
+
     if ($sentence->rowCount() > 0) {
 
         $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
