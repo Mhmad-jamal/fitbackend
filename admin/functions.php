@@ -362,6 +362,7 @@ function get_workouts_by_goal($connect)
 {
    
     $user_id = $_POST["user_id"];
+    if($user_id){
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
     $sentence->execute();
   
@@ -402,6 +403,10 @@ function get_workouts_by_goal($connect)
         
         return false;
     }
+}
+else{
+    return false;
+}
 }
 function insert_Food($connect, $user_id, $prev_id)
 {
