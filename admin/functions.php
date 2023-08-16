@@ -489,7 +489,8 @@ function get_food_by_goal($connect)
         $sentence = $connect->prepare("SELECT * FROM `usesr_goal_diet` WHERE user_id = :user_id ORDER BY id DESC LIMIT 1");
         $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $sentence->execute();
-
+var_dump("here");
+die();
         if ($sentence->rowCount() > 0) {
             $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
             $timestamp_from_db = strtotime($last_record['created_at']);
