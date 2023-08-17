@@ -24,21 +24,21 @@
                   <div class="form-group col-md-12">
 
                     <label>Name</label>
-                    <input type="text" value="" placeholder="" name="user_name" class="form-control" required="">
+                    <input type="text" value="" placeholder="" name="manager_name" class="form-control" required="">
 
                     <label>Email</label>
-                    <input type="text" value="" placeholder="" name="user_email" class="form-control" required="">
+                    <input type="text" value="" placeholder="" name="manager_email" class="form-control" required="">
                     <label id="email-availability-status"></label>
 
                     <label>Description</label>
-                    <textarea type="text" class="mceNoEditor form-control" name="user_description"></textarea>
+                    <textarea type="text" class="mceNoEditor form-control" name="manager_description"></textarea>
 
                     <label>Password</label>
-                    <input type="password" value="" placeholder="" name="user_password" class="form-control" id="password-field" required="">
+                    <input type="password" value="" placeholder="" name="manager_password" class="form-control" id="password-field" required="">
                     <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 
                     <label>Verified</label>
-                    <select class="custom-select form-control" name="user_verified">
+                    <select class="custom-select form-control" name="manager_verified">
                       <option value selected>-</option>
                       <option value="1">Yes</option>
                       <option value="0">No</option>

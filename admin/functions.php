@@ -77,6 +77,12 @@ function get_all_exercises($connect)
     $sentence->execute();
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
 }
+function get_all_code($connect){
+    $sentence = $connect->prepare("SELECT * FROM `generated_code` ORDER BY `generated_code`.`id` DESC");
+
+    $sentence->execute();
+    return $sentence->fetchAll(PDO::FETCH_ASSOC);
+}
 
 function id_exercise($id)
 {

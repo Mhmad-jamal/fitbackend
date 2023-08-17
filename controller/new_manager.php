@@ -16,15 +16,18 @@ if (isset($_SESSION['manager_email'])){
 
 			$manager_name = cleardata($_POST['manager_name']);
 			$manager_email = cleardata($_POST['manager_email']);
+			$manager_description = cleardata($_POST['manager_description']);
+
 			$manager_verified = cleardata($_POST['manager_verified']);
 			$manager_password = cleardata($_POST['manager_password']);
 			$encryptPass = hash('sha512', $manager_password);
 
-			$statment = $connect->prepare("INSERT INTO managers (manager_id, manager_name, manager_email, manager_verified, manager_password, manager_created) VALUES (null, :manager_name, :manager_email, :manager_verified, :manager_password, CURRENT_TIMESTAMP)");
+			$statment = $connect->prepare("INSERT INTO managers (manager_id, manager_name, manager_email,manager_description, manager_verified, manager_password, manager_created) VALUES (null, :manager_name, :manager_email,:manager_description, :manager_verified, :manager_password, CURRENT_TIMESTAMP)");
 
 			$statment->execute(array(
 				':manager_name' => $manager_name,
 				':manager_email' => $manager_email,
+				':manager_description'=>$manager_description,
 				':manager_verified' => $manager_verified,
 				':manager_password' => $encryptPass
 			));
