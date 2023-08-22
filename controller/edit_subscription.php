@@ -43,8 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Execute the prepared statement
         $statement->execute();
 
-        header('Location: ' . SITE_URL . '/controller/subscription.php');
-        exit(); // Make sure to exit the script after redirection
+        require '../views/subscription.view.php';
     } catch (\PDOException $e) {
         // Handle the exception here
         echo "Error updating subscription: " . $e->getMessage();
