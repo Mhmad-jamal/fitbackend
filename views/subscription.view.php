@@ -5,38 +5,22 @@
     $.fn.dataTable.ext.errMode = 'throw';
     $('#table_id').dataTable({
      "bProcessing": true,
-     "sAjaxSource": "../controller/get_users.php",
+     "sAjaxSource": "../controller/get_all_subscritption.php",
      "responsive": true,
      "bPaginate":true,
      "aaSorting": [[5,'desc']],
      "sPaginationType":"full_numbers",
      "iDisplayLength": 10,
      "aoColumns": [
-    { mData: 'displayName', "width": "5%"},
-    { mData: 'email', "width": "10%"},
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.emailVerified == true) {
-        return '<span class="badge badge-pill bg-success">Yes</span>';
-      }else if(data.emailVerified == false) {
-        return '<span class="badge badge-pill bg-warning">No</span>';
-      }
-      }
-    },
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.disabled == false) {
-        return '<span class="badge badge-pill bg-success">Active</span>';
-      }else if(data.disabled == true) {
-        return '<span class="badge badge-pill bg-danger">Disabled</span>';
-      }
-      }
-    },
-    { "mData": null , "width": "7%",
-     "mRender" : function (data) {
-      return moment(data.metadata.createdAt).format('DD/MM/YYYY hh:mm:ss');
-      }
-    },
+    { mData: 'id', "width": "5%"},
+    { mData: 'name', "width": "5%"},
+    { mData: 'start_date', "width": "5%"},
+    { mData: 'end_date', "width": "5%"},
+    { mData: 'price', "width": "5%"},
+    { mData: 'created_at', "width": "5%"},
+
+    
+    
     { "mData": null,
     "width": "8%",
     "className": "text-center",
@@ -44,14 +28,9 @@
     'searchable': false,
     "mRender" : function (data) {
 
-      let buttons = "";
-      btns = "<a class='btn btn-small btn-primary' href='../controller/edit_user.php?id="+data.uid+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_user.php?id="+data.uid+"'>Delete</a>";
+      buttons = "<a class='btn btn-small btn-primary' href='../controller/edit_subscription.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_subscription.php?id="+data.id+"'>Delete</a>";
       
-      if (data.disabled == false) {
-        buttons = btns + " <a class='btn btn-small btn-warning' href='../controller/disable_user.php?id="+data.uid+"'>Disable</a>";
-      }else if(data.disabled == true) {
-        buttons = btns + " <a class='btn btn-small btn-success' href='../controller/enable_user.php?id="+data.uid+"'>Enable</a>";
-      }
+      
 
       return buttons;
       }
@@ -75,7 +54,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h5>Users</h5>
+                            <h5>Subscription</h5>
                         </div>
                     </div>
 
@@ -87,11 +66,13 @@
 <table id="table_id" class="table table-striped table-bordered" cellspacing="0" width="100%" style="border-radius: 5px;">
     <thead>
             <tr>
+                <th>id</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Verified</th>
-                <th>Status</th>
-                <th>Joined</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price </th>
+                <th>Created At </th>
+
                 <th>Actions</th>
             </tr>
         </thead>

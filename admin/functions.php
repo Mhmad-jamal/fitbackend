@@ -78,7 +78,17 @@ function get_all_exercises($connect)
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
 }
 function get_all_code($connect){
-    $sentence = $connect->prepare("SELECT * FROM `generated_code` ORDER BY `generated_code`.`id` DESC");
+    $sentence = $connect->prepare("  SELECT gc.*, s.name AS subscription_name
+    FROM generated_code AS gc
+    INNER JOIN subscription AS s ON gc.subscription_id = s.id
+    ORDER BY gc.id DESC");
+
+    $sentence->execute();
+    return $sentence->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function get_all_subscritption($connect){
+    $sentence = $connect->prepare("SELECT * FROM `subscription` ORDER BY `subscription`.`id` DESC");
 
     $sentence->execute();
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
@@ -774,6 +784,12 @@ function id_type($id_type)
 function get_type_per_id($connect, $id_type)
 {
     $sentence = $connect->query("SELECT * FROM types WHERE type_id = $id_type LIMIT 1");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
+function get_subscription_ById($connect, $id)
+{
+    $sentence = $connect->query("SELECT * FROM subscription WHERE id = $id LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }

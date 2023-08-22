@@ -343,8 +343,8 @@
             </li>
             <li>
                 <a href="javascript:void(0);" class="have-submenu <?php showMenu('subscription.php');?>">
-                    <span class="icon-thumbnail"><i class="dripicons-stopwatch"></i></span>
-                    <span class="title">subscription</span>
+                <span class="icon-thumbnail"><i class="dripicons-rocket"></i></span>
+                    <span class="title">Subscription</span>
                 </a>
                 <ul class="sub-menu" style="display: <?php activePage('subscription.php');?>">
 
@@ -354,7 +354,12 @@
                             <span class="title">Show All</span>
                         </a>
                     </li>
-
+                    <li>
+                        <a href="../controller/add_subscription.php">
+                            <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
+                            <span class="title">Add New Subscription</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="../controller/generate_code.php">
                             <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
