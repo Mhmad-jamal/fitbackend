@@ -30,8 +30,7 @@ if (isset($_SESSION['manager_email'])){
         // Execute the prepared statement
         $statement->execute();
     
-        header('Location: ' . SITE_URL . '/controller/subscription.php');
-        exit(); // Make sure to exit the script after redirection
+       // Make sure to exit the script after redirection
     }
     require '../views/add_subscription.view.php';
     require '../views/footer.view.php';
