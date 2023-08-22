@@ -30,7 +30,7 @@ if (isset($_SESSION['manager_email'])){
         // Execute the prepared statement
         $statement->execute();
     
-       // Make sure to exit the script after redirection
+        require '../views/subscription.view.php';
     }
     require '../views/add_subscription.view.php';
     require '../views/footer.view.php';
