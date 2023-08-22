@@ -78,10 +78,8 @@
                     "width": "5%",
                     "className": "status text-center",
                     "render": function(data, type, row) {
-                        console.log(data);
-                        console.log(type);
-                        console.log(row);
-                        return row.status === 0 ? 'Unused' : 'Used';
+                       
+                        return data === 0 ? 'Unused' : 'Used';
                     }
                 },
                 {
