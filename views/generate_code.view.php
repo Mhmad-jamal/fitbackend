@@ -84,7 +84,7 @@
                 {
                     "width": "5%",
                     "render": function(data, type, row) {
-                        buttons = "<a class='btn btn-small btn-primary' href='../controller/edit_subscription.php?id=" + row.id + "'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_code.php?id=" + row.id + "'>Delete</a>";
+                        buttons = " <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_code.php?id=" + row.id + "'>Delete</a>";
 
 
 
