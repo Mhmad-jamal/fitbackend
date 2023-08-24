@@ -563,25 +563,29 @@ $sentence->execute();
         // Calculate the expiration date
         $subscription_duration=$subscription[0]['subscription_duration'];
         $expiration_date = date("Y-m-d", strtotime($subscription_date . "+$subscription_duration months"));
-    
-        // Compare expiration date with current date
-        $current_date = date("Y-m-d");
+
+      $current_date = date("Y-m-d");
         if ($expiration_date >= $current_date) {
             $subscription_status = "Active";
+            $response = array("status" => 200, "message" => "user active ");
+
+        }else {
+            $response = array("status" => 202, "message" => "Sorry your subscription is ended ");
+
         }
     
         // Update the subscription details
         $subscription[0]["subscription_expiration"] = $expiration_date;
         $subscription[0]["subscription_status"] = $subscription_status;
  
-        return $subscription; // Return the modified fetched data
+        return $response;
     } else {
-        return false;
+        $response = array("status" => 201, "message" => "join now");
     }
     
     }else {
-        return false;
-
+        $response = array("status" => 404, "message" => "user not found");
+return $response;
     }
 }
 
