@@ -4,41 +4,41 @@
   $(document).ready(function(){
     $.fn.dataTable.ext.errMode = 'throw';
     $('#table_id').dataTable({
-     "bProcessing": true,
-     "sAjaxSource": "../controller/get_all_subscritption.php",
-     "responsive": true,
-     "bPaginate":true,
-     "aaSorting": [[5,'desc']],
-     "sPaginationType":"full_numbers",
-     "iDisplayLength": 10,
-     "aoColumns": [
-    { mData: 'id', "width": "5%"},
-    { mData: 'name', "width": "5%"},
-    { mData: 'subscription_duration', "width": "5%"},
-    { mData: 'price', "width": "5%"},
-    { mData: 'created_at', "width": "5%"},
-
-    
-    
-    { "mData": null,
-    "width": "8%",
-    "className": "text-center",
-    'orderable': false,
-    'searchable': false,
-    "mRender" : function (data) {
-
-      buttons = "<a class='btn btn-small btn-primary' href='../controller/edit_subscription.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_subscription.php?id="+data.id+"'>Delete</a>";
-      
-      
-
-      return buttons;
-      }
-      
-    }
-    ]
-  });
+      "bProcessing": true,
+      "sAjaxSource": "../controller/get_all_subscritption.php",
+      "responsive": true,
+      "bPaginate": true,
+      "aaSorting": [[5,'desc']],
+      "sPaginationType": "full_numbers",
+      "iDisplayLength": 10,
+      "aoColumns": [
+        { mData: 'id', "width": "5%"},
+        { mData: 'name', "width": "5%"},
+        {
+          mData: 'subscription_duration',
+          "width": "5%",
+          "render": function(data, type, row, meta) {
+            return data + " Months";
+          }
+        },
+        { mData: 'price', "width": "5%"},
+        { mData: 'created_at', "width": "5%"},
+        {
+          "mData": null,
+          "width": "8%",
+          "className": "text-center",
+          'orderable': false,
+          'searchable': false,
+          "mRender" : function (data) {
+            buttons = "<a class='btn btn-small btn-primary' href='../controller/edit_subscription.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_subscription.php?id="+data.id+"'>Delete</a>";
+            return buttons;
+          }
+        }
+      ]
+    });
   });
 </script>
+
 
 <!--Page Container--> 
 <section class="page-container">
