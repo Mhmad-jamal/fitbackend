@@ -18,18 +18,25 @@
                             <input type="text" value="" required placeholder="3-Month and Get 1 month Free " name="name" class="form-control" required="">
                         </div>
                     </div>
-    <div class="row  mt-3">
-   
-        <div class="col-md-4">
-        <label class="control-label d-flex ">Start Date</label>
-        <input type="date" value="" required placeholder="date" name="start_date" class="form-control" required="">
-    </div>
-    </div>
+    
     <div class="row  mt-3">
    
    <div class="col-md-4">
-   <label class="control-label d-flex ">End Date</label>
-   <input type="date" value="" required placeholder="date" name="end_date" class="form-control" required="">
+   <label class="control-label d-flex ">Subscription Duration</label>
+   <select class="form-control" id="subscriptionDuration" name="subscription_duration">
+        <option value="1 month">1 month</option>
+        <option value="2 months">2 months</option>
+        <option value="3 months">3 months</option>
+        <option value="4 months">4 months</option>
+        <option value="5 months">5 months</option>
+        <option value="6 months">6 months</option>
+        <option value="7 months">7 months</option>
+        <option value="8 months">8 months</option>
+        <option value="9 months">9 months</option>
+        <option value="10 months">10 months</option>
+        <option value="11 months">11 months</option>
+        <option value="12 months">12 months</option>
+      </select>
 </div>
 </div>
 <div class="row  mt-3">

@@ -13,18 +13,16 @@ if (isset($_SESSION['manager_email'])){
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = cleardata($_POST['name']);
-        $start_date = cleardata($_POST['start_date']);
-        $end_date = cleardata($_POST['end_date']);
+        $subscription_duration = cleardata($_POST['subscription_duration']);
         $price = cleardata($_POST['price']);
     
         $statement = $connect->prepare(
-            'INSERT INTO subscription (name, start_date, end_date, price) VALUES (:name, :start_date, :end_date, :price)'
+            'INSERT INTO subscription (name, subscription_duration, price) VALUES (:name, :subscription_duration, :price)'
         );
     
         // Bind values using named placeholders
         $statement->bindValue(':name', $name);
-        $statement->bindValue(':start_date', $start_date);
-        $statement->bindValue(':end_date', $end_date);
+        $statement->bindValue(':subscription_duration', $subscription_duration);
         $statement->bindValue(':price', $price);
     
         // Execute the prepared statement

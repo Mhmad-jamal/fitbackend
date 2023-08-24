@@ -14,8 +14,7 @@
      "aoColumns": [
     { mData: 'id', "width": "5%"},
     { mData: 'name', "width": "5%"},
-    { mData: 'start_date', "width": "5%"},
-    { mData: 'end_date', "width": "5%"},
+    { mData: 'subscription_duration', "width": "5%"},
     { mData: 'price', "width": "5%"},
     { mData: 'created_at', "width": "5%"},
 
@@ -68,8 +67,8 @@
             <tr>
                 <th>id</th>
                 <th>Name</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>subscription duration </th>
+             
                 <th>Price </th>
                 <th>Created At </th>
 

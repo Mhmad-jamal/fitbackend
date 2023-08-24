@@ -22,21 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = cleardata($_POST['id']); // Make sure to retrieve the id from the form
 
     $name = cleardata($_POST['name']);
-    $start_date = cleardata($_POST['start_date']);
-    $end_date = cleardata($_POST['end_date']);
+    $subscription_duration = cleardata($_POST['subscription_duration']);
+   
     $price = cleardata($_POST['price']);
 
     try {
         $statement = $connect->prepare(
             'UPDATE subscription 
-            SET name = :name, start_date = :start_date, end_date = :end_date, price = :price 
+            SET name = :name, subscription_duration=:subscription_duration, price = :price 
             WHERE id = :id'
         );
 
         // Bind values using named placeholders
         $statement->bindValue(':name', $name);
-        $statement->bindValue(':start_date', $start_date);
-        $statement->bindValue(':end_date', $end_date);
+        $statement->bindValue(':subscription_duration', $subscription_duration);
         $statement->bindValue(':price', $price);
         $statement->bindValue(':id', $id); // Bind the id value
 
