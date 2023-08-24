@@ -539,6 +539,51 @@ function get_food_by_goal($connect)
         return false;
     }
 }
+function checkUsersubscriptions($connect){
+    if(isset($_POST["user_id"])){
+        $user_id = $_POST["user_id"];
+        $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
+        INNER JOIN `subscription` s ON us.subscription_id = s.id
+        WHERE us.user_id = :user_id");
+
+$sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$sentence->execute();
+   
+    $row_count = $sentence->rowCount(); // Get the number of rows
+    if ($row_count > 0) {
+        $subscription = $sentence->fetchAll();
+        $subscription_duration = $subscription[0]["subscription_duration"];
+        $subscription_date = $subscription[0]["date"];
+    
+        // Initialize default values
+        $subscription_status = "Expired"; // Default status
+    
+       
+    
+        // Calculate the expiration date
+        $subscription_duration=$subscription[0]['subscription_duration'];
+        $expiration_date = date("Y-m-d", strtotime($subscription_date . "+$subscription_duration months"));
+    
+        // Compare expiration date with current date
+        $current_date = date("Y-m-d");
+        if ($expiration_date >= $current_date) {
+            $subscription_status = "Active";
+        }
+    
+        // Update the subscription details
+        $subscription[0]["subscription_expiration"] = $expiration_date;
+        $subscription[0]["subscription_status"] = $subscription_status;
+ 
+        return $subscription; // Return the modified fetched data
+    } else {
+        return false;
+    }
+    
+    }else {
+        return false;
+
+    }
+}
 
 function get_all_workouts($connect)
 {
