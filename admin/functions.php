@@ -77,7 +77,8 @@ function get_all_exercises($connect)
     $sentence->execute();
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
 }
-function get_all_code($connect){
+function get_all_code($connect)
+{
     $sentence = $connect->prepare("  SELECT gc.*, s.name AS subscription_name
     FROM generated_code AS gc
     INNER JOIN subscription AS s ON gc.subscription_id = s.id
@@ -87,7 +88,8 @@ function get_all_code($connect){
     return $sentence->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function get_all_subscritption($connect){
+function get_all_subscritption($connect)
+{
     $sentence = $connect->prepare("SELECT * FROM `subscription` ORDER BY `subscription`.`id` DESC");
 
     $sentence->execute();
@@ -324,28 +326,28 @@ function insert_workout($connect, $user_id, $prev_id)
 
     $gender = '';
     $primary_goal = '';
-$place='';
-$level='';
+    $place = '';
+    $level = '';
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id'");
     $sentence->execute();
 
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
         $user_goal = json_decode($user_data["user_goal"]);
-       
+
         foreach ($user_goal as $key => $value) {
             if ($value->componentId == 1) {
                 $gender = $value->value;
             } elseif ($value->componentId == 2) {
                 $primary_goal = $value->value;
-            }elseif($value->componentId==3){
-                $place=$value->value;
-            }elseif($value->componentId==4){
-                $level=$value->value;
+            } elseif ($value->componentId == 3) {
+                $place = $value->value;
+            } elseif ($value->componentId == 4) {
+                $level = $value->value;
             }
         }
-        if($gender=='' || $primary_goal=='' || $place=='' ||$level==''){
-        
+        if ($gender == '' || $primary_goal == '' || $place == '' || $level == '') {
+
             return false;
         }
 
@@ -366,16 +368,15 @@ $level='';
             $statement = $connect->prepare(
                 'INSERT INTO usesr_goal_workout (user_id, workout_id) VALUES (:user_id, :workout_id)'
             );
-    
+
             $insertResult = $statement->execute(array(
                 ':user_id' => $user_id,
                 ':workout_id' => $Workout_id,
             ));
+        } else {
+            $insertResult = false;
         }
-        else {
-            $insertResult=false;
-        }
-       
+
 
         if ($insertResult) {
             return $Workout_id;
@@ -386,57 +387,56 @@ $level='';
 }
 function get_workouts_by_goal($connect)
 {
-   
+
     $user_id = $_POST["user_id"];
-    if($user_id){
-    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
-    $sentence->execute();
-  
-
-    if ($sentence->rowCount() > 0) {
-
-        $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
+    if ($user_id) {
+        $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
         $sentence->execute();
 
+
         if ($sentence->rowCount() > 0) {
-          
-            $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
-           
-            $timestamp_from_db = strtotime($last_record['created_at']);
 
-            $today = strtotime(date('Y-m-d'));
+            $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
+            $sentence->execute();
 
-            $seven_days_later = strtotime('+7 days', $today);
-            $workout_id = $last_record["workout_id"];
-            if ($timestamp_from_db <= $seven_days_later) {
+            if ($sentence->rowCount() > 0) {
 
-                $result = get_workout_per_id($connect, $workout_id);
-            } else {
+                $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
 
-                $result = insert_workout($connect, $user_id, $workout_id);
-                if ($result) {
+                $timestamp_from_db = strtotime($last_record['created_at']);
+
+                $today = strtotime(date('Y-m-d'));
+
+                $seven_days_later = strtotime('+7 days', $today);
+                $workout_id = $last_record["workout_id"];
+                if ($timestamp_from_db <= $seven_days_later) {
+
                     $result = get_workout_per_id($connect, $workout_id);
+                } else {
+
+                    $result = insert_workout($connect, $user_id, $workout_id);
+                    if ($result) {
+                        $result = get_workout_per_id($connect, $workout_id);
+                    }
+                }
+            } else {
+                $result = insert_workout($connect, $user_id, null);
+                if ($result) {
+                    $result = get_workout_per_id($connect, $result);
                 }
             }
+            return $result;
         } else {
-            $result = insert_workout($connect, $user_id, null);
-            if ($result) {
-                $result = get_workout_per_id($connect, $result);
-            }
+
+            return false;
         }
-        return $result;
     } else {
-        
         return false;
     }
 }
-else{
-    return false;
-}
-}
 function insert_Food($connect, $user_id, $prev_id)
 {
-    $user_id=$_POST['user_id'];
+    $user_id = $_POST['user_id'];
     $diet = '';
     $primary_goal = '';
 
@@ -445,7 +445,7 @@ function insert_Food($connect, $user_id, $prev_id)
 
     if ($sentence->rowCount() > 0) {
         $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
-   
+
         $user_goal = json_decode($user_data["user_goal"]);
 
         foreach ($user_goal as $key => $value) {
@@ -454,21 +454,20 @@ function insert_Food($connect, $user_id, $prev_id)
                 $diet = $value->value;
             }
         }
-    
 
-       
-        if($diet=='' || $diet ==2){
+
+
+        if ($diet == '' || $diet == 2) {
             return false;
         }
-       
+
 
         $diet_id = '';
         if ($prev_id != null) {
             $sentence = $connect->prepare("SELECT diets.*, categories.category_title AS category_title FROM diets, categories WHERE diet_id != '$prev_id' AND diet_improvement = '$diet' AND diets.diet_category = categories.category_id ORDER BY RAND() LIMIT 1");
 
-           
+
             $sentence->execute();
-            
         } else {
             $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE   diet_improvement='$diet' AND   diets.diet_category = categories.category_id  ORDER BY RAND() limit 1");
             $sentence->execute();
@@ -477,14 +476,14 @@ function insert_Food($connect, $user_id, $prev_id)
         $diet_data = $sentence->fetchAll();
         if (count($diet_data) > 0) {
 
-        $diet_id = $diet_data[0]['diet_id'];
-        }else {
+            $diet_id = $diet_data[0]['diet_id'];
+        } else {
             return false;
         }
         $statement = $connect->prepare(
             'INSERT INTO usesr_goal_diet (user_id, diet_id) VALUES (:user_id, :diet_id)'
         );
-        
+
         $insertResult = $statement->execute(array(
             ':user_id' => $user_id,
             ':diet_id' => $diet_id,
@@ -499,13 +498,13 @@ function insert_Food($connect, $user_id, $prev_id)
 }
 function get_food_by_goal($connect)
 {
-     $user_id = $_POST["user_id"];
-     
+    $user_id = $_POST["user_id"];
 
- $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
+
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
     $sentence->execute();
     if ($sentence->rowCount() > 0) {
-     
+
 
         $sentence = $connect->prepare("SELECT * FROM `usesr_goal_diet` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
         $sentence->execute();
@@ -539,54 +538,130 @@ function get_food_by_goal($connect)
         return false;
     }
 }
-function checkUsersubscriptions($connect){
-    if(isset($_POST["user_id"])){
+function checkUsersubscriptions($connect)
+{
+    if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
         $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
         INNER JOIN `subscription` s ON us.subscription_id = s.id
         WHERE us.user_id = :user_id");
 
-$sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-$sentence->execute();
-   
-    $row_count = $sentence->rowCount(); // Get the number of rows
-    if ($row_count > 0) {
-        $subscription = $sentence->fetchAll();
-        $subscription_duration = $subscription[0]["subscription_duration"];
-        $subscription_date = $subscription[0]["date"];
-    
-        // Initialize default values
-        $subscription_status = "Expired"; // Default status
-    
-       
-    
-        // Calculate the expiration date
-        $subscription_duration=$subscription[0]['subscription_duration'];
-        $expiration_date = date("Y-m-d", strtotime($subscription_date . "+$subscription_duration months"));
+        $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sentence->execute();
 
-      $current_date = date("Y-m-d");
-        if ($expiration_date >= $current_date) {
-            $subscription_status = "Active";
-            $response = array("status" => 200, "message" => "user active ");
+        $row_count = $sentence->rowCount(); // Get the number of rows
+        if ($row_count > 0) {
+            $subscription = $sentence->fetchAll();
+            $subscription_duration = $subscription[0]["subscription_duration"];
+            $subscription_date = $subscription[0]["date"];
 
-        }else {
-            $response = array("status" => 202, "message" => "Sorry your subscription is ended ");
+            // Initialize default values
+            $subscription_status = "Expired"; // Default status
 
+
+
+            // Calculate the expiration date
+            $subscription_duration = $subscription[0]['subscription_duration'];
+            $expiration_date = date("Y-m-d", strtotime($subscription_date . "+$subscription_duration months"));
+
+            $current_date = date("Y-m-d");
+            if ($expiration_date >= $current_date) {
+                $subscription_status = "Active";
+                $response = array("status" => 200, "message" => "user active ");
+            } else {
+                $response = array("status" => 202, "message" => "Sorry your subscription is ended ");
+            }
+
+            // Update the subscription details
+            $subscription[0]["subscription_expiration"] = $expiration_date;
+            $subscription[0]["subscription_status"] = $subscription_status;
+
+            return $response;
+        } else {
+            $response = array("status" => 201, "message" => "join now");
         }
-    
-        // Update the subscription details
-        $subscription[0]["subscription_expiration"] = $expiration_date;
-        $subscription[0]["subscription_status"] = $subscription_status;
- 
-        return $response;
     } else {
-        $response = array("status" => 201, "message" => "join now");
-    }
-    
-    }else {
         $response = array("status" => 404, "message" => "user not found");
-return $response;
+        return $response;
     }
+}
+function subscribe($connect)
+{
+    $response = array();
+
+    if (isset($_POST["user_id"])) {
+        $user_id = $_POST["user_id"];
+
+        if (isset($_POST["general_code"])) {
+            $general_code = $_POST["general_code"];
+            $payment_method = "code";
+            $query = "
+            SELECT gc.id AS generated_code_id, s.id AS subscription_id, gc.*, s.*
+            FROM generated_code gc
+            INNER JOIN subscription s ON gc.subscription_id = s.id
+            WHERE gc.code = :general_code
+            
+            ";
+            $sentence = $connect->prepare($query);
+            $sentence->bindParam(':general_code', $general_code, PDO::PARAM_STR);
+            $sentence->execute();
+
+            $row_count = $sentence->rowCount(); // Get the number of rows
+
+            if ($row_count > 0) {
+                $codedata = $sentence->fetchAll(PDO::FETCH_ASSOC)[0];
+                if ($codedata["status"] == 0) {
+                    $subscription_id = $codedata["subscription_id"];
+                    $generated_code=$codedata["code"];
+                    $currentDate = date('Y-m-d');
+
+                    $statement = $connect->prepare(
+                        'INSERT INTO user_subscription (user_id, subscription_id,payment_method,generated_code, date) VALUES (:user_id, :subscription_id, :payment_method,:generated_code,:current_date)'
+                    );
+
+                    $insertResult = $statement->execute(array(
+                        ':user_id' => $user_id,
+                        ':subscription_id' => $subscription_id,
+                        ':current_date' => $currentDate,
+                        ':payment_method' => $payment_method,
+                        ':generated_code'=>$generated_code,
+                    ));
+
+                    if ($insertResult) {
+                        $idToUpdate = $codedata["generated_code_id"]; // Replace with the actual ID you want to update
+
+                        $statement = $connect->prepare("
+                    UPDATE generated_code
+                     SET status = 1
+                     WHERE id = :id_to_update
+                        ");
+
+                        $statement->bindParam(':id_to_update', $idToUpdate, PDO::PARAM_INT);
+                        $updateResult = $statement->execute();
+
+                        if ($updateResult) {
+                            $response = array("status" => 200, "message" => "subscription updated succsessfuly add", "data" => $codedata);
+
+                        } else {
+                        }
+                    } else {
+                        // Insertion failed
+                        $response = array("status" => 500, "message" => "insertion error");
+                    }
+                } else {
+                    $response = array("status" => 201, "message" => "Code used before", "data" => $codedata);
+                }
+            } else {
+                $response = array("status" => 404, "message" => "invalid code");
+            }
+        } else {
+            $response = array("status" => 405, "message" => "general Code undefined");
+        }
+    } else {
+        $response = array("status" => 406, "message" => "user id undefined");
+    }
+
+    return $response;
 }
 
 function get_all_workouts($connect)
