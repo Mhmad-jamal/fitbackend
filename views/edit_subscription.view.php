@@ -27,18 +27,18 @@
      <label class="control-label d-flex ">Subscription duration </label>
                         
     <select class="form-control" id="subscriptionDuration" name="subscription_duration">
-    <option <?php echo ($subscription["subscription_duration"] == "1 month") ? 'selected' : '' ?> value="1 month">1 month</option>
-    <option <?php echo ($subscription["subscription_duration"] == "2 months") ? 'selected' : '' ?> value="2 months">2 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "3 months") ? 'selected' : '' ?> value="3 months">3 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "4 months") ? 'selected' : '' ?> value="4 months">4 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "5 months") ? 'selected' : '' ?> value="5 months">5 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "6 months") ? 'selected' : '' ?> value="6 months">6 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "7 months") ? 'selected' : '' ?> value="7 months">7 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "8 months") ? 'selected' : '' ?> value="8 months">8 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "9 months") ? 'selected' : '' ?> value="9 months">9 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "10 months") ? 'selected' : '' ?> value="10 months">10 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "11 months") ? 'selected' : '' ?> value="11 months">11 months</option>
-    <option <?php echo ($subscription["subscription_duration"] == "12 months") ? 'selected' : '' ?> value="12 months">12 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "1") ? 'selected' : '' ?> value="1">1 month</option>
+    <option <?php echo ($subscription["subscription_duration"] == "2") ? 'selected' : '' ?> value="2">2 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "3") ? 'selected' : '' ?> value="3">3 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "4") ? 'selected' : '' ?> value="4">4 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "5") ? 'selected' : '' ?> value="5">5 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "6") ? 'selected' : '' ?> value="6">6 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "7") ? 'selected' : '' ?> value="7">7 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "8") ? 'selected' : '' ?> value="8">8 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "9") ? 'selected' : '' ?> value="9">9 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "10") ? 'selected' : '' ?> value="10">10 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "11") ? 'selected' : '' ?> value="11">11 months</option>
+    <option <?php echo ($subscription["subscription_duration"] == "12 ") ? 'selected' : '' ?> value="12">12 months</option>
 </select>
 </div>
        
