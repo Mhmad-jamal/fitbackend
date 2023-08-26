@@ -550,11 +550,12 @@ function checkUsersubscriptions($connect)
         $sentence->execute();
 
         $row_count = $sentence->rowCount(); 
-        var_dump($row_count);
-        die();
+       
         // Get the number of rows
         if ($row_count > 0) {
             $subscription = $sentence->fetchAll();
+            var_dump($subscription);
+            die();
             $subscription_duration = $subscription[0]["subscription_duration"];
             $subscription_date = $subscription[0]["date"];
 
