@@ -540,25 +540,40 @@ function get_food_by_goal($connect)
 }
 function checkUsersubscriptions($connect)
 {
-    $user_id = $_POST["user_id"];
-    $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
-        INNER JOIN `subscription` s ON us.subscription_id = s.id
-        WHERE us.user_id = :user_id");
-    
-    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    
-    // Get and print the query string
-    $queryString = $sentence->queryString;
-    var_dump($queryString);
-    var_dump("hey"); // Print the query string
-    die();
-    $sentence->execute();
-    
-    $row_count = $sentence->rowCount();
-    
-    if ($row_count > 0) {
-        $subscription = $sentence->fetchAll();
-        var_dump($subscription);
+    if (isset($_POST["user_id"])) {
+        function getExecutedQueryString($stmt) {
+            ob_start();
+            $stmt->debugDumpParams();
+            $dump = ob_get_clean();
+            $lines = explode("\n", $dump);
+            $query = $lines[0];
+            return $query;
+        }
+        
+        $user_id = $_POST["user_id"];
+        $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
+            INNER JOIN `subscription` s ON us.subscription_id = s.id
+            WHERE us.user_id = :user_id");
+        
+        $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $sentence->execute();
+        
+        // Get the executed query and print it
+        $executedQuery = getExecutedQueryString($sentence);
+        echo "Executed Query: $executedQuery";
+        
+        $row_count = $sentence->rowCount();
+        if ($row_count > 0) {
+            $subscription = $sentence->fetchAll();
+            var_dump($subscription);
+            die();
+        }
+        
+       
+        // Get the number of rows
+        if ($row_count > 0) {
+            $subscription = $sentence->fetchAll();
+             var_dump($row_count);
         die();
             $subscription_duration = $subscription[0]["subscription_duration"];
             $subscription_date = $subscription[0]["date"];
