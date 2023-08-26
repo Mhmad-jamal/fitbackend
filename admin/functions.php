@@ -549,7 +549,10 @@ function checkUsersubscriptions($connect)
         $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $sentence->execute();
 
-        $row_count = $sentence->rowCount(); // Get the number of rows
+        $row_count = $sentence->rowCount(); 
+        var_dump($row_count);
+        die();
+        // Get the number of rows
         if ($row_count > 0) {
             $subscription = $sentence->fetchAll();
             $subscription_duration = $subscription[0]["subscription_duration"];
