@@ -549,8 +549,8 @@ function checkUsersubscriptions($connect)
     
     // Get and print the query string
     $queryString = $sentence->queryString;
-    echo "Query String: $queryString"; // Print the query string
-    
+    var_dump($queryString); // Print the query string
+    die();
     $sentence->execute();
     
     $row_count = $sentence->rowCount();
