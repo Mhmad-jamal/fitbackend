@@ -579,14 +579,14 @@ function checkUsersubscriptions($connect)
             $subscription[0]["subscription_expiration"] = $expiration_date;
             $subscription[0]["subscription_status"] = $subscription_status;
 
-            return $response;
         } else {
             $response = array("status" => 201, "message" => "join now");
         }
     } else {
         $response = array("status" => 404, "message" => "user not found");
-        return $response;
     }
+    return $response;
+
 }
 function subscribe($connect)
 {
