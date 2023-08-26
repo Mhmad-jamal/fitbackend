@@ -540,22 +540,25 @@ function get_food_by_goal($connect)
 }
 function checkUsersubscriptions($connect)
 {
-    if (isset($_POST["user_id"])) {
-        $user_id = $_POST["user_id"];
-        $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
+    $user_id = $_POST["user_id"];
+    $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
         INNER JOIN `subscription` s ON us.subscription_id = s.id
         WHERE us.user_id = :user_id");
-
-        $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $sentence->execute();
-
-        $row_count = $sentence->rowCount(); 
-       
-        // Get the number of rows
-        if ($row_count > 0) {
-            $subscription = $sentence->fetchAll();
-            var_dump($subscription);
-            die();
+    
+    $sentence->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    
+    // Get and print the query string
+    $queryString = $sentence->queryString;
+    echo "Query String: $queryString"; // Print the query string
+    
+    $sentence->execute();
+    
+    $row_count = $sentence->rowCount();
+    
+    if ($row_count > 0) {
+        $subscription = $sentence->fetchAll();
+        var_dump($subscription);
+        die();
             $subscription_duration = $subscription[0]["subscription_duration"];
             $subscription_date = $subscription[0]["date"];
 
