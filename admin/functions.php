@@ -623,7 +623,7 @@ function subscribe($connect)
                     );
 
                     var_dump("here");
-                var_dump($user_id);
+                var_dump($statement);
                     var_dump($subscription_id);
                     var_dump($currentDate);
                     var_dump($payment_method);
