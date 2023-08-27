@@ -630,11 +630,26 @@ function subscribe($connect)
                             ':payment_method' => $payment_method,
                             ':generated_code' => $generated_code,
                         ));
-                    
                         if ($insertResult) {
-                            // Insertion was successful
+                            $idToUpdate = $codedata["generated_code_id"]; // Replace with the actual ID you want to update
+    
+                            $statement = $connect->prepare("
+                        UPDATE generated_code
+                         SET status = 1
+                         WHERE id = :id_to_update
+                            ");
+    
+                            $statement->bindParam(':id_to_update', $idToUpdate, PDO::PARAM_INT);
+                            $updateResult = $statement->execute();
+    
+                            if ($updateResult) {
+                                $response = array("status" => 200, "message" => "subscription updated succsessfuly add", "data" => $codedata);
+    
+                            } else {
+                            }
                         } else {
                             // Insertion failed
+                            $response = array("status" => 500, "message" => "insertion error");
                         }
                     } catch (PDOException $e) {
                         // Handle the exception (log or send an appropriate response)
@@ -643,27 +658,7 @@ function subscribe($connect)
                     
                    
 
-                    if ($insertResult) {
-                        $idToUpdate = $codedata["generated_code_id"]; // Replace with the actual ID you want to update
-
-                        $statement = $connect->prepare("
-                    UPDATE generated_code
-                     SET status = 1
-                     WHERE id = :id_to_update
-                        ");
-
-                        $statement->bindParam(':id_to_update', $idToUpdate, PDO::PARAM_INT);
-                        $updateResult = $statement->execute();
-
-                        if ($updateResult) {
-                            $response = array("status" => 200, "message" => "subscription updated succsessfuly add", "data" => $codedata);
-
-                        } else {
-                        }
-                    } else {
-                        // Insertion failed
-                        $response = array("status" => 500, "message" => "insertion error");
-                    }
+                   
                 } else {
                     $response = array("status" => 201, "message" => "Code used before", "data" => $codedata);
                 }
