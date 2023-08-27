@@ -618,25 +618,29 @@ function subscribe($connect)
                     $generated_code=$codedata["code"];
                     $currentDate = date('Y-m-d');
 
-                    $statement = $connect->prepare(
-                        'INSERT INTO user_subscription (user_id, subscription_id,payment_method,generated_code, date) VALUES (:user_id, :subscription_id, :payment_method,:generated_code,:current_date)'
-                    );
-
-                    var_dump("here");
-                var_dump($statement);
-                    var_dump($subscription_id);
-                    var_dump($currentDate);
-                    var_dump($payment_method);
-                    var_dump($generated_code);
-
-
-                    $insertResult = $statement->execute(array(
-                        ':user_id' => $user_id,
-                        ':subscription_id' => $subscription_id,
-                        ':current_date' => $currentDate,
-                        ':payment_method' => $payment_method,
-                        ':generated_code'=>$generated_code,
-                    ));
+                    try {
+                        $statement = $connect->prepare(
+                            'INSERT INTO user_subscription (user_id, subscription_id, payment_method, generated_code, date) VALUES (:user_id, :subscription_id, :payment_method, :generated_code, :current_date)'
+                        );
+                    
+                        $insertResult = $statement->execute(array(
+                            ':user_id' => $user_id,
+                            ':subscription_id' => $subscription_id,
+                            ':current_date' => $currentDate,
+                            ':payment_method' => $payment_method,
+                            ':generated_code' => $generated_code,
+                        ));
+                    
+                        if ($insertResult) {
+                            // Insertion was successful
+                        } else {
+                            // Insertion failed
+                        }
+                    } catch (PDOException $e) {
+                        // Handle the exception (log or send an appropriate response)
+                        echo "Database error: " . $e->getMessage();
+                    }
+                    
                    
 
                     if ($insertResult) {
