@@ -13,12 +13,14 @@ if (!$connect) {
 // Use $_POST to access the data sent from React Native app
 $user_id = $_POST['user_id'];
 $user_email = $_POST['user_email'];
+$user_name = $_POST['user_name'];
 $user_goal = $_POST['user_goal'];
 
 try {
-    $stmt = $connect->prepare('INSERT INTO users_goal (user_id, user_email, user_goal) VALUES (:user_id, :user_email, :user_goal)');
+    $stmt = $connect->prepare('INSERT INTO users_goal (user_id, user_email, user_name, user_goal) VALUES (:user_id, :user_email, :user_name, :user_goal)');
     $stmt->bindParam(':user_id', $user_id);
     $stmt->bindParam(':user_email', $user_email);
+    $stmt->bindParam(':user_name', $user_name);
     $stmt->bindParam(':user_goal', $user_goal);
 
     $stmt->execute();

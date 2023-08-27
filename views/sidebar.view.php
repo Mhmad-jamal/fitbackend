@@ -383,6 +383,15 @@
                 </a>
             </li>
 
+
+            <li>
+                <a href="../controller/support.php">
+                    <span class="icon-thumbnail"><i class="dripicons-document-edit"></i></span>
+                    <span class="title">Support</span>
+                </a>
+            </li>
+
+
         </div>
     </div>
 </ul>
