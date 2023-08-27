@@ -622,6 +622,9 @@ function subscribe($connect)
                         'INSERT INTO user_subscription (user_id, subscription_id,payment_method,generated_code, date) VALUES (:user_id, :subscription_id, :payment_method,:generated_code,:current_date)'
                     );
 
+                    
+
+
                     $insertResult = $statement->execute(array(
                         ':user_id' => $user_id,
                         ':subscription_id' => $subscription_id,
@@ -629,6 +632,8 @@ function subscribe($connect)
                         ':payment_method' => $payment_method,
                         ':generated_code'=>$generated_code,
                     ));
+                    var_dump($insertResult);
+                    die();
 
                     if ($insertResult) {
                         $idToUpdate = $codedata["generated_code_id"]; // Replace with the actual ID you want to update
