@@ -394,25 +394,42 @@ function get_workouts_by_goal($connect)
         $sentence->execute();
 
 
-        $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+        if ($sentence->rowCount() > 0) {
 
-        $timestamp_from_db = strtotime($last_record['created_at']);
-        $today = strtotime(date('Y-m-d'));
-        $seven_days_ago = strtotime('-7 days', $today); // Calculate 7 days ago
-        
-        $workout_id = $last_record["workout_id"];
-        
-        if ($timestamp_from_db >= $seven_days_ago) {
-            // Case when created_at is within the last 7 days
-            $result = get_workout_per_id($connect, $workout_id);
-        } else {
-            // Case when created_at is more than 7 days ago
-            $result = insert_workout($connect, $user_id, $workout_id);
-            if ($result) {
-                $result = get_workout_per_id($connect, $workout_id);
+            $sentence = $connect->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
+            $sentence->execute();
+
+            if ($sentence->rowCount() > 0) {
+
+                $last_record = $sentence->fetch(PDO::FETCH_ASSOC);
+
+
+                $timestamp_from_db = strtotime($last_record['created_at']);
+                $today = strtotime(date('Y-m-d'));
+                $seven_days_ago = strtotime('-7 days', $today); // Calculate 7 days ago
+                
+                $workout_id = $last_record["workout_id"];
+                if ($timestamp_from_db >= $seven_days_ago) {
+
+                    $result = get_workout_per_id($connect, $workout_id);
+                } else {
+
+                    $result = insert_workout($connect, $user_id, $workout_id);
+                    if ($result) {
+                        $result = get_workout_per_id($connect, $workout_id);
+                    }
+                }
+            } else {
+                $result = insert_workout($connect, $user_id, null);
+                if ($result) {
+                    $result = get_workout_per_id($connect, $result);
+                }
             }
+            return $result;
+        } else {
+
+            return false;
         }
-        
     } else {
         return false;
     }
