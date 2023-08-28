@@ -745,7 +745,7 @@ function get_all_supports($connect)
 function get_all_supports_by_userId($connect)
 {
     $user_id=$_POST["user_id"];
-    $sentence = $connect->prepare("SELECT support.*, users_goal.user_id as user FROM support JOIN users_goal ON users_goal.id = support.user_id WHERE users_goal.user_id = :user_id ORDER BY id DESC");
+    $sentence = $connect->prepare("SELECT * FROM support WHERE user_id = :user_id");
     
     $sentence->bindParam(':user_id', $user_id, PDO::PARAM_STR);
     
@@ -753,6 +753,7 @@ function get_all_supports_by_userId($connect)
     
     return $sentence->fetchAll();
 }
+
 
 
 function id_post($id_post)
