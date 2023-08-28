@@ -738,7 +738,7 @@ function get_all_posts($connect)
 function get_all_supports($connect)
 {
 
-    $sentence = $connect->prepare("SELECT support.*, users_goal.user_id as user from support  JOIN users_goal ON users_goal.id = support.user_id ORDER BY id DESC");
+    $sentence = $connect->prepare("SELECT support.*, users_goal.user_name AS user FROM support JOIN users_goal ON users_goal.user_id = support.user_id ORDER BY support.id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
