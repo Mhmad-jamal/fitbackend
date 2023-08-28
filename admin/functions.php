@@ -409,7 +409,7 @@ function get_workouts_by_goal($connect)
 
                 $seven_days_later = strtotime('+7 days', $today);
                 $workout_id = $last_record["workout_id"];
-                if ($timestamp_from_db >= $seven_days_later) {
+                if ($timestamp_from_db > $seven_days_later) {
 
                     $result = get_workout_per_id($connect, $workout_id);
                 } else {
