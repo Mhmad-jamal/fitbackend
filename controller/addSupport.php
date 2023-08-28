@@ -39,7 +39,6 @@ session_start();
         }
     } catch (PDOException $e) {
         // Print the exception message for debugging
-        echo "Exception: " . $e->getMessage();
     
         // Handle the exception here
         // You can log the error, generate a proper error response, etc.
