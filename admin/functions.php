@@ -412,11 +412,15 @@ function get_workouts_by_goal($connect)
                
                 $workout_id = $last_record["workout_id"];
                 if ($timestamp_from_db >= $seven_days_later) {
-
+                    var_dump("Npt");
+                    die();
                    $result = get_workout_per_id($connect, $workout_id);
-               } else {
 
+               } else {
+                var_dump("insert");
+                die();
                     $result = insert_workout($connect, $user_id, $workout_id);
+                   
                      if ($result) {
                         $result = get_workout_per_id($connect, $workout_id);
                     } 
