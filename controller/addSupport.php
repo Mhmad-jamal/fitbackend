@@ -18,7 +18,7 @@ session_start();
                 'INSERT INTO support (user_id, message) VALUES (:user_id, :message)'
             );
             
-            $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $statement->bindParam(':user_id', $user_id, PDO::PARAM_STR);
             $statement->bindParam(':message', $message, PDO::PARAM_STR);
             
             $statement->execute();
