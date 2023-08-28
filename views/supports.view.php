@@ -36,7 +36,7 @@
           }
         },
         {
-          mData: 'date_time',
+          mData: 'created_at',
           "width": "15%",
           "className": "text-center"
         },
