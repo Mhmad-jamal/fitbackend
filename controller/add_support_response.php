@@ -14,7 +14,7 @@ session_start();
         $response = cleardata($_POST['response']);
         
         $statement = $connect->prepare(
-            'UPDATE support SET response=:response WHERE id=:support_id'
+            'UPDATE support SET response_message=:response WHERE id=:support_id'
         );
         
         $statement->bindParam(':support_id', $support_id, PDO::PARAM_INT);
