@@ -409,22 +409,17 @@ function get_workouts_by_goal($connect)
 
                 $seven_days_later = strtotime('+7 days', $today);
 
-                var_dump($seven_days_later);
-
-                var_dump($timestamp_from_db);
+               
                 $workout_id = $last_record["workout_id"];
                 if ($timestamp_from_db >= $seven_days_later) {
 
-                    var_dump($timestamp_from_db <= $seven_days_later);
-                    die();
+                   $result = get_workout_per_id($connect, $workout_id);
+               } else {
 
-/*                     $result = get_workout_per_id($connect, $workout_id);
- */                } else {
-
-/*                     $result = insert_workout($connect, $user_id, $workout_id);
- */                    /* if ($result) {
+                    $result = insert_workout($connect, $user_id, $workout_id);
+                     if ($result) {
                         $result = get_workout_per_id($connect, $workout_id);
-                    } */
+                    } 
                 }
             } else {
                 $result = insert_workout($connect, $user_id, null);
