@@ -28,7 +28,7 @@
           "className": "text-center"
         },
         {
-          mData: 'response',
+          mData: 'response_message',
           "width": "25%",
           "className": "text-center",
           render: function(data, type, row) {
