@@ -72,7 +72,7 @@ $statment->execute(array(
 
 		));
 
-		header('Location: ' . $_SERVER['HTTP_REFERER']);
+		header('Location: ' . SITE_URL . '/controller/recipes.php');
 
 } else{
 
