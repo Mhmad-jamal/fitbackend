@@ -72,11 +72,10 @@ $statment->execute(array(
 
 		));
 
+		
 		$redirectURL = SITE_URL . '/controller/recipes.php';
-		$headerString = 'Location: ' . $redirectURL;
-	
-		header($headerString);
-
+		echo '<script>window.location.href = "' . $redirectURL . '";</script>';
+die();
 } else{
 
 $id_diet = id_diet($_GET['id']);
