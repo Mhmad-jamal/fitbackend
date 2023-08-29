@@ -515,9 +515,9 @@ function get_food_by_goal($connect)
 
             $today = strtotime(date('Y-m-d'));
 
-            $seven_days_later = strtotime('+7 days', $today);
+            $seven_days_ago = strtotime('-7 days', $today); // Calculate 7 days ago
             $diet_id = $last_record["diet_id"];
-            if ($timestamp_from_db <= $seven_days_later) {
+            if ($timestamp_from_db >= $seven_days_ago) {
 
                 $result = get_diet_per_id($connect, $diet_id);
             } else {
