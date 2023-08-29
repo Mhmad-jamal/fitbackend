@@ -72,7 +72,6 @@ $statment->execute(array(
 
 		));
 
-header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 } else{
 
