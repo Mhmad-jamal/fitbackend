@@ -89,12 +89,12 @@ $diet = get_diet_per_id($connect, $id_diet);
 }
 
 $diet = $diet['0'];
+require '../views/edit.recipe.view.php';
 
 }
 
 $categories_lists = get_all_categories($connect);
 
-require '../views/edit.recipe.view.php';
 require '../views/footer.view.php';
     
 } else {
