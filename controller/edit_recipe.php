@@ -72,7 +72,7 @@ $statment->execute(array(
 
 		));
 
-		header('Location: ' . SITE_URL . '/controller/home.php');
+		header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 } else{
 
@@ -89,12 +89,12 @@ $diet = get_diet_per_id($connect, $id_diet);
 }
 
 $diet = $diet['0'];
-require '../views/edit.recipe.view.php';
 
 }
 
 $categories_lists = get_all_categories($connect);
 
+require '../views/edit.recipe.view.php';
 require '../views/footer.view.php';
     
 } else {
