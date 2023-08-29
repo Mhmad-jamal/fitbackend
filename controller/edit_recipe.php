@@ -72,7 +72,7 @@ $statment->execute(array(
 
 		));
 
-		header('Location:' . SITE_URL . '/controller/recipes.php');
+		header('Location: ' . SITE_URL . '/controller/home.php');
 
 } else{
 
