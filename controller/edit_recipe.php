@@ -79,7 +79,7 @@ try{
         var_dump("Update failed: " . $errorInfo[2]);
     }
 
-    // Redirect on success
+	die();
     header('Location:' . SITE_URL . '/controller/recipes.php');
 	die();
 } catch (PDOException $e) {
