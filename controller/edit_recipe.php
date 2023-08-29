@@ -71,6 +71,7 @@ $statment->execute(array(
 		':diet_id' => $diet_id
 
 		));
+		header('Location:' . SITE_URL . '/controller/recipes.php');
 
 
 } else{
