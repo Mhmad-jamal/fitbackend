@@ -72,7 +72,7 @@ $statment->execute(array(
 
 		));
 
-header('Location: ' . $_SERVER['HTTP_REFERER']);
+		header('Location: ' . SITE_URL . '/controller/recipes.php');
 
 } else{
 
@@ -100,6 +100,3 @@ require '../views/footer.view.php';
 } else {
 		header('Location: ' . SITE_URL . '/controller/login.php');		
 		}
-
-
-?>
