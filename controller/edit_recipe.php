@@ -81,6 +81,7 @@ try{
 
     // Redirect on success
     header('Location:' . SITE_URL . '/controller/recipes.php');
+	die();
 } catch (PDOException $e) {
     echo "Database connection failed: " . $e->getMessage();
 }
