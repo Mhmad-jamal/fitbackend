@@ -74,6 +74,7 @@ if (isset($_SESSION['manager_email'])) {
 
 		/* 		header('Location: ' . SITE_URL . '/controller/recipes.php');
  */
+die();
 	} else {
 
 		$id_diet = id_diet($_GET['id']);
@@ -90,11 +91,11 @@ if (isset($_SESSION['manager_email'])) {
 
 		$diet = $diet['0'];
 	}
-/* 
+
 	$categories_lists = get_all_categories($connect);
 
 	require '../views/edit.recipe.view.php';
-	require '../views/footer.view.php'; */
+	require '../views/footer.view.php';
 } else {
 	header('Location: ' . SITE_URL . '/controller/login.php');
 }
