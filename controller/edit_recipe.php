@@ -74,9 +74,7 @@ $statment->execute(array(
 
 		$redirectURL = SITE_URL . '/controller/recipes.php';
 		$headerString = 'Location: ' . $redirectURL;
-		var_dump($headerString);
-		die();
-		// Set the actual header
+	
 		header($headerString);
 
 } else{
