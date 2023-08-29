@@ -416,7 +416,7 @@ function get_workouts_by_goal($connect)
 
                     $result = insert_workout($connect, $user_id, $workout_id);
                     if ($result) {
-                        $result = get_workout_per_id($connect, $workout_id);
+                        $result = get_workout_per_id($connect, $result);
                     }
                 }
             } else {
