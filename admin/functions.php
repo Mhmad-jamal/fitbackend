@@ -450,7 +450,7 @@ function insert_Food($connect, $user_id, $prev_id)
 
         foreach ($user_goal as $key => $value) {
 
-            if ($value->componentId == 17) {
+            if ($value->componentId == 16) {
                 $diet = $value->value;
             }
         }
