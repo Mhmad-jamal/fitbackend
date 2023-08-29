@@ -46,32 +46,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	}
 
 
-$statment = $connect->prepare(
-	'UPDATE diets SET diet_title = :diet_title, diet_description = :diet_description, diet_ingredients = :diet_ingredients, diet_category = :diet_category, diet_directions = :diet_directions, diet_calories = :diet_calories, diet_carbs = :diet_carbs, diet_protein = :diet_protein, diet_fat = :diet_fat,diet_improvement=:diet_improvement, diet_time = :diet_time, diet_servings = :diet_servings, diet_featured = :diet_featured, diet_status = :diet_status, diet_price = :diet_price, diet_image = :diet_image WHERE diet_id = :diet_id'
-	);
+try{
+	$statement = $connect->prepare(
+        'UPDATE diets SET diet_title = :diet_title, diet_description = :diet_description, diet_ingredients = :diet_ingredients, diet_category = :diet_category, diet_directions = :diet_directions, diet_calories = :diet_calories, diet_carbs = :diet_carbs, diet_protein = :diet_protein, diet_fat = :diet_fat, diet_improvement = :diet_improvement, diet_time = :diet_time, diet_servings = :diet_servings, diet_featured = :diet_featured, diet_status = :diet_status, diet_price = :diet_price, diet_image = :diet_image WHERE diet_id = :diet_id'
+    );
 
-$statment->execute(array(
+    $updated = $statement->execute(array(
+        ':diet_title' => $diet_title,
+        ':diet_description' => $diet_description,
+        ':diet_ingredients' => $diet_ingredients,
+        ':diet_category' => $diet_category,
+        ':diet_directions' => $diet_directions,
+        ':diet_calories' => $diet_calories,
+        ':diet_carbs' => $diet_carbs,
+        ':diet_protein' => $diet_protein,
+        ':diet_fat' => $diet_fat,
+        ':diet_improvement' => $diet_improvement,
+        ':diet_time' => $diet_time,
+        ':diet_servings' => $diet_servings,
+        ':diet_featured' => $diet_featured,
+        ':diet_status' => $diet_status,
+        ':diet_price' => $diet_price,
+        ':diet_image' => $diet_image,
+        ':diet_id' => $diet_id
+    ));
 
-		':diet_title' => $diet_title,
-		':diet_description' => $diet_description,
-		':diet_ingredients' => $diet_ingredients,
-		':diet_category' => $diet_category,
-		':diet_directions' => $diet_directions,
-		':diet_calories' => $diet_calories,
-		':diet_carbs' => $diet_carbs,
-		':diet_protein' => $diet_protein,
-		':diet_fat' => $diet_fat,
-		':diet_improvement'=>$diet_improvement,
-		':diet_time' => $diet_time,
-		':diet_servings' => $diet_servings,
-		':diet_featured' => $diet_featured,
-		':diet_status' => $diet_status,
-		':diet_price' => $diet_price,
-		':diet_image' => $diet_image,
-		':diet_id' => $diet_id
+    if ($updated) {
+        $rowsAffected = $statement->rowCount();
+        var_dump("Number of rows updated: " . $rowsAffected);
+    } else {
+        $errorInfo = $statement->errorInfo();
+        var_dump("Update failed: " . $errorInfo[2]);
+    }
 
-		));
-		header('Location:' . SITE_URL . '/controller/recipes.php');
+    // Redirect on success
+    header('Location:' . SITE_URL . '/controller/recipes.php');
+} catch (PDOException $e) {
+    echo "Database connection failed: " . $e->getMessage();
+}
 
 
 } else{
