@@ -391,7 +391,7 @@
 
             <li>
                 <a href="../controller/support.php">
-                    <span class="icon-thumbnail"><i class="dripicons-document-edit"></i></span>
+                    <span class="icon-thumbnail"><i class="dripicons-archive"></i></span>
                     <span class="title">Support</span>
                 </a>
             </li>
