@@ -1,3 +1,8 @@
+<style>.navigation-sidebar {
+    height: 100%; /* Set the height to fit the viewport */
+    overflow-y: auto; /* Add vertical scroll when content exceeds height */
+}
+</style>
 <nav id="navigation" class="navigation-sidebar bg-primary">
         <div class="navigation-header">
         <a href="<?php echo SITE_URL ?>"><img src="../assets/images/wbdashboard.png" style="max-width: 130px;"></a>

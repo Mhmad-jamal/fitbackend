@@ -45,10 +45,13 @@
    <option value="<?php echo $categories_list['category_id']; ?>"><?php echo $categories_list['category_title']; ?></option>
     <?php endforeach; ?>
    </select> 
-   <label class="control-label">For Diet needs improvement</label>
-   <select class="form-control" name="diet_improvement" required="">
-   <option value="1">Yes</option>
-   <option value="2">No</option>
+   <label class="control-label">Course</label>
+   <select class="form-control" name="course" required="">
+   <option value="1">breakfast </option>
+   <option value="2">Snack 1</option>
+   <option value="3">Lunch </option>
+   <option value="4">Snack 2</option>
+   <option value="5">Dinner</option>
 
    </select> 
 

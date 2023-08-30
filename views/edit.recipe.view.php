@@ -48,11 +48,16 @@
                           <option value="<?php echo $categories_list['category_id']; ?>"><?php echo $categories_list['category_title']; ?></option>
                         <?php endforeach; ?>
                       </select>
-                      <label class="control-label">For Diet needs improvement</label>
-                      <select class="form-control" name="diet_improvement" required="">
-                        <option value="1" <?php if ($diet["diet_improvement"] == 1) echo "selected"; ?>>Yes</option>
-                        <option value="2" <?php if ($diet["diet_improvement"] == 2) echo "selected"; ?>>No</option>
+                      <label class="control-label">Course</label>
+
+                      <select class="form-control" name="course" required="">
+                        <option value="1" <?php if ($diet['course'] == 1) echo 'selected'; ?>>Breakfast</option>
+                        <option value="2" <?php if ($diet['course'] == 2) echo 'selected'; ?>>Snack 1</option>
+                        <option value="3" <?php if ($diet['course'] == 3) echo 'selected'; ?>>Lunch</option>
+                        <option value="4" <?php if ($diet['course'] == 4) echo 'selected'; ?>>Snack 2</option>
+                        <option value="5" <?php if ($diet['course'] == 5) echo 'selected'; ?>>Dinner</option>
                       </select>
+
                       <label class="control-label">Price</label>
 
                       <select class="custom-select form-control" name="diet_price">
