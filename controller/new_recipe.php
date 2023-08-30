@@ -64,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		':diet_image' => 'recipe_' . $renamefile
 		));
 
-	header('Location:' . SITE_URL . '/controller/recipes.php');
-
+		$redirectURL = SITE_URL . '/controller/recipes.php';
+		echo '<script>window.location.href = "' . $redirectURL . '";</script>';
+die();
 }
 
 $categories_lists = get_all_categories($connect);
