@@ -13,7 +13,6 @@ if ($conn->connect_error) {
 $diet = '';
 if ( isset($_POST["user_id"] )) {
      $user_id = $_POST["user_id"]; 
-    $user_id = "UVfSLG79pubBWcNM2Ukq17uQigM2";
 
     $user_data = mysqli_query($conn, "SELECT * FROM `users_goal` WHERE `user_id` LIKE '$user_id'");
     if (mysqli_num_rows($user_data) > 0) {
