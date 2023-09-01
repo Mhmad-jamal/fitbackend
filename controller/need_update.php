@@ -24,12 +24,16 @@ if (isset($_POST["user_id"])) {
     if (mysqli_num_rows($user_data) > 0) {
         while ($row = mysqli_fetch_assoc($user_data)) {
             // Process the retrieved records here
-            $response["status"] = 201;
-            $response["message"] = " user goals created in the last month!";
+            $response["status"] = 200;
+            $response["message"] = "user Need update goal!";
         }
     } else {
         $response["status"] = 201;
-        $response["message"] = "No user goals created in the last month!";
+        $response["message"] = "no need to update goal!";
     }
-    echo json_encode($response);
+}else{
+    $response["status"] = 404;
+    $response["message"] = "user not Found";
 }
+echo json_encode($response);
+
