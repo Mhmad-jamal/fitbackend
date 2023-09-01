@@ -17,7 +17,7 @@ if ( isset($_POST["user_id"] )) {
     if (mysqli_num_rows($user_data) > 0) {
 
         $user_data_arr = mysqli_fetch_assoc($user_data);
-var_dump($user_data);
+var_dump($user_data_arr);
     }else {
         $response["status"] = 201;
         $response["message"] = "user not found!";
