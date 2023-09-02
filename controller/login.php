@@ -58,7 +58,7 @@ if(5==5){
 
 			}else{
 
-			$errors .= $password;
+			$errors .= "INVALID PASSWORD";
 			}
 
         }
