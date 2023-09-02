@@ -21,10 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 $captcha = $_POST["captcha"];
 $captchaUser = filter_var($_POST["captcha"], FILTER_SANITIZE_STRING);
 
-
-
-// this for captcha
-if(5==5){
+if(isset($_SESSION['CAPTCHA_CODE']) && $_SESSION['CAPTCHA_CODE'] == $captchaUser){
 
         if ($csrf->validate('login-token')) {
 
@@ -58,7 +55,7 @@ if(5==5){
 
 			}else{
 
-			$errors .= "INVALID PASSWORD";
+			$errors .= "INCORRECT LOGIN DATA OR ACCESS DENIED";
 			}
 
         }
