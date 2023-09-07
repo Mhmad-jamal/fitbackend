@@ -1,4 +1,15 @@
 <?php
+
+require '../admin/config.php';
+require '../admin/functions.php';
+
+
+$response = array("status" => 0, "message" => "", "data" => null);
+$conn = new mysqli($database['host'], $database['user'], $database['pass'], $database['db']);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"]; 
     $user_goal = $_POST["user_goal"];
@@ -23,4 +34,4 @@ if (isset($_POST["user_id"])) {
 }
 
 echo json_encode($response);
-?>
+
