@@ -15,7 +15,7 @@ if (isset($_POST["user_id"])) {
     $user_goal = $_POST["user_goal"];
 
     // Use NOW() function to set the created_at column to the current date and time
-    $query = "UPDATE `users_goal` SET `user_goal` = '$user_goal', `created_at` = NOW() WHERE `users_goal`.`id` = '$user_id';";
+    $query = "UPDATE `users_goal` SET `user_goal` = '$user_goal', `created_at` = NOW() WHERE `users_goal`.`user_id` LIKE '$user_id';";
     
     $user_data = mysqli_query($conn, $query);
 
