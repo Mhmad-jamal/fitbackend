@@ -39,8 +39,6 @@ if (isset($_SESSION['manager_email'])) {
             }
         }
 
-        require '../views/generate_code.view.php';
-        die();
     }
 
     $subscription_lists = get_all_subscritption($connect);
