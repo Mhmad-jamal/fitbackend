@@ -145,7 +145,13 @@
                     </div>
 
                 </div>
+<?php
+if (isset($_SESSION['insert_message']) && !empty($_SESSION['insert_message'])) {
+    echo $_SESSION['insert_message'] ;
+    unset($_SESSION['insert_message']);
+}
 
+?>
             </div>
         </form>
         <div class="content sm-gutter">

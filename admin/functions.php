@@ -13,7 +13,7 @@ function connect($database)
         return $connect;
     } catch (PDOException $e) {
 
-        $connect = new PDO('mysql:host=localhost;dbname=fit', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
+        $connect = new PDO('mysql:host=localhost;dbname=mohannadtheeb_admin', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES  \'UTF8\''));
         return $connect;
     }
 }
