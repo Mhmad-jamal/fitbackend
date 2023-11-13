@@ -7,9 +7,7 @@ if (isset($_SESSION['manager_email'])) {
     require '../views/header.view.php';
     require '../views/navbar.view.php';
     $connect = connect($database);
-if(isset($_SESSION['insert_message'])){
-    $_SESSION['insert_message']="<div></div>";
-}
+    $_SESSION['insert_message']="";
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id'])) {
         $code = cleardata($_POST['code']);
         $subscription_id = cleardata($_POST["subscription_id"]);
