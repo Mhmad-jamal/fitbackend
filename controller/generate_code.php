@@ -39,7 +39,7 @@ if (isset($_SESSION['manager_email'])) {
             }
         }
 
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        header('Location: generate_code.view.php'); // Redirect to the same page
         exit();
     }
 
