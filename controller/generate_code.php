@@ -30,9 +30,9 @@ if (isset($_SESSION['manager_email'])) {
                 ));
 
                 if ($success) {
-                    $_SESSION['insert_message'] = '<div class="alert alert-success text-center" role="alert">Record inserted successfully!</div>';
+                    $_SESSION['insert_message'] = '<div class="alert alert-success text-center" role="alert">Code inserted successfully!</div>';
                 } else {
-                    $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting record.</div>';
+                    $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting Code.</div>';
                 }
             } catch (\PDOException $e) {
                 $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting record.</div>';

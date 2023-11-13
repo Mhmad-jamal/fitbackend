@@ -23,6 +23,7 @@ if(!$id){
 
 $statement = $connect->prepare('DELETE FROM generated_code WHERE id = :id');
 $statement->execute(array('id' => $id));
+$_SESSION['insert_message'] = '<div class="alert alert-success text-center" role="alert">Delete code successfully!</div>';
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 
