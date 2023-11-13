@@ -1,7 +1,5 @@
 <?php require 'sidebar.php'; 
-if(isset($_SESSION['insert_message'])){
-    $_SESSION['insert_message']="<div></div>";
-}
+
 ?>
 <script>
     // Function to generate a random token
@@ -153,6 +151,8 @@ if(isset($_SESSION['insert_message'])){
 if (isset($_SESSION['insert_message']) && !empty($_SESSION['insert_message'])) {
     echo $_SESSION['insert_message'] ;
     unset($_SESSION['insert_message']);
+    $_SESSION['insert_message']="<div></div>";
+
 }
 
 ?>
