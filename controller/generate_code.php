@@ -8,7 +8,7 @@ if (isset($_SESSION['manager_email'])) {
     require '../views/navbar.view.php';
     $connect = connect($database);
 if(isset($_SESSION['insert_message'])){
-    unset($_SESSION['insert_message']);
+    $_SESSION['insert_message']="<div></div>";
 }
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id'])) {
         $code = cleardata($_POST['code']);

@@ -26,8 +26,7 @@ $statement->execute(array('id' => $id));
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 
-}else {
-		header('Location: ' . SITE_URL . '/controller/login.php');		
+}else {		header('Location: ' . SITE_URL . '/controller/login.php');		
 		}
 
 
