@@ -69,7 +69,6 @@ if (isset($_SESSION['manager_email'])) {
 
 } else {
     header('Location: ' . SITE_URL . '/controller/login.php');
-    exit();
 }
 
 // Function to check if the code already exists in the database
