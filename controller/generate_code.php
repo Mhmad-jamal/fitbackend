@@ -41,7 +41,6 @@ if (isset($_SESSION['manager_email'])) {
             }
         }
         header('Location: ' . SITE_URL . '/controller/generate_code.view.php');
-exit();
 
     }
 
