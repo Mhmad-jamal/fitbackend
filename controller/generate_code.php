@@ -7,6 +7,7 @@ if (isset($_SESSION['manager_email'])) {
     require '../views/header.view.php';
     require '../views/navbar.view.php';
     $connect = connect($database);
+    $_SESSION['insert_message']="";
 
    
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id']) && isset($_POST['submit_button'])) {
@@ -38,9 +39,9 @@ if (isset($_SESSION['manager_email'])) {
             } catch (\PDOException $e) {
                 $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting record.</div>';
             }
-            header('Location: ' . $_SERVER['PHP_SELF']);
-exit();
         }
+        header('Location: ' . SITE_URL . '/controller/generate_code.view.php');
+
 
     }
 
