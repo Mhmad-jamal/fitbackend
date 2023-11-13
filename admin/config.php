@@ -7,9 +7,9 @@ define('SITE_URL', 'http://appadmin.mohannad-theeb.com/');
 
 $database = array(
 'host' => 'localhost',
-'db' => 'mohannadtheeb_admin',
-'user' => 'mohannadtheeb_admin',
-'pass' => 'mohannadtheeb_admin'
+'db' => 'giftfundtrade_admin',
+'user' => 'giftfundtrade_admin',
+'pass' => '#admin@2023'
 );
 
 $email_config = array(
