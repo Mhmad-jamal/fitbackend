@@ -1004,7 +1004,13 @@ function get_all_categories($connect)
     $sentence->execute();
     return $sentence->fetchAll();
 }
+function get_allergies_and_diseases($connect)
+{
 
+    $sentence = $connect->prepare("SELECT * FROM allergies_and_diseases ORDER BY id DESC");
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
 function id_category($id_category)
 {
     return (int)cleardata($id_category);

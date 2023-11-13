@@ -221,6 +221,32 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="javascript:void(0);" class="have-submenu <?php showMenu('allergies_and_diseases.php');?>">
+                    <span class="icon-thumbnail"><i class="dripicons-heart"></i></span>
+                    <span class="title">Allergies and diseases</span>
+                </a>
+                <!--Submenu-->
+                <ul class="sub-menu" style="display: <?php activePage('allergies_and_diseases.php');?>">
+
+                    <li>
+                        <a href="../controller/allergies_and_diseases.php">
+                            <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
+                            <span class="title">Show All</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../controller/new_allergies_and_diseases.php">
+                            <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
+                            <span class="title">New Allergies and diseases</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+
 
             <li>
                 <a href="javascript:void(0);" class="have-submenu <?php showMenu('posts.php');?>">
