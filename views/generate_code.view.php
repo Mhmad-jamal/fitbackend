@@ -40,6 +40,7 @@
                 cache: false,
                 data: formdata,
                 success: function(response) {
+location.reload();
 
                     $('#table_id').DataTable().ajax.reload();
                 },
@@ -142,17 +143,19 @@
                     </div>
 
                     <div class=" mt-3">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" name="submit_button" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-secondary" id="generateButton">Generate</button>
                     </div>
 
                 </div>
 <?php
 if (isset($_SESSION['insert_message']) && !empty($_SESSION['insert_message'])) {
-    echo $_SESSION['insert_message'] ;
+    echo $_SESSION['insert_message'];
     unset($_SESSION['insert_message']);
    
 
+} else {
+    echo "<div></div>";
 }
 
 ?>

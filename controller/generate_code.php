@@ -7,8 +7,9 @@ if (isset($_SESSION['manager_email'])) {
     require '../views/header.view.php';
     require '../views/navbar.view.php';
     $connect = connect($database);
-    $_SESSION['insert_message']="";
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id'])) {
+
+   
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id']) && isset($_POST['submit_button'])) {
         $code = cleardata($_POST['code']);
         $subscription_id = cleardata($_POST["subscription_id"]);
 
@@ -37,6 +38,8 @@ if (isset($_SESSION['manager_email'])) {
             } catch (\PDOException $e) {
                 $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting record.</div>';
             }
+            header('Location: ' . $_SERVER['PHP_SELF']);
+exit();
         }
 
     }
@@ -55,6 +58,8 @@ if (isset($_SESSION['manager_email'])) {
 
             if ($statement->rowCount() > 0) {
                 echo json_encode(['success' => true]);
+                $_SESSION['insert_message'] = '<div class="alert alert-success text-center" role="alert">Delete code successfully!</div>';
+
             } else {
                 echo json_encode(['success' => false]);
             }
