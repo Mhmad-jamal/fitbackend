@@ -1,4 +1,8 @@
-<?php require 'sidebar.php'; ?>
+<?php require 'sidebar.php'; 
+if(isset($_SESSION['insert_message'])){
+    $_SESSION['insert_message']="<div></div>";
+}
+?>
 <script>
     // Function to generate a random token
     function generateToken(length) {
