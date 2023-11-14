@@ -7,7 +7,6 @@ if (isset($_SESSION['manager_email'])) {
     require '../views/header.view.php';
     require '../views/navbar.view.php';
     $connect = connect($database);
-    $_SESSION['insert_message']="";
 
    
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['id']) && isset($_POST['submit_button'])) {
