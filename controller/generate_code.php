@@ -1,7 +1,6 @@
 <?php
 session_start();
-ob_start(); 
-
+ob_start();
 if (isset($_SESSION['manager_email'])) {
     require '../admin/config.php';
     require '../admin/functions.php';
@@ -41,7 +40,7 @@ if (isset($_SESSION['manager_email'])) {
                 $_SESSION['insert_message'] = '<div class="alert alert-danger text-center" role="alert">Error inserting record.</div>';
             }
         }
-        header('Location: ' . SITE_URL . '/controller/generate_code.view.php');
+        header('Location: ' . SITE_URL . '/controller/generate_code.php');
 
     }
 
