@@ -1,6 +1,7 @@
 <?php 
-
 session_start();
+ob_start(); 
+
 if (isset($_SESSION['manager_email'])){
     
     
@@ -37,13 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		':image' => 'catdiet_' . $renamefile
 		));
 
-		if($success){
-	header('Location:' . SITE_URL . '/controller/allergies_and_diseases.php');
-		}else{
-			var_dump("errro");
-			die();
-		}
-		die();
+		header('Location:' . SITE_URL . '/controller/allergies_and_diseases.php');
+
 }
 
 require '../views/new_allergies_and_diseases.php';
