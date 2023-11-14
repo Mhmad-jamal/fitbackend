@@ -174,7 +174,7 @@
             <li>
                 <a href="javascript:void(0);" class="have-submenu <?php showMenu('recipes.php');?>">
                     <span class="icon-thumbnail"><i class="dripicons-cutlery"></i></span>
-                    <span class="title">Recipes</span>
+                    <span class="title">Food Recipes</span>
                 </a>
                 <!--Submenu-->
                 <ul class="sub-menu" style="display: <?php activePage('recipes.php');?>">

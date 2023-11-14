@@ -27,11 +27,11 @@
   <div class="form-group col-md-12">
     <div class="block col-md-12" style="padding-bottom: 35px">
 
-   <label class="control-label">Title</label>
+   <label class="control-label">Food name</label>
    <input type="text" value="" placeholder="Title" name="diet_title" class="form-control" required="">
 
-   <label class="control-label">Description</label>
-   <textarea value="" name="diet_description" class="advancedtinymce form-control" id="description" required=""></textarea>
+   <!-- <label class="control-label">Description</label>
+   <textarea value="" name="diet_description" class="advancedtinymce form-control" id="description" required=""></textarea> -->
 
    <label class="control-label">Ingredients</label>
    <textarea value="" name="diet_ingredients" class="advancedtinymce form-control" id="ingredients" required=""></textarea>
@@ -39,12 +39,12 @@
    <label class="control-label">Directions</label>
    <textarea value="" name="diet_directions" class="advancedtinymce form-control" id="directions" required=""></textarea>
 
-   <label class="control-label">Category</label>
+   <!-- <label class="control-label">Category</label>
    <select class="form-control" name="diet_category" required="">
     <?php foreach($categories_lists as $categories_list): ?>
    <option value="<?php echo $categories_list['category_id']; ?>"><?php echo $categories_list['category_title']; ?></option>
     <?php endforeach; ?>
-   </select> 
+   </select>  -->
    <label class="control-label">Course</label>
    <select class="form-control" name="course" required="">
    <option value="1">breakfast </option>
@@ -55,13 +55,13 @@
 
    </select> 
 
-   <label class="control-label">Price</label>
+   <!-- <label class="control-label">Price</label>
    <select class="form-control" name="diet_price">
    <option value="-" selected>-</option>
    <option value="free">Free</option>
    <option value="premium">Premium</option>
    </select>
-
+ -->
    <label class="control-label">Calories</label>
    <input type="text" value="" placeholder="Calories" name="diet_calories" class="form-control" required="">
 
@@ -74,61 +74,24 @@
    <label class="control-label">Fat</label>
    <input type="text" value="" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
 
-   <label class="control-label">Servings</label>
-   <input type="text" value="" placeholder="Servings" name="diet_servings" class="form-control" required="">
+   <!-- <label class="control-label">Servings</label>
+   <input type="text" value="" placeholder="Servings" name="diet_servings" class="form-control" required=""> -->
 
-   <label class="control-label">Total Time</label>
-   <input type="text" value="" placeholder="Total Time (Minutes)" name="diet_time" class="form-control" required="">
+  <!--  <label class="control-label">Total Time</label>
+   <input type="text" value="" placeholder="Total Time (Minutes)" name="diet_time" class="form-control" required=""> -->
 
 <label class="control-label">Featured</label>
    
    <style type="text/css">
      td{padding: 0 .5rem !important;}
    </style>
-<table>
-  <tr>
-    <td>                             <div class="radio radio-success">
-                                <input type="radio" name="diet_featured" id="radio3" value="1">
-                                <label for="radio3">
-                                    AYes
-                                </label>
-                            </div></td>
-                            <td>
-                                                          <div class="radio radio-danger">
-                                <input type="radio" name="diet_featured" id="radio4" value="0">
-                                <label for="radio4">
-                                    No
-                                </label>
-                            </div>
-                            </td>
-  </tr>
-
-</table>
-
-   <label class="control-label">Status</label>
+<input type="hidden" name="diet_status" id="radio5"  value="1">
+<input type="hidden" name="diet_featured" id="radio3" value="1" >
 
 
-<table>
-  <tr>
-    <td>                             <div class="radio radio-success">
-                                <input type="radio" name="diet_status" id="radio5" value="1">
-                                <label for="radio5">
-                                    Active
-                                </label>
-                            </div></td>
-                            <td>
-                                                          <div class="radio radio-danger">
-                                <input type="radio" name="diet_status" id="radio6" value="0">
-                                <label for="radio6">
-                                    Inactive
-                                </label>
-                            </div>
-                            </td>
-  </tr>
-
-</table>
+  
    
-   <label class="control-label">Image</label>
+   <label class="control-label">Food Image</label>
 
 <div class="new-image" id="image-preview">
   <label for="image-upload" id="image-label">Choose File</label>

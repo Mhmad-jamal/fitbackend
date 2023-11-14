@@ -1,4 +1,6 @@
 <?php 
+ob_start(); 
+
 
 session_start();
 if (isset($_SESSION['manager_email'])){
@@ -18,20 +20,20 @@ if(!$connect){
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$diet_title = cleardata($_POST['diet_title']);
-	$diet_description = $_POST['diet_description'];
+	$diet_description = "";
 	$diet_ingredients = $_POST['diet_ingredients'];
-	$diet_category = cleardata($_POST['diet_category']);
+	$diet_category = "";
 	$diet_directions = $_POST['diet_directions'];
 	$diet_calories = cleardata($_POST['diet_calories']);
 	$diet_carbs = cleardata($_POST['diet_carbs']);
 	$diet_protein = cleardata($_POST['diet_protein']);
 	$diet_fat = cleardata($_POST['diet_fat']);
 	$course=cleardata($_POST["course"]);
-	$diet_time = cleardata($_POST['diet_time']);
-	$diet_servings = cleardata($_POST['diet_servings']);
-	$diet_featured = cleardata($_POST['diet_featured']);
+	$diet_time = "";
+	$diet_servings = "";
+	$diet_featured = "";
 	$diet_status = cleardata($_POST['diet_status']);
-	$diet_price = cleardata($_POST['diet_price']);
+	$diet_price = "";
 	$diet_image = $_FILES['diet_image']['tmp_name'];
 
 	$imagefile = explode(".", $_FILES["diet_image"]["name"]);
@@ -65,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		));
 
 		$redirectURL = SITE_URL . '/controller/recipes.php';
-		echo '<script>window.location.href = "' . $redirectURL . '";</script>';
-die();
+		header('Location: ' .$redirectURL);
+
 }
 
 $categories_lists = get_all_categories($connect);

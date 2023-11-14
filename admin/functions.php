@@ -848,7 +848,7 @@ function number_products($connect)
 function get_all_diets($connect)
 {
 
-    $sentence = $connect->prepare("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diets.diet_category = categories.category_id ORDER BY diet_id DESC");
+    $sentence = $connect->prepare("SELECT * from diets ORDER BY diet_id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }
@@ -860,7 +860,7 @@ function id_diet($id_diet)
 
 function get_diet_per_id($connect, $id_diet)
 {
-    $sentence = $connect->query("SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diet_id = $id_diet AND diets.diet_category = categories.category_id LIMIT 1");
+    $sentence = $connect->query("SELECT  * from diets WHERE diet_id = $id_diet  LIMIT 1");
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }

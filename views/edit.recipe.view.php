@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-12">
             <div class="block-heading d-flex align-items-center title-pages">
-              <h5 class="text-truncate">Edit Recipe</h5>
+              <h5 class="text-truncate">Edit food Recipe</h5>
             </div>
           </div>
 
@@ -29,25 +29,25 @@
 
                       <input type="hidden" value="<?php echo $diet['diet_id']; ?>" name="diet_id">
 
-                      <label class="control-label">Title</label>
+                      <label class="control-label">Food Name</label>
                       <input type="text" value="<?php echo $diet['diet_title']; ?>" placeholder="Title" name="diet_title" class="form-control" required="">
 
-                      <label class="control-label">Description</label>
+                     <!--  <label class="control-label">Description</label>
                       <textarea value="" name="diet_description" class="advancedtinymce form-control" id="description" required=""><?php echo $diet['diet_description']; ?></textarea>
-
+ -->
                       <label class="control-label">Ingredients</label>
                       <textarea value="" name="diet_ingredients" class="advancedtinymce form-control" id="ingredients" required=""><?php echo $diet['diet_ingredients']; ?></textarea>
 
                       <label class="control-label">Directions</label>
                       <textarea value="" name="diet_directions" class="advancedtinymce form-control" id="directions" required=""><?php echo $diet['diet_directions']; ?></textarea>
 
-                      <label class="control-label">Category</label>
+                    <!--   <label class="control-label">Category</label>
                       <select class="form-control" name="diet_category" required>
                         <option value="<?php echo $diet['diet_category']; ?>" selected><?php echo $diet['category_title']; ?></option>
                         <?php foreach ($categories_lists as $categories_list) : ?>
                           <option value="<?php echo $categories_list['category_id']; ?>"><?php echo $categories_list['category_title']; ?></option>
                         <?php endforeach; ?>
-                      </select>
+                      </select> -->
                       <label class="control-label">Course</label>
 
                       <select class="form-control" name="course" required="">
@@ -58,7 +58,7 @@
                         <option value="5" <?php if ($diet['course'] == 5) echo 'selected'; ?>>Dinner</option>
                       </select>
 
-                      <label class="control-label">Price</label>
+                    <!--   <label class="control-label">Price</label>
 
                       <select class="custom-select form-control" name="diet_price">
                         <?php
@@ -76,7 +76,7 @@
                           echo '<option value="premium">Premium</option>';
                         }
                         ?>
-                      </select>
+                      </select> -->
 
                       <label class="control-label">Calories</label>
                       <input type="text" value="<?php echo $diet['diet_calories']; ?>" placeholder="Calories" name="diet_calories" class="form-control" required="">
@@ -90,84 +90,29 @@
                       <label class="control-label">Fat</label>
                       <input type="text" value="<?php echo $diet['diet_fat']; ?>" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
 
-                      <label class="control-label">Servings</label>
+                    <!--   <label class="control-label">Servings</label>
                       <input type="text" value="<?php echo $diet['diet_servings']; ?>" placeholder="Servings" name="diet_servings" class="form-control" required="">
-
-                      <label class="control-label">Total Time</label>
+ -->
+                     <!--  <label class="control-label">Total Time</label>
                       <input type="text" value="<?php echo $diet['diet_time']; ?>" placeholder="Total Time (Minutes)" name="diet_time" class="form-control" required="">
+ -->
+<!--                       <label class="control-label">Featured</label>
+ -->
+                       <input type="hidden" value="1" name="diet_featured">
+                       <input type="hidden" value="1" name="diet_status">
 
-                      <label class="control-label">Featured</label>
+                       
 
-                      <div class="row">
-                        <div class="col-sm-1">
-
-                          <?php
-
-
-                          $in = '1';
-
-                          if (strpos($in, $diet['diet_featured']) !== false) {
-                            echo '<div class="radio radio-success"> <input type="radio" name="diet_featured" id="radio3" value="' . $diet['diet_featured'] . '" checked=""> <label for="radio3"> Yes </label> </div>';
-                          } else {
-                            echo '<div class="radio radio-success"> <input type="radio" name="diet_featured" id="radio3" value="' . $in . '"> <label for="radio3"> Yes </label> </div>';
-                          }
-                          ?>
-                        </div>
-
-                        <div class="col-sm-1">
-
-                          <?php
+                     
 
 
-                          $out = '0';
-
-                          if (strpos($out, $diet['diet_featured']) !== false) {
-                            echo '<div class="radio radio-danger"> <input type="radio" name="diet_featured" id="radio4" value="0" checked=""> <label for="radio4"> No </label> </div>';
-                          } else {
-                            echo '<div class="radio radio-danger"> <input type="radio" name="diet_featured" id="radio4" value="' . $out . '"> <label for="radio4"> No </label> </div>';
-                          }
-                          ?>
-                        </div>
-
-                      </div>
-
-                      <label class="control-label">Status</label>
-
-                      <div class="row">
-                        <div class="col-sm-1">
-
-                          <?php
+                     
 
 
-                          $in = '1';
-
-                          if (strpos($in, $diet['diet_status']) !== false) {
-                            echo '<div class="radio radio-success"> <input type="radio" name="diet_status" id="radio5" value="' . $diet['diet_status'] . '" checked=""> <label for="radio5"> Active </label> </div>';
-                          } else {
-                            echo '<div class="radio radio-success"> <input type="radio" name="diet_status" id="radio5" value="' . $in . '"> <label for="radio5"> Active </label> </div>';
-                          }
-                          ?>
-                        </div>
-
-                        <div class="col-sm-1">
-
-                          <?php
+                     
 
 
-                          $out = '0';
-
-                          if (strpos($out, $diet['diet_status']) !== false) {
-                            echo '<div class="radio radio-danger"> <input type="radio" name="diet_status" id="radio6" value="0" checked=""> <label for="radio6"> Inactive </label> </div>';
-                          } else {
-                            echo '<div class="radio radio-danger"> <input type="radio" name="diet_status" id="radio6" value="' . $out . '"> <label for="radio6"> Inactive </label> </div>';
-                          }
-                          ?>
-                        </div>
-
-                      </div>
-
-
-                      <label>Image</label>
+                      <label>Food  Image</label>
 
                       <div class="new-image" id="image-preview" style="background: url(../images/<?php echo $diet['diet_image'] ?>);background-size: cover; background-position: center;">
                         <label for="image-upload" id="image-label">Choose File</label>

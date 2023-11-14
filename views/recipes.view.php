@@ -17,10 +17,8 @@
       return "<img src='../images/"+data.diet_image+"' style='width: 70px; height: 40px; padding: 2px;'/>";}
     },
     { mData: 'diet_title', "width": "20%"},
-    { mData: 'category_title', "width": "12%"},
     { mData: 'diet_protein', "width": "10%" },
     { mData: 'diet_fat', "width": "10%" },
-    { mData: 'diet_time', "width": "8%" },
     { "mData": null , "width": "5%", "className":"status text-center",
      "mRender" : function (data) {
       if (data.diet_featured == 1) {
@@ -39,17 +37,8 @@
       }
       }
     },
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.diet_price == 'free') {
-        return '<span>Free</span>';
-      }else if(data.diet_price == 'premium') {
-        return '<span>Premium</span>';
-      }else{
-        return '<span>-</span>';
-      }
-      }
-    },
+    
+    
     { "mData": null,
     "width": "20%",
     "className": "text-center",
@@ -76,7 +65,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h5>Recipes</h5>
+                            <h5>Food Recipes</h5>
                         </div>
                     </div>
 
@@ -89,15 +78,12 @@
     <thead>
             <tr>
               <th>Id</th>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Category</th>
+                <th> Food Image</th>
+                <th>Food Name</th>
                 <th>Protein</th>
                 <th>Fat</th>
-                <th>Time</th>
                 <th>Featured</th>
                 <th>Status</th>
-                <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>

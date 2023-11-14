@@ -57,7 +57,7 @@
             <tr>
               <th>Id</th>
                 <th>Image</th>
-                <th>Title</th>
+                <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
