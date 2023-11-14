@@ -32,13 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		'INSERT INTO allergies_and_diseases (id,name,image) VALUES (null, :name, :image)'
 		);
 
-	$statment->execute(array(
+	$success=$statment->execute(array(
 		':name' => $name,
 		':image' => 'catdiet_' . $renamefile
 		));
 
+		if($success){
 	header('Location:' . SITE_URL . '/controller/allergies_and_diseases.php');
-
+		}else{
+			var_dump("errro");
+			die();
+		}
+		die();
 }
 
 require '../views/new_allergies_and_diseases.php';
