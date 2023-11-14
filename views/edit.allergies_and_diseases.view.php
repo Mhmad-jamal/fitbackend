@@ -41,14 +41,14 @@
                                             <br/>
                                             <div class="action-button">
                                                 <input type="submit" name="update" value="Update" class="btn btn-embossed btn-primary">
-                                                <a onclick="alertdelete();">
+                                             <!--    <a onclick="alertdelete();">
                                                     <input name="trash" value="Delete" class="btn btn-embossed btn-danger" style="width: 80px;">
                                                 </a>
                                                 <script type="text/javascript">
                                                     function alertdelete() {
                                                         swal({ title: "Are you sure?", text: "You will not be able to recover this item!", type: "warning", cancelButtonClass: "btn-default btn-sm", showCancelButton: true, confirmButtonClass: "btn-danger btn-sm", confirmButtonText: "Yes, delete it!", closeOnConfirm: false }, function () { window.location.href = "<?php echo SITE_URL ?>/controller/delete_allergies_and_diseases.php?id=<?php echo $allergies_and_diseases['id']; ?>" });
                                                     }
-                                                </script>
+                                                </script> -->
                                             </div>
 
                                         </div>
