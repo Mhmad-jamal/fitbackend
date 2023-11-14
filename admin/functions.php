@@ -1022,6 +1022,12 @@ function get_category_per_id($connect, $id_category)
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
+function get_allergies_and_diseases_id($connect, $id)
+{
+    $sentence = $connect->query("SELECT * FROM allergies_and_diseases WHERE id = $id LIMIT 1");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
 
 function number_categories($connect)
 {

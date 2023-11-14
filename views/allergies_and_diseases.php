@@ -23,7 +23,7 @@
     'orderable': false,
     'searchable': false,
     "mRender" : function (data) {
-      return "<a class='btn btn-small btn-primary' href='../controller/edit_category.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_category.php?id="+data.id+"'>Delete</a>";}
+      return "<a class='btn btn-small btn-primary' href='../controller/edit_allergies_and_diseases.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_allergies_and_diseases.php?id="+data.id+"'>Delete</a>";}
     }
     ]
   });
