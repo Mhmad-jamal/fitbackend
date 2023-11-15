@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h5>Workouts</h5>
+                            <h5>Food Program</h5>
                         </div>
                     </div>
 
