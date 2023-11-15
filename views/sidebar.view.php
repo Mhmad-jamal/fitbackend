@@ -195,6 +195,30 @@
 
                 </ul>
             </li>
+            <li>
+                <a href="javascript:void(0);" class="have-submenu <?php showMenu('food_program.php');?>">
+                    <span class="icon-thumbnail"><i class="dripicons-basket"></i></span>
+                    <span class="title">Food programs</span>
+                </a>
+                <!--Submenu-->
+                <ul class="sub-menu" style="display: <?php activePage('food_program.php');?>">
+
+                    <li>
+                        <a href="../controller/food_program.php">
+                            <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
+                            <span class="title">Show All</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../controller/new_food_program.php">
+                            <span class="icon-thumbnail"><i class="dripicons-dot"></i></span>
+                            <span class="title">New food programs</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
 
 
             <li>

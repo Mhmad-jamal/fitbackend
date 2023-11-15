@@ -715,6 +715,16 @@ function get_all_workouts($connect)
     $sentence->execute();
     return $sentence->fetchAll();
 }
+function get_all_program_food($connect)
+{
+
+    $sentence = $connect->prepare("SELECT program_food.*, categories.category_title AS category_name 
+    FROM program_food 
+    JOIN categories ON program_food.category_id = categories.category_id 
+    ORDER BY program_food.id DESC");
+$sentence->execute();
+    return $sentence->fetchAll();
+}
 function id_workout($id_workout)
 {
     return (int)cleardata($id_workout);
