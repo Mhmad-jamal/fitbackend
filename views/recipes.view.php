@@ -19,6 +19,9 @@
     { mData: 'diet_title', "width": "20%"},
     { mData: 'diet_protein', "width": "10%" },
     { mData: 'diet_fat', "width": "10%" },
+
+    { mData: 'diet_calories', "width": "10%" },
+    { mData: 'diet_carbs', "width": "10%" },
     { "mData": null , "width": "5%", "className":"status text-center",
      "mRender" : function (data) {
       if (data.diet_featured == 1) {
@@ -82,6 +85,8 @@
                 <th>Food Name</th>
                 <th>Protein</th>
                 <th>Fat</th>
+                <th>Calories</th>
+                <th>Carbs</th>
                 <th>Featured</th>
                 <th>Status</th>
                 <th>Actions</th>
