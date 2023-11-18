@@ -7,7 +7,7 @@
      "sAjaxSource": "../controller/get_food_program.php",
      "responsive": true,
      "bPaginate":true,
-     "aaSorting": [[1,'desc']],
+     "aaSorting": [[0, 'desc']],
      "sPaginationType":"full_numbers",
      "iDisplayLength": 10,
      "aoColumns": [
