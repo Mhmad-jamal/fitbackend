@@ -28,7 +28,7 @@
     'orderable': false,
     'searchable': false,
     "mRender" : function (data) {
-      return "<a class='btn btn-small btn-primary' href='#?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='#?id="+data.id+"'>Delete</a>";}
+      return "<a class='btn btn-small btn-primary' href='../controller/edit_food_program.php?id="+data.id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_food_program.php?id="+data.id+"'>Delete</a>";}
     }
     ]
   });

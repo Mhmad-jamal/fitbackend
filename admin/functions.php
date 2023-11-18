@@ -736,6 +736,12 @@ function get_workout_per_id($connect, $id_workout)
     $sentence = $sentence->fetchAll();
     return ($sentence) ? $sentence : false;
 }
+function get_food_program_by_id($connect, $id)
+{
+    $sentence = $connect->query("SELECT * FROM program_food  WHERE id =$id LIMIT 1");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
 
 function number_workouts($connect)
 {
