@@ -95,8 +95,8 @@ if(!$connect){
 if(isset($_GET["id"])){
     $id=$_GET['id'];
 }else{
-    var_dump("@@@@@@@2");
-    die();
+    header('Location: ' . SITE_URL . '/controller/food_program.php');
+
 }
 $food_program=get_food_program_by_id($connect,$id);
 $program_data=$food_program[0];
@@ -113,7 +113,7 @@ $day7_values = isset($program->day7) ? json_decode($program->day7, true) : [];
 
 
 
-$program_allergies =json_decode($program_data["Allergies"]);
+$program_allergies = json_decode($program_data["Allergies"], true) ?? [];
 
 
 
