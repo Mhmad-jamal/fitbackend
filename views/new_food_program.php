@@ -185,14 +185,18 @@
     });
 
     function displaySum(values, targetId) {
-        // Calculate the sum of the values array
-        var sum = values.reduce(function (a, b) {
-            return a + b;
-        }, 0);
+    // Calculate the sum of the values array
+    var sum = values.reduce(function (a, b) {
+        return a + b;
+    }, 0);
 
-        // Display the sum in the input field
-        $(targetId).val(sum / 7);
-    }
+    // Round the sum to two decimal places
+    var roundedSum = (sum / 7).toFixed(2);
+
+    // Display the rounded sum in the input field
+    $(targetId).val(roundedSum);
+}
+
 });
 
     </script>
