@@ -46,6 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$statment = $connect->prepare(
 		'INSERT INTO diets (diet_id,diet_title,diet_description,diet_ingredients,diet_category,diet_directions,diet_calories,diet_carbs,diet_protein,diet_fat,course,diet_time,diet_servings,diet_featured,diet_status,diet_price,diet_image) VALUES (null, :diet_title, :diet_description, :diet_ingredients, :diet_category, :diet_directions, :diet_calories, :diet_carbs, :diet_protein, :diet_fat,:course, :diet_time, :diet_servings, :diet_featured, :diet_status, :diet_price, :diet_image)'
 		);
+		echo "<br>";
+		echo "<br>";
+		echo "<br>";
+		var_dump("Here");
 
 		
 	$result =$statment->execute(array(
