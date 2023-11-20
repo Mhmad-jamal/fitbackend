@@ -14,7 +14,7 @@ var_dump("Ssssssssssssssssss");
 if(!$connect){
 	header ('Location: ' . SITE_URL . '/controller/error.php');
 	}
-	var_dump("@@@@@@@@@");
+	var_dump($_SERVER['REQUEST_METHOD']);
 
 die(); 
 
