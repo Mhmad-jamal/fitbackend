@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$diet_title = cleardata($_POST['diet_title']);
 	$diet_description = "";
 	$diet_ingredients = $_POST['diet_ingredients'];
-	$diet_category = 1;
+	$diet_category = null;
 	$diet_directions = $_POST['diet_directions'];
 	$diet_calories = cleardata($_POST['diet_calories']);
 	$diet_carbs = cleardata($_POST['diet_carbs']);
