@@ -19,24 +19,7 @@
     { mData: 'diet_title', "width": "20%"},
     { mData: 'diet_protein', "width": "10%" },
     { mData: 'diet_fat', "width": "10%" },
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.diet_featured == 1) {
-        return '<span class="badge badge-pill bg-success">Yes</span>';
-      }else if(data.diet_featured == 0) {
-        return '<span class="badge badge-pill bg-warning">No</span>';
-      }
-      }
-    },
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.diet_status == 1) {
-        return '<span class="badge badge-pill bg-success">Active</span>';
-      }else if(data.diet_status == 0) {
-        return '<span class="badge badge-pill bg-warning">Inactive</span>';
-      }
-      }
-    },
+    
     
     
     { "mData": null,
@@ -82,8 +65,7 @@
                 <th>Food Name</th>
                 <th>Protein</th>
                 <th>Fat</th>
-                <th>Featured</th>
-                <th>Status</th>
+            
                 <th>Actions</th>
             </tr>
         </thead>
