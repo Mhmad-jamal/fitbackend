@@ -1,19 +1,23 @@
 <?php 
+session_start();
+var_dump("@@@@@@@@@");
 
+die();    
 session_start();
 if (isset($_SESSION['manager_email'])){
-    
+
     
 require '../admin/config.php';
 require '../admin/functions.php';
 
 $connect = connect($database);
+
 if(!$connect){
 	header ('Location: ' . SITE_URL . '/controller/error.php');
 	}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+	
 $user = cleardata($_POST['user_id']);
 $workout = cleardata($_POST['workout_id']);
 
