@@ -15,7 +15,9 @@ if(!$connect){
 	}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-	
+	var_dump("@@@@@@@@@");
+
+die();  
 $user = cleardata($_POST['user_id']);
 $workout = cleardata($_POST['workout_id']);
 var_dump($user);
