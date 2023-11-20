@@ -45,7 +45,7 @@
     'orderable': false,
     'searchable': false,
     "mRender" : function (data) {
-      return "<a class='btn btn-small btn-primary' href='../controller/edit_recipe.php?id="+data.diet_id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_recipe.php?id="+data.diet_id+"'>Delete</a>";}
+      return "<a class='btn btn-small btn-primary' href='../controller/edit_recipe.php?id="+data.diet_id+"'>Edit</a> <a class='btn btn-small btn-danger btn-delete deleteItem' data-url='../controller/delete_diet.php?id="+data.diet_id+"'>Delete</a>";}
     }
     ]
   });
