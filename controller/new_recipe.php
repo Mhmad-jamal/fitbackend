@@ -42,7 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$diet_image_upload = '../' . $items_config['images_folder'];
 
 	move_uploaded_file($diet_image, $diet_image_upload . 'recipe_' . $renamefile);
-
+	var_dump("Her");
+	die();
 	$statment = $connect->prepare(
 		'INSERT INTO diets (diet_id,diet_title,diet_description,diet_ingredients,diet_category,diet_directions,diet_calories,diet_carbs,diet_protein,diet_fat,course,diet_time,diet_servings,diet_featured,diet_status,diet_price,diet_image) VALUES (null, :diet_title, :diet_description, :diet_ingredients, :diet_category, :diet_directions, :diet_calories, :diet_carbs, :diet_protein, :diet_fat,:course, :diet_time, :diet_servings, :diet_featured, :diet_status, :diet_price, :diet_image)'
 		);
@@ -65,8 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		':diet_price' => $diet_price,
 		':diet_image' => 'recipe_' . $renamefile
 		));
-		var_dump($result);
-		die();
+		
 
 		$redirectURL = SITE_URL . '/controller/recipes.php';
 		header('Location: ' .$redirectURL);
