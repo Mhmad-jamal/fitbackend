@@ -190,7 +190,7 @@
       <div class="modal-body">
   
    <label class="control-label">Select Workout</label>
-   <form action="//appadmin.mohannad-theeb.com/controller/new_userdiet.php" method="POST">
+<form enctype="multipart/form-data" action="//appadmin.mohannad-theeb.com/controller/new_userworkout.php" method="post">
    <input type="hidden" value="<?php echo $userInfo->uid; ?>" name="user_id">
    <select class="my-select form-control" name="workout_id">
     <?php foreach($get_all_workouts as $workout): ?>
@@ -250,7 +250,7 @@
       <div class="modal-body">
   
    <label class="control-label">Select Diet</label>
-<form enctype="multipart/form-data" action="<?php echo SITE_URL ?>/controller/new_userdiet.php" method="post">
+<form enctype="multipart/form-data" action="//appadmin.mohannad-theeb.com/controller/new_userdiet.php" method="post">
    <input type="hidden" value="<?php echo $userInfo->uid; ?>" name="user_id">
    <select class="my-select form-control" name="diet_id">
     <?php foreach($get_all_diets as $diet): ?>
