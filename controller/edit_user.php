@@ -1,5 +1,4 @@
 <?php 
-
 session_start();
 
 require '../classes/firebase/vendor/autoload.php';
