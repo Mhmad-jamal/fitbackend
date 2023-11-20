@@ -1,8 +1,6 @@
 <?php 
 session_start();
-var_dump("@@@@@@@@@");
 
-die();    
 session_start();
 if (isset($_SESSION['manager_email'])){
 
@@ -20,7 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	
 $user = cleardata($_POST['user_id']);
 $workout = cleardata($_POST['workout_id']);
+var_dump($user);
+var_dump($workout);
+var_dump("@@@@@@@@@");
 
+die();    
 $statment = $connect->prepare("INSERT INTO workouts_users (ws_workout,ws_user) VALUES (:ws_workout, :ws_user)");
 
 $statment->execute(array(
