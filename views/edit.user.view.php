@@ -12,7 +12,7 @@
             <div class="container-fluid padding-25 sm-padding-10">
                 <div class="row">
                     <div class="col-12">
-                                        <div class="block-heading d-flex align-items-center title-pages">
+              <div class="block-heading d-flex align-items-center title-pages">
                     <h5 class="text-truncate">Edit User</h5>
                 </div>
                     </div>
@@ -44,15 +44,15 @@
                         <div class="block counter-block mb-6" style="text-align: left;">
 
                         <div class="section-title" style="margin-top: 0;">
-                            <h4 style="font-size: 18px;">Diets</h4>
+                            <h4 style="font-size: 18px;">Program</h4>
                         </div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#diets">
-  Add Diet
+  Add Program
 </button>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#assigneddiets">
-  Assigned Diets
+  Assigned Program
 </button>
 
                         </div>
@@ -66,7 +66,7 @@
                         </div>
 
 <p style="text-transform: uppercase; font-size: 13px"><b><?php echo $totalworkouts; ?></b> Total of workouts assigned</p>
-<p style="text-transform: uppercase; font-size: 13px"><b><?php echo $totaldiets; ?></b> Total of diets assigned</p>
+<p style="text-transform: uppercase; font-size: 13px"><b><?php echo $totaldiets; ?></b> Total of Program assigned</p>
 
 
                         </div>
