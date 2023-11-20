@@ -72,6 +72,7 @@
         .table th,
         .table td {
             text-align: right;
+            font-size:10px
         }
     </style>
 </head>
