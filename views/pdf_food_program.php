@@ -327,7 +327,7 @@ usort($diets_data_day1, function($a, $b) {
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-   <!--  <script>
+     <script>
         setTimeout(() => {
             var element = document.getElementById("element");
 
@@ -349,7 +349,7 @@ usort($diets_data_day1, function($a, $b) {
                     window.open(pdf.output("bloburl"), "_self");
                 });
         }, 1000);
-    </script>  -->
+    </script>  
 </body>
 
 </html>
