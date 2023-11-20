@@ -65,7 +65,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		':diet_price' => $diet_price,
 		':diet_image' => 'recipe_' . $renamefile
 		));
-		
+		if ($result) {
+			// Query executed successfully
+			$redirectURL = SITE_URL . '/controller/recipes.php';
+			header('Location: ' . $redirectURL);
+		} else {
+			// Query execution failed
+			$errorInfo = $statment->errorInfo();
+			echo "Error: " . $errorInfo[2]; // The error message
+		}
 
 		$redirectURL = SITE_URL . '/controller/recipes.php';
 		header('Location: ' .$redirectURL);
