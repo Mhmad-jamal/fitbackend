@@ -10,16 +10,19 @@
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
+            font-family: 'Cairo', sans-serif;
+
         }
 
         #element {
             width: 80%;
             margin: 0 auto;
+            margin-top:10px;
         }
 
         .title {
             background-color: #f8cc00;
-            padding: 20px;
+            padding: 12px;
             text-align: center;
             display: flex;
             justify-content: center;
@@ -37,7 +40,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 12px;
         }
 
         .day {
@@ -45,7 +48,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             margin: 10px;
-            padding: 20px;
+            padding: 12px;
             text-align: center;
         }
 
@@ -85,23 +88,29 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم الأول</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم الأول</th>
                     </tr>
                     <tr>
                         <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+usort($diets_data_day1, function($a, $b) {
+    return $a[0]['course'] - $b[0]['course'];
+});
+    foreach ($diets_data_day1 as $key => $day1_data) {
+        echo "<th>{$day1_data[0]['diet_title']}</th>";
+    }
+?>
+                       
                     </tr>
                 </tbody>
             </table>
@@ -111,23 +120,28 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم الثاني</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم الثاني</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                  usort($diets_data_day2, function($a, $b) {
+                    return $a[0]['course'] - $b[0]['course'];
+                });
+                  foreach ($diets_data_day2 as $key => $day2_data) {
+                      echo "<th>{$day2_data[0]['diet_title']}</th>";
+                  }
+              ?>
                     </tr>
                 </tbody>
             </table>
@@ -136,23 +150,29 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black; ">اليوم  الثالث</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black; ">اليوم  الثالث</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                    usort($diets_data_day3, function($a, $b) {
+                        return $a[0]['course'] - $b[0]['course'];
+                    });
+                  
+                  foreach ($diets_data_day3 as $key => $day3_data) {
+                      echo "<th>{$day3_data[0]['diet_title']}</th>";
+                  }
+              ?>
                     </tr>
                 </tbody>
             </table>
@@ -161,23 +181,29 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم  الرابع</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم  الرابع</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                     usort($diets_data_day4, function($a, $b) {
+                        return $a[0]['course'] - $b[0]['course'];
+                    });
+                  
+                  foreach ($diets_data_day4 as $key => $day4_data) {
+                      echo "<th>{$day4_data[0]['diet_title']}</th>";
+                  }
+              ?>
                     </tr>
                 </tbody>
             </table>
@@ -186,23 +212,28 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم  الخامس</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم  الخامس</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                  usort($diets_data_day5, function($a, $b) {
+                    return $a[0]['course'] - $b[0]['course'];
+                });
+                  foreach ($diets_data_day5 as $key => $day5_data) {
+                      echo "<th>{$day5_data[0]['diet_title']}</th>";
+                  }
+              ?>
                     </tr>
                 </tbody>
             </table>
@@ -211,23 +242,28 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم  السادس</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم  السادس</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                  usort($diets_data_day6, function($a, $b) {
+                    return $a[0]['course'] - $b[0]['course'];
+                });
+                  foreach ($diets_data_day6 as $key => $day6_data) {
+                      echo "<th>{$day6_data[0]['diet_title']}</th>";
+                  }
+              ?>
                     </tr>
                 </tbody>
             </table>
@@ -236,23 +272,51 @@
                     <tr>
                         <!-- Centered, larger font, and yellow background -->
                         <th scope="col" colspan="5" class="centered-th text-center"
-                            style="background-color: #f8cc00; font-size: 20px;color: black;">اليوم  السابع</th>
+                            style="background-color: #f8cc00; font-size: 12px;color: black;">اليوم  السابع</th>
                     </tr>
                     <tr>
-                        <th scope="col">وجبة الفطور</th>
-                        <th scope="col">وجبة الغداء </th>
+                         <th scope="col">وجبة الفطور</th>
                         <th scope="col">سناك 1</th>
-                        <th scope="col">وجبة العشاء </th>
+
+                        <th scope="col">وجبة الغداء </th>
                         <th scope="col">سناك 2 </th>
+
+                        <th scope="col">وجبة العشاء </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                    <?php 
+                  usort($diets_data_day7, function($a, $b) {
+                    return $a[0]['course'] - $b[0]['course'];
+                });
+                  foreach ($diets_data_day7 as $key => $day7_data) {
+                      echo "<th>{$day7_data[0]['diet_title']}</th>";
+                  }
+              ?>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- Centered, larger font, and yellow background -->
+                        <th scope="col" colspan="5" class="centered-th text-center"
+                            style="background-color: #f8cc00; font-size: 12px;color: black;"> قيم غذائية </th>
+                    </tr>
+                    <tr>
+                        <td>كالوري</td>
+                        <td>كربوهيدرات</td>
+                        <td>بروتين</td>
+                        <td>دهون</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $program_data["calories"]?></td>
+                        <td><?php echo $program_data["carbs"]?></td>
+                        <td><?php echo $program_data["protein"]?></td>
+                        <td><?php echo $program_data["fat"]?></td>
                     </tr>
                 </tbody>
             </table>
@@ -263,7 +327,7 @@
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
+   <!--  <script>
         setTimeout(() => {
             var element = document.getElementById("element");
 
@@ -285,7 +349,7 @@
                     window.open(pdf.output("bloburl"), "_self");
                 });
         }, 1000);
-    </script> 
+    </script>  -->
 </body>
 
 </html>
