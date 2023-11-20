@@ -904,7 +904,7 @@ function number_diets_by_user($connect, $id_user)
 function get_diets_by_user($connect, $id_user)
 {
 
-    $sentence = $connect->prepare("SELECT * FROM diets WHERE diet_id IN (SELECT diets_users.du_diet FROM diets_users WHERE du_user = '" . $id_user . "') ORDER BY diet_id DESC");
+    $sentence = $connect->prepare("SELECT * FROM program_food WHERE id IN (SELECT diets_users.du_diet FROM diets_users WHERE du_user = '" . $id_user . "') ORDER BY id DESC");
     $sentence->execute();
     return $sentence->fetchAll();
 }

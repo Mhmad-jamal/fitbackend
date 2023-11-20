@@ -253,8 +253,8 @@
 <form enctype="multipart/form-data" action="//appadmin.mohannad-theeb.com/controller/new_userdiet.php" method="post">
    <input type="hidden" value="<?php echo $userInfo->uid; ?>" name="user_id">
    <select class="my-select form-control" name="diet_id">
-    <?php foreach($get_all_diets as $diet): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $diet['diet_image']; ?>" value="<?php echo $diet['diet_id']; ?>"><?php echo $diet['diet_title']; ?></option>
+    <?php foreach($get_all_program as $diet): ?>
+   <option value="<?php echo $diet['id']; ?>"><?php echo $diet['name']; ?></option>
     <?php endforeach; ?>
    </select>
          </div>
@@ -281,10 +281,9 @@
         <table class="table table-bordered" cellspacing="0" width="100%">
           <?php foreach($userdiets as $diet): ?>
             <tr>
-            <td width="40px" align="center"><img src="../images/<?php echo $diet['diet_image']; ?>" style="width: 40px; height: 40px; padding: 2px;"></td>
-            <td style="text-align: left; vertical-align: middle;"><div class="ellipsis" style="width: 370px"><?php echo $diet['diet_title']; ?></div></td>
+            <td style="text-align: left; vertical-align: middle;"><div class="ellipsis" style="width: 370px"><?php echo $diet['name']; ?></div></td>
             <td width="30px" style="text-align: center; vertical-align: middle;">
-              <a href="../controller/delete_userdiet.php?user=<?php echo $userInfo->uid; ?>&diet=<?php echo $diet['diet_id']; ?>" style="cursor: pointer; font-size: 18px; color: #ab1616; font-weight: 900;"><i class="fa fa-trash-o"></i></a>
+              <a href="../controller/delete_userdiet.php?user=<?php echo $userInfo->uid; ?>&diet=<?php echo $diet['id']; ?>" style="cursor: pointer; font-size: 18px; color: #ab1616; font-weight: 900;"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           <?php endforeach; ?>

@@ -40,7 +40,7 @@ $get_all_workouts = get_all_workouts($connect);
 $totalworkouts = number_workouts_by_user($connect, $id_user);
 $userworkouts = get_workouts_by_user($connect, $id_user);
 
-$get_all_diets = get_all_diets($connect);
+$get_all_program = get_all_program_food($connect);
 $totaldiets = number_diets_by_user($connect, $id_user);
 $userdiets = get_diets_by_user($connect, $id_user);
 
