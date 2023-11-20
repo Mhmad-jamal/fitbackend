@@ -190,7 +190,7 @@
       <div class="modal-body">
   
    <label class="control-label">Select Workout</label>
-<form enctype="multipart/form-data" action="https://appadmin.mohannad-theeb.com/controller/new_userworkout.php" method="POST">
+   <form action="//appadmin.mohannad-theeb.com/controller/new_userdiet.php" method="POST">
    <input type="hidden" value="<?php echo $userInfo->uid; ?>" name="user_id">
    <select class="my-select form-control" name="workout_id">
     <?php foreach($get_all_workouts as $workout): ?>
