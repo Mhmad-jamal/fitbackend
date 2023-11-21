@@ -29,6 +29,14 @@
             align-items: center;
         }
 
+        .title2 {
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .title h1 {
             font-size: 25px;
             font-weight: bold;
@@ -82,6 +90,11 @@
         <div class="title">
             <h1>برنامح الغذائي الأسبوعي</h1>
         </div>
+        <div class="title2">
+    <a href="<?= $program_data['link']; ?>">
+        <h4><?= $program_data['name']; ?></h4>
+    </a>
+</div>
 
         <div class="days-container">
             <table class="table">

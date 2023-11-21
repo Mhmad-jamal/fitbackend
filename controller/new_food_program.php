@@ -18,12 +18,12 @@ if(!$connect){
 	} 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    function storeProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name,$serializedAllergies)
+    function storeProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id,$link, $name,$serializedAllergies)
 {
     try {
         // Prepare the SQL statement
-        $sql = "INSERT INTO program_food (program, fat, protein, carbs, calories, category_id, name,Allergies) 
-                VALUES ( :jsonprogram,:fat, :protein, :carbs, :calories, :category_id, :name ,:allergies)";
+        $sql = "INSERT INTO program_food (program, fat, protein, carbs, calories, category_id, name,link,Allergies) 
+                VALUES ( :jsonprogram,:fat, :protein, :carbs, :calories, :category_id, :name, :link,:allergies)";
 
         $stmt = $connect->prepare($sql);
 
@@ -36,6 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $stmt->bindParam(':calories', $calories);
         $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':link', $link);
+
         $stmt->bindParam(':allergies', $serializedAllergies);
 
         // Execute the statement
@@ -63,11 +65,13 @@ $protein = $_POST["protein"] ?? 0;
 $carbs = $_POST["carbs"] ?? 0;
 $calories = $_POST["calories"] ?? 0;
 $category_id=$_POST["category_id"];
+$link=$_POST["link"];
+
 $name=$_POST["name"];
 $Allergies=json_encode($_POST["Allergies"]);
 $jsonprogram = json_encode($program);
 
-storeProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name,$Allergies);
+storeProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id,$link, $name,$Allergies);
 
 
     // Now you can use the $program array as needed, for example, you might want to encode it as JSON before sending it to the backend
