@@ -274,7 +274,7 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day6 as $key => $day6_data) {
-                    echo "<th><a href='{$day6_data[0]['link']}'>{$day6_data[0]['diet_title']}</a></th>";
+                    echo "<a href='{$day6_data[0]['link']}'>{$day6_data[0]['diet_title']}</th>";
                 }
               ?>
                     </tr>
