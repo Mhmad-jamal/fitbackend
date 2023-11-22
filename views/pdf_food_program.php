@@ -274,7 +274,7 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day6 as $key => $day6_data) {
-                    echo "<a href='{$day6_data[0]['link']}'>{$day6_data[0]['diet_title']}</th>";
+                    echo "<th><a href='{$day6_data[0]['link']}'>{$day6_data[0]['diet_title']}</a></th>";
                 }
               ?>
                     </tr>
@@ -340,29 +340,46 @@ usort($diets_data_day1, function($a, $b) {
         integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-     <script>
-        setTimeout(() => {
-            var element = document.getElementById("element");
+        <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var element = document.getElementById("element");
 
-            var opt = {
-                margin: 0,
-                filename: "myfile.pdf",
-                image: { type: "jpeg", quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { orientation: "portrait" },
-            };
+        var opt = {
+            margin: 0,
+            filename: "myfile.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { orientation: "portrait" },
+        };
 
-            html2pdf()
-                .set(opt)
-                .from(element)
-                .toPdf()
-                .get("pdf")
-                .then(function (pdf) {
-                    // Open the PDF in the current window/tab
-                    window.open(pdf.output("bloburl"), "_self");
-                });
-        }, 1000);
-    </script>  
+        html2pdf()
+            .set(opt)
+            .from(element)
+            .toPdf()
+            .get("pdf")
+            .then(function(pdf) {
+                // Create a Blob URL for the PDF
+                var blobUrl = URL.createObjectURL(pdf.output("blob"));
+
+                // Create a temporary link element
+                var link = document.createElement("a");
+
+                // Set the download attribute and the href to the Blob URL
+                link.download = "myfile.pdf";
+                link.href = blobUrl;
+
+                // Append the link to the body
+                document.body.appendChild(link);
+
+                // Trigger a click on the link to start the download
+                link.click();
+
+                // Remove the link from the DOM
+                document.body.removeChild(link);
+            });
+    });
+</script>
+
 </body>
 
 </html>
