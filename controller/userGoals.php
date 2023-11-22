@@ -8,10 +8,7 @@ $connect = connect($database);
 if (!$connect) {
     $response = array("status" => 0, "data" => "Error data connect");
     die();
-} 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: *");
+}
 
 // Debugging: Check traditional form data
 
@@ -22,11 +19,7 @@ $user_id = $_POST['user_id'];
 $user_email = $_POST['user_email'];
 $user_name = $_POST['user_name'];
 $user_goal = $_POST['user_goal'];
-if(!isset($_POST['user_id'])){
-    var_dump("@@@2");
-    die();
 
-}
 try {
     $stmt = $connect->prepare('INSERT INTO users_goal (user_id, user_email, user_name, user_goal) VALUES (:user_id, :user_email, :user_name, :user_goal)');
     $stmt->bindParam(':user_id', $user_id);
