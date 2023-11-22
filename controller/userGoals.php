@@ -12,6 +12,7 @@ if (!$connect) {
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: *");
+header("Access-Control-Allow-Headers: Content-Type");
 
 
 // Debugging: Check traditional form data
