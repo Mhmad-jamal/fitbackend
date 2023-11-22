@@ -17,7 +17,7 @@ if(!$connect){
 	header('Location: ' . SITE_URL . '/controller/error.php');
 	} 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        function updateProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name,$link, $serializedAllergies, $program_id)
+        function updateProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name, $serializedAllergies, $program_id)
         {
             try {
                 // Prepare the SQL statement for updating existing entry
@@ -29,8 +29,6 @@ if(!$connect){
                             calories = :calories, 
                             category_id = :category_id, 
                             name = :name,
-                            link = :link,
-
                             Allergies = :allergies
                         WHERE id = :program_id";
     
@@ -44,8 +42,6 @@ if(!$connect){
                 $stmt->bindParam(':calories', $calories);
                 $stmt->bindParam(':category_id', $category_id);
                 $stmt->bindParam(':name', $name);
-                $stmt->bindParam(':link', $link);
-
                 $stmt->bindParam(':allergies', $serializedAllergies);
                 $stmt->bindParam(':program_id', $program_id);
     
@@ -82,12 +78,10 @@ if(!$connect){
             $calories = $_POST["calories"] ?? 0;
             $category_id = $_POST["category_id"];
             $name = $_POST["name"];
-            $link = $_POST["link"];
-
             $Allergies = json_encode($_POST["Allergies"]);
             $jsonprogram = json_encode($program);
     
-            updateProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name,$link, $Allergies, $program_id);
+            updateProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name, $Allergies, $program_id);
     
             // Now you can use the $program array as needed, for example, you might want to encode it as JSON before sending it to the backend
             header('Location: ' . SITE_URL . '/controller/food_program.php');

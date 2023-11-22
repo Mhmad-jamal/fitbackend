@@ -89,7 +89,8 @@
 
                       <label class="control-label">Fat</label>
                       <input type="text" value="<?php echo $diet['diet_fat']; ?>" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
-
+                      <label class="control-label">Recipe Link</label>
+   <input type="text" value="<?php echo $diet["link"]?>" placeholder="https://" name="link" class="form-control" >
                     <!--   <label class="control-label">Servings</label>
                       <input type="text" value="<?php echo $diet['diet_servings']; ?>" placeholder="Servings" name="diet_servings" class="form-control" required="">
  -->

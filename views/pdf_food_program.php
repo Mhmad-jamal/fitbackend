@@ -91,9 +91,8 @@
             <h1>برنامح الغذائي الأسبوعي</h1>
         </div>
         <div class="title2">
-    <a href="<?= $program_data['link']; ?>">
         <h4><?= $program_data['name']; ?></h4>
-    </a>
+    
 </div>
 
         <div class="days-container">
@@ -121,7 +120,7 @@ usort($diets_data_day1, function($a, $b) {
     return $a[0]['course'] - $b[0]['course'];
 });
     foreach ($diets_data_day1 as $key => $day1_data) {
-        echo "<th>{$day1_data[0]['diet_title']}</th>";
+        echo "<th><a href='{$day1_data[0]['link']}'>{$day1_data[0]['diet_title']}</a></th>";
     }
 ?>
                        
@@ -153,8 +152,8 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day2 as $key => $day2_data) {
-                      echo "<th>{$day2_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day2_data[0]['link']}'>{$day2_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>
@@ -184,8 +183,8 @@ usort($diets_data_day1, function($a, $b) {
                     });
                   
                   foreach ($diets_data_day3 as $key => $day3_data) {
-                      echo "<th>{$day3_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day3_data[0]['link']}'>{$day4_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>
@@ -215,8 +214,8 @@ usort($diets_data_day1, function($a, $b) {
                     });
                   
                   foreach ($diets_data_day4 as $key => $day4_data) {
-                      echo "<th>{$day4_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day4_data[0]['link']}'>{$day4_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>
@@ -245,8 +244,8 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day5 as $key => $day5_data) {
-                      echo "<th>{$day5_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day5_data[0]['link']}'>{$day5_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>
@@ -275,8 +274,8 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day6 as $key => $day6_data) {
-                      echo "<th>{$day6_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day6_data[0]['link']}'>{$day6_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>
@@ -305,8 +304,8 @@ usort($diets_data_day1, function($a, $b) {
                     return $a[0]['course'] - $b[0]['course'];
                 });
                   foreach ($diets_data_day7 as $key => $day7_data) {
-                      echo "<th>{$day7_data[0]['diet_title']}</th>";
-                  }
+                    echo "<th><a href='{$day7_data[0]['link']}'>{$day7_data[0]['diet_title']}</a></th>";
+                }
               ?>
                     </tr>
                 </tbody>

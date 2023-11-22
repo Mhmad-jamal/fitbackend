@@ -73,6 +73,8 @@
 
    <label class="control-label">Fat</label>
    <input type="text" value="" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
+   <label class="control-label">Recipe Link</label>
+   <input type="text" value="" placeholder="https://" name="link" class="form-control" >
 
    <!-- <label class="control-label">Servings</label>
    <input type="text" value="" placeholder="Servings" name="diet_servings" class="form-control" required=""> -->

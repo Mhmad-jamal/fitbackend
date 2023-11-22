@@ -121,10 +121,6 @@
         <label class="control-label">Program Fat</label>
         <input type="text" class="form-control" name="fat" id="fat" readonly >
     </div>
-    <div class="col-md-6">
-        <label class="control-label">Program Link</label>
-        <input type="text" class="form-control" name="link" id="link"  >
-    </div>
 </div>
 
 

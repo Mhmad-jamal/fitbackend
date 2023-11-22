@@ -158,10 +158,6 @@
         <label class="control-label">Program Fat</label>
         <input type="text" class="form-control" value="<?php echo $program_data["fat"]; ?>" name="fat" id="fat" readonly >
     </div>
-    <div class="col-md-6">
-        <label class="control-label">Program Link</label>
-        <input type="text" class="form-control" value="<?php echo $program_data["link"]; ?>" name="link" id="link"  >
-    </div>
 </div>
 
 

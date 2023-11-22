@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$diet_time = "";
 	$diet_servings = "";
 	$diet_featured = "";
+	$link=cleardata($_POST["link"]);
+
 	$diet_status = cleardata($_POST['diet_status']);
 	$diet_price = "";
 	$diet_image = $_FILES['diet_image']['tmp_name'];
@@ -44,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	move_uploaded_file($diet_image, $diet_image_upload . 'recipe_' . $renamefile);
 
 	$statment = $connect->prepare(
-		'INSERT INTO diets (diet_id,diet_title,diet_description,diet_ingredients,diet_category,diet_directions,diet_calories,diet_carbs,diet_protein,diet_fat,course,diet_time,diet_servings,diet_featured,diet_status,diet_price,diet_image) VALUES (null, :diet_title, :diet_description, :diet_ingredients, :diet_category, :diet_directions, :diet_calories, :diet_carbs, :diet_protein, :diet_fat,:course, :diet_time, :diet_servings, :diet_featured, :diet_status, :diet_price, :diet_image)'
-		);
+		'INSERT INTO diets (diet_id,diet_title,diet_description,diet_ingredients,diet_category,diet_directions,diet_calories,diet_carbs,diet_protein,diet_fat,course,diet_time,diet_servings,diet_featured,diet_status,diet_price,diet_image,link) VALUES (null, :diet_title, :diet_description, :diet_ingredients, :diet_category, :diet_directions, :diet_calories, :diet_carbs, :diet_protein, :diet_fat,:course, :diet_time, :diet_servings, :diet_featured, :diet_status, :diet_price, :diet_image,:link)'
+);
 
 	$statment->execute(array(
 		':diet_title' => $diet_title,
@@ -63,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		':diet_featured' => $diet_featured,
 		':diet_status' => $diet_status,
 		':diet_price' => $diet_price,
+		':link'=>$link,
 		':diet_image' => 'recipe_' . $renamefile
 		));
 
