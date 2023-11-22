@@ -9,6 +9,10 @@ if (!$connect) {
     $response = array("status" => 0, "data" => "Error data connect");
     die();
 }
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: *");
+
 
 // Debugging: Check traditional form data
 
