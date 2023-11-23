@@ -5,9 +5,7 @@
 // Author: Wicombit
 // Author Profile: https://codecanyon.net/user/wicombit/portfolio
 /*--------------------*/
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: *");
+
 function connect($database)
 {
     try {
@@ -628,7 +626,7 @@ function subscribe($connect)
 {
     $response = array();
    
-    var_dump($_POST["user_id"]);
+    var_dump($_GET["user_id"]);
     die();
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
