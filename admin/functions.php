@@ -624,8 +624,7 @@ function checkUsersubscriptions($connect)
 function subscribe($connect)
 {
     $response = array();
-var_dump("@@@@@@");
-die();
+
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
 
