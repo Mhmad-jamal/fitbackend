@@ -36,10 +36,10 @@
                       <textarea value="" name="diet_description" class="advancedtinymce form-control" id="description" required=""><?php echo $diet['diet_description']; ?></textarea>
  -->
                       <label class="control-label">Ingredients</label>
-                      <textarea value="" name="diet_ingredients" class="advancedtinymce form-control" id="ingredients" required=""><?php echo $diet['diet_ingredients']; ?></textarea>
+                      <textarea value="" name="diet_ingredients" class="advancedtinymce form-control" id="ingredients" ><?php echo $diet['diet_ingredients']; ?></textarea>
 
                       <label class="control-label">Directions</label>
-                      <textarea value="" name="diet_directions" class="advancedtinymce form-control" id="directions" required=""><?php echo $diet['diet_directions']; ?></textarea>
+                      <textarea value="" name="diet_directions" class="advancedtinymce form-control" id="directions" ><?php echo $diet['diet_directions']; ?></textarea>
 
                     <!--   <label class="control-label">Category</label>
                       <select class="form-control" name="diet_category" required>

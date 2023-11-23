@@ -8,20 +8,8 @@ $connect = connect($database);
 if (!$connect) {
     $response = array("status" => 0, "data" => "Error data connect");
     die();
-}
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Headers: Content-Type");
+} 
 
-var_dump($_POST['user_id']);
-echo "ssss";
-die();
-
-// Debugging: Check traditional form data
-
-
-// Debugging: Check raw POST data
 // Use $_POST to access the data sent from React Native app
 $user_id = $_POST['user_id'];
 $user_email = $_POST['user_email'];
