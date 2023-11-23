@@ -625,9 +625,8 @@ function checkUsersubscriptions($connect)
 function subscribe($connect)
 {
     $response = array();
-    $post_data = json_decode(file_get_contents('php://input'), true);
-    $user_id = $post_data['user_id'];
-    var_dump($user_id);
+   
+    var_dump($_POST["user_id"]);
     die();
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
