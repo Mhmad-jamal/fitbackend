@@ -79,16 +79,16 @@
                       </select> -->
 
                       <label class="control-label">Calories</label>
-                      <input type="number" value="<?php echo $diet['diet_calories']; ?>" placeholder="Calories" name="diet_calories" class="form-control" required="">
+                      <input type="text"  pattern="\d+(\.\d+)?" title="Enter a valid number" value="<?php echo $diet['diet_calories']; ?>" placeholder="Calories" name="diet_calories" class="form-control" required="">
 
                       <label class="control-label">Carbs</label>
-                      <input type="number" value="<?php echo $diet['diet_carbs']; ?>" placeholder="Carbs (Grams)" name="diet_carbs" class="form-control" required="">
+                      <input type="text"  pattern="\d+(\.\d+)?" title="Enter a valid number" value="<?php echo $diet['diet_carbs']; ?>" placeholder="Carbs (Grams)" name="diet_carbs" class="form-control" required="">
 
                       <label class="control-label">Protein</label>
-                      <input type="number" value="<?php echo $diet['diet_protein']; ?>" placeholder="Protein (Grams)" name="diet_protein" class="form-control" required="">
+                      <input type="text"  pattern="\d+(\.\d+)?" title="Enter a valid number" value="<?php echo $diet['diet_protein']; ?>" placeholder="Protein (Grams)" name="diet_protein" class="form-control" required="">
 
                       <label class="control-label">Fat</label>
-                      <input type="number" value="<?php echo $diet['diet_fat']; ?>" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
+                      <input type="text"  pattern="\d+(\.\d+)?" title="Enter a valid number" value="<?php echo $diet['diet_fat']; ?>" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
                       <label class="control-label">Recipe Link</label>
    <input type="text" value="<?php echo $diet["link"]?>" placeholder="https://" name="link" class="form-control" >
                     <!--   <label class="control-label">Servings</label>
