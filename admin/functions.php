@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
 
 /*--------------------*/
 // App Name: WB Fit Basic/Pro
@@ -573,7 +575,6 @@ function get_food_by_goal($connect)
 }
 function checkUsersubscriptions($connect)
 {
-   
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
         $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
@@ -625,13 +626,12 @@ function checkUsersubscriptions($connect)
 function subscribe($connect)
 {
     $response = array();
-   
-   
-    if (isset($_GET["user_id"])) {
-        $user_id = $_GET["user_id"];
 
-        if (isset($_GET["general_code"])) {
-            $general_code = $_GET["general_code"];
+    if (isset($_POST["user_id"])) {
+        $user_id = $_POST["user_id"];
+
+        if (isset($_POST["general_code"])) {
+            $general_code = $_POST["general_code"];
             $payment_method = "code";
             $query = "
             SELECT gc.id AS generated_code_id, s.id AS subscription_id, gc.*, s.*
