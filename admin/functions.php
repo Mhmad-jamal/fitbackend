@@ -573,6 +573,7 @@ function get_food_by_goal($connect)
 }
 function checkUsersubscriptions($connect)
 {
+   
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
         $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
@@ -624,7 +625,10 @@ function checkUsersubscriptions($connect)
 function subscribe($connect)
 {
     $response = array();
-
+    $post_data = json_decode(file_get_contents('php://input'), true);
+    $user_id = $post_data['user_id'];
+    var_dump($user_id);
+    die();
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
 
