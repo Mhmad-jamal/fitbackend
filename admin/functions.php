@@ -630,7 +630,8 @@ function subscribe($connect)
     
     // Read the raw JSON data from the request body
     $post_data = json_decode(file_get_contents('php://input'));
-    
+    var_dump($post_data);
+    die();
     if (isset($post_data->user_id)) {
         $user_id = $post_data->user_id;
 
