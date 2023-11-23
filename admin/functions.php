@@ -626,13 +626,12 @@ function subscribe($connect)
 {
     $response = array();
    
-    var_dump($_GET["user_id"]);
-    die();
-    if (isset($_POST["user_id"])) {
-        $user_id = $_POST["user_id"];
+   
+    if (isset($_GET["user_id"])) {
+        $user_id = $_GET["user_id"];
 
-        if (isset($_POST["general_code"])) {
-            $general_code = $_POST["general_code"];
+        if (isset($_GET["general_code"])) {
+            $general_code = $_GET["general_code"];
             $payment_method = "code";
             $query = "
             SELECT gc.id AS generated_code_id, s.id AS subscription_id, gc.*, s.*
