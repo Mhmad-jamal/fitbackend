@@ -624,16 +624,10 @@ function checkUsersubscriptions($connect)
 function subscribe($connect)
 {
     $response = array();
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-    header("Access-Control-Allow-Headers: *");
-    
-    // Read the raw JSON data from the request body
-    $post_data = json_decode(file_get_contents('php://input'));
-    var_dump($post_data);
-    die();
-    if (isset($post_data->user_id)) {
-        $user_id = $post_data->user_id;
+var_dump($_POST["user_id"]);
+die();
+    if (isset($_POST["user_id"])) {
+        $user_id = $_POST["user_id"];
 
         if (isset($_POST["general_code"])) {
             $general_code = $_POST["general_code"];
