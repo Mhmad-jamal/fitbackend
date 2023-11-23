@@ -1,6 +1,14 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
+// Allow specific methods
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+
+// Allow specific headers
+header("Access-Control-Allow-Headers: *");
+
+// Set content type for JSON
+header("Content-Type: application/json");
 
 /*--------------------*/
 // App Name: WB Fit Basic/Pro
