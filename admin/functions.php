@@ -5,7 +5,9 @@
 // Author: Wicombit
 // Author Profile: https://codecanyon.net/user/wicombit/portfolio
 /*--------------------*/
-
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: *");
 function connect($database)
 {
     try {
