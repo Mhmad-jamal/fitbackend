@@ -63,16 +63,16 @@
    </select>
  -->
    <label class="control-label">Calories</label>
-   <input type="text" value="" placeholder="Calories" name="diet_calories" class="form-control" required="">
+   <input type="number" value="" placeholder="Calories" name="diet_calories" class="form-control" required="">
 
    <label class="control-label">Carbs</label>
-   <input type="text" value="" placeholder="Carbs (Grams)" name="diet_carbs" class="form-control" required="">
+   <input type="number" value="" placeholder="Carbs (Grams)" name="diet_carbs" class="form-control" required="">
 
    <label class="control-label">Protein</label>
-   <input type="text" value="" placeholder="Protein (Grams)" name="diet_protein" class="form-control" required="">
+   <input type="number" value="" placeholder="Protein (Grams)" name="diet_protein" class="form-control" required="">
 
    <label class="control-label">Fat</label>
-   <input type="text" value="" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
+   <input type="number" value="" placeholder="Fat (Grams)" name="diet_fat" class="form-control" required="">
    <label class="control-label">Recipe Link</label>
    <input type="text" value="" placeholder="https://" name="link" class="form-control" >
 
