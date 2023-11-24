@@ -81,6 +81,7 @@ $sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 		$time = $row['diet_time'];
 		$servings = $row['diet_servings'];
 		$price = $row['diet_price'];
+		$link = $row['link'];
 
 		$data[] = array(
 			'id'=> $id,
@@ -96,7 +97,8 @@ $sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 			'fat'=> html_entity_decode($fat),
 			'time'=> html_entity_decode($time),
 			'servings'=> html_entity_decode($servings),
-			'price'=> $price
+			'price'=> $,
+			'link'=>$link
 		);
 	}
 
