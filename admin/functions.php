@@ -624,14 +624,16 @@ function get_food_by_goal($connect)
             }
         } else {
             $result = insert_Food($connect, $user_id, null);
+            var_dump($result);
+            var_dump("##############3");
+            die();
             if ($result) {
                 $result = get_food_program_by_id_mobile($connect, $result);
             }
         }
         return $result;
     } else {
-        var_dump("##############3");
-        die();
+       
         return false;
     }
 }
