@@ -519,6 +519,9 @@ $food_category=[];
 
         
         if (count($food_category) == 0 ) {
+            var_dump($food_category);
+            var_dump("@@@");
+            die();
            return false;
 
         }
@@ -624,9 +627,7 @@ function get_food_by_goal($connect)
             }
         } else {
             $result = insert_Food($connect, $user_id, null);
-            var_dump($result);
-            var_dump("##############3");
-            die();
+          
             if ($result) {
                 $result = get_food_program_by_id_mobile($connect, $result);
             }
