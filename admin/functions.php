@@ -519,12 +519,13 @@ $food_category=[];
        
         
         if (count($food_category) == 0 ) {
-            var_dump($food_category);
-        var_dump("@@@");
-        die();
+         
            return false;
 
         }
+        var_dump($food_category);
+        var_dump("@@@");
+        die();
 
 
 
