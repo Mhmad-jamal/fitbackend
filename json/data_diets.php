@@ -20,7 +20,7 @@ header("access-control-allow-origin: *");
 
 require './app_core.php';
 
-	$sqlQuery = "SELECT diets.*,categories.category_title AS category_title FROM diets,categories WHERE diets.diet_category = categories.category_id AND diets.diet_status = 1";
+$sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 
 	if(getParamsID()){
 
