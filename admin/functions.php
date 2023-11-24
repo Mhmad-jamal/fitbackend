@@ -516,12 +516,12 @@ $food_category=[];
             $calories = $weight * 50;
 
         }
-        var_dump($food_category);
-        var_dump("@@@");
-        die();
+       
         
         if (count($food_category) == 0 ) {
-           
+            var_dump($food_category);
+        var_dump("@@@");
+        die();
            return false;
 
         }
