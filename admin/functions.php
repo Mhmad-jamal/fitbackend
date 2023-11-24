@@ -630,6 +630,8 @@ function get_food_by_goal($connect)
         }
         return $result;
     } else {
+        var_dump("##############3");
+        die();
         return false;
     }
 }
