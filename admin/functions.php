@@ -565,13 +565,7 @@ $food_category=[];
         
         $program = $sentence->fetchAll();
        
-        var_dump($minCalories);
-        var_dump($maxCalories);
-        var_dump($food_categoryids);
-        var_dump($AllergiesJSON);
-
-        var_dump("@@@");
-        die();
+        
         
         if (count($program) > 0) {
 
