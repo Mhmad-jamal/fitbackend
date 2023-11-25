@@ -640,7 +640,7 @@ function checkUsersubscriptions($connect)
 {
     if (isset($_POST["user_id"])) {
         $user_id = $_POST["user_id"];
-        $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
+        $sentence = $connect->prepare("SELECT us.*, s.subscription_duration FROM `user_subscription` us
         INNER JOIN `subscription` s ON us.subscription_id = s.id
         WHERE us.user_id = :user_id
         ORDER BY us.created_at DESC
