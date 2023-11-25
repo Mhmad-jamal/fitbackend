@@ -44,9 +44,9 @@
  function getCoursesValue($id) {
   $courses = array(
       1 => "breakfast",
-      2 => "snack_1",
+      2 => "snack 1",
       3 => "lunch",
-      4 => "snack_2",
+      4 => "snack 2",
       5 => "dinner"
   );
 
