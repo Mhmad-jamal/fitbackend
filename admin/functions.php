@@ -642,7 +642,9 @@ function checkUsersubscriptions($connect)
         $user_id = $_POST["user_id"];
         $sentence = $connect->prepare("SELECT us.*, s.* FROM `user_subscription` us
         INNER JOIN `subscription` s ON us.subscription_id = s.id
-        WHERE us.user_id = :user_id");
+        WHERE us.user_id = :user_id
+        ORDER BY us.created_at DESC
+        LIMIT 1");
 
         $sentence->bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $sentence->execute();
@@ -656,7 +658,6 @@ function checkUsersubscriptions($connect)
             $subscription_duration = $subscription[0]["subscription_duration"];
             $subscription_date = $subscription[0]["date"];
 
-            // Initialize default values
             $subscription_status = "Expired"; // Default status
 
 
