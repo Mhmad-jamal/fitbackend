@@ -613,9 +613,11 @@ function get_food_by_goal($connect)
          
 
             if ($timestamp_from_db > $seven_days_ago) {
+               
+                $result = get_food_program_by_id_mobile($connect, $program_id);
+                var_dump($program_id);
                 var_dump("aaaaaaaaa@2");
                 die();
-                $result = get_food_program_by_id_mobile($connect, $program_id);
             } else {
                 var_dump("ssssss@2");
                 die();
