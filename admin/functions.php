@@ -780,6 +780,13 @@ function get_all_workouts($connect)
     $sentence->execute();
     return $sentence->fetchAll();
 }
+function get_phone($connect)
+{
+
+    $sentence = $connect->prepare("SELECT * FROM `contact_number`");
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
 function get_all_program_food($connect)
 {
 
