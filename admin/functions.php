@@ -654,12 +654,13 @@ function checkUsersubscriptions($connect)
         // Get the number of rows
         if ($row_count > 0) {
             $subscription = $sentence->fetchAll();
-           
+            var_dump($subscription);
+            die();
+
             $subscription_duration = $subscription[0]["subscription_duration"];
             $subscription_date = $subscription[0]["date"];
 
             $subscription_status = "Expired"; // Default status
-
 
 
             // Calculate the expiration date
