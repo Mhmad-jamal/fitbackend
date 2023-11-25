@@ -598,8 +598,7 @@ function get_food_by_goal($connect)
     $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
     $sentence->execute();
     if ($sentence->rowCount() > 0) {
-        var_dump("ssssss@2");
-        die();
+      
 
         $sentence = $connect->prepare("SELECT * FROM `users_goal_diet` WHERE user_id = '$user_id' ORDER BY id DESC LIMIT 1");
         $sentence->execute();
@@ -612,7 +611,8 @@ function get_food_by_goal($connect)
           
             $seven_days_ago = strtotime('-7 days', $today); // Calculate 7 days ago
             $program_id = $last_record["program_id"];
-          
+            var_dump("ssssss@2");
+            die();
 
             if ($timestamp_from_db > $seven_days_ago) {
                 
@@ -635,8 +635,7 @@ function get_food_by_goal($connect)
         }
         return $result;
     } else {
-       var_dump("@@@");
-       die();
+     
         return false;
     }
 }
