@@ -41,14 +41,33 @@
         </option>
     <?php endforeach; ?>
 </select>
+<?php 
+ function getCoursesValue($id) {
+  $courses = array(
+      1 => "breakfast",
+      2 => "snack_1",
+      3 => "lunch",
+      4 => "snack_2",
+      5 => "dinner"
+  );
 
+  // Check if the ID exists in the array
+  if (array_key_exists($id, $courses)) {
+      // Return the corresponding value
+      return $courses[$id];
+  } else {
+      // If the ID is not found, you can return a default value or handle it as needed
+      return "Course not found";
+  }
+}
+ ?>
   
 
    <label class="control-label">Day 1</label>
    <input type="hidden" value="1" name="day_1">
    <select multiple="multiple" class="my-select form-control diet-select"  name="day1[]">
-    <?php foreach ($food_list1 as $food1): ?>
-        <?php
+    <?php foreach ($food_list1 as $food1): 
+        
         $selected = in_array($food1['diet_id'], $day1_values) ? 'selected' : '';
         ?>
         <option data-calories="<?php echo $food1['diet_calories']; ?>"
@@ -57,7 +76,7 @@
                 data-carbs="<?php echo $food1['diet_carbs']; ?>"
                 data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food1['diet_image']; ?>"
                 value="<?php echo $food1['diet_id']; ?>" <?php echo $selected; ?>>
-            <?php echo $food1['diet_title']; ?>
+                <?php echo $food1['diet_title'] . "    (" . getCoursesValue($food1['course']) . " - " . $food1['diet_calories'] . ')'; ?>
         </option>
     <?php endforeach; ?>
 </select>
@@ -70,7 +89,14 @@
         <?php
         $selected = in_array($food2['diet_id'], $day2_values) ? 'selected' : '';
         ?>
-   <option  data-calories="<?php echo $food2['diet_calories']; ?>" data-fat="<?php echo $food2['diet_fat']; ?>" data-protein="<?php echo $food2['diet_protein']; ?>" data-carbs="<?php echo $food2['diet_carbs']; ?>"  data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food2['diet_image']; ?>" value="<?php echo $food2['diet_id']; ?> " <?php echo $selected; ?>><?php echo $food2['diet_title'];  ?></option>
+   <option  data-calories="<?php echo $food2['diet_calories']; ?>"
+    data-fat="<?php echo $food2['diet_fat']; ?>" data-protein="<?php echo $food2['diet_protein']; ?>"
+     data-carbs="<?php echo $food2['diet_carbs']; ?>" 
+      data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food2['diet_image']; ?>" 
+      value="<?php echo $food2['diet_id']; ?> " <?php echo $selected; ?>>
+      
+      <?php echo $food2['diet_title'] . "    (" . getCoursesValue($food2['course']) . " - " . $food2['diet_calories'] . ')'; ?>
+    </option>
     <?php endforeach; ?>
    </select>
 
@@ -81,7 +107,12 @@
         <?php
         $selected = in_array($food3['diet_id'], $day3_values) ? 'selected' : '';
         ?>
-   <option <?php echo $selected; ?>  data-calories="<?php echo $food3['diet_calories']; ?>" data-fat="<?php echo $food3['diet_fat']; ?>" data-protein="<?php echo $food3['diet_protein']; ?>" data-carbs="<?php echo $food3['diet_carbs']; ?>"  data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food3['diet_image']; ?>" value="<?php echo $food3['diet_id']; ?>"><?php echo $food3['diet_title']; ?></option>
+   <option <?php echo $selected; ?>  data-calories="<?php echo $food3['diet_calories']; ?>" 
+   data-fat="<?php echo $food3['diet_fat']; ?>" data-protein="<?php echo $food3['diet_protein']; ?>"
+    data-carbs="<?php echo $food3['diet_carbs']; ?>"  data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food3['diet_image']; ?>" 
+    value="<?php echo $food3['diet_id']; ?>">
+    <?php echo $food3['diet_title'] . "    (" . getCoursesValue($food3['course']) . " - " . $food3['diet_calories'] . ')'; ?>
+</option>
     <?php endforeach; ?>
    </select>
 
@@ -93,7 +124,12 @@
         <?php
         $selected = in_array($food4['diet_id'], $day4_values) ? 'selected' : '';
         ?>
-   <option <?php echo $selected; ?>  data-calories="<?php echo $food4['diet_calories']; ?>" data-fat="<?php echo $food4['diet_fat']; ?>" data-protein="<?php echo $food4['diet_protein']; ?>" data-carbs="<?php echo $food4['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food4['diet_image']; ?>" value="<?php echo $food4['diet_id']; ?>"><?php echo $food4['diet_title']; ?></option>
+   <option <?php echo $selected; ?>
+     data-calories="<?php echo $food4['diet_calories']; ?>" data-fat="<?php echo $food4['diet_fat']; ?>"
+      data-protein="<?php echo $food4['diet_protein']; ?>" data-carbs="<?php echo $food4['diet_carbs']; ?>"
+      data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food4['diet_image']; ?>" value="<?php echo $food4['diet_id']; ?>">
+      <?php echo $food4['diet_title'] . "    (" . getCoursesValue($food4['course']) . " - " . $food4['diet_calories'] . ')'; ?>
+    </option>
     <?php endforeach; ?>
    </select>
 
@@ -104,7 +140,12 @@
         <?php
         $selected = in_array($food5['diet_id'], $day5_values) ? 'selected' : '';
         ?>
-   <option <?php echo $selected; ?>   data-calories="<?php echo $food5['diet_calories']; ?>" data-fat="<?php echo $food5['diet_fat']; ?>" data-protein="<?php echo $food5['diet_protein']; ?>" data-carbs="<?php echo $food5['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food5['diet_image']; ?>" value="<?php echo $food5['diet_id']; ?>"><?php echo $food5['diet_title']; ?></option>
+   <option <?php echo $selected; ?>   
+   data-calories="<?php echo $food5['diet_calories']; ?>" 
+   data-fat="<?php echo $food5['diet_fat']; ?>" data-protein="<?php echo $food5['diet_protein']; ?>"
+    data-carbs="<?php echo $food5['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food5['diet_image']; ?>"
+    value="<?php echo $food5['diet_id']; ?>">  <?php echo $food5['diet_title'] . "    (" . getCoursesValue($food5['course']) . " - " . $food5['diet_calories'] . ')'; ?>
+</option>
     <?php endforeach; ?>
    </select>
 
@@ -115,7 +156,11 @@
         <?php
         $selected = in_array($food6['diet_id'], $day6_values) ? 'selected' : '';
         ?>
-   <option  <?php echo $selected; ?> data-calories="<?php echo $food6['diet_calories']; ?>" data-fat="<?php echo $food6['diet_fat']; ?>" data-protein="<?php echo $food6['diet_protein']; ?>" data-carbs="<?php echo $food6['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food6['diet_image']; ?>" value="<?php echo $food6['diet_id']; ?>"><?php echo $food6['diet_title']; ?></option>
+   <option  <?php echo $selected; ?> data-calories="<?php echo $food6['diet_calories']; ?>"
+    data-fat="<?php echo $food6['diet_fat']; ?>" data-protein="<?php echo $food6['diet_protein']; ?>" 
+    data-carbs="<?php echo $food6['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food6['diet_image']; ?>"
+     value="<?php echo $food6['diet_id']; ?>">  <?php echo $food6['diet_title'] . "    (" . getCoursesValue($food6['course']) . " - " . $food6['diet_calories'] . ')'; ?>
+</option>
     <?php endforeach; ?>
    </select>
 
@@ -126,7 +171,12 @@
         <?php
         $selected = in_array($food7['diet_id'], $day7_values) ? 'selected' : '';
         ?>
-   <option <?php echo $selected; ?>  data-calories="<?php echo $food7['diet_calories']; ?>" data-fat="<?php echo $food7['diet_fat']; ?>" data-protein="<?php echo $food7['diet_protein']; ?>" data-carbs="<?php echo $food7['diet_carbs']; ?>" data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food7['diet_image']; ?>" value="<?php echo $food7['diet_id']; ?>"><?php echo $food7['diet_title']; ?></option>
+   <option <?php echo $selected; ?> 
+    data-calories="<?php echo $food7['diet_calories']; ?>" data-fat="<?php echo $food7['diet_fat']; ?>" 
+    data-protein="<?php echo $food7['diet_protein']; ?>" data-carbs="<?php echo $food7['diet_carbs']; ?>"
+     data-img-src="<?php echo SITE_URL ?>/images/<?php echo $food7['diet_image']; ?>" 
+     value="<?php echo $food7['diet_id']; ?>">  <?php echo $food7['diet_title'] . "    (" . getCoursesValue($food7['course']) . " - " . $food7['diet_calories'] . ')'; ?>
+</option>
     <?php endforeach; ?>
    </select>
    <label class="control-label">Allergies or diseases</label>
