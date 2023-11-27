@@ -79,7 +79,7 @@ $(document).ready(function() {
            var workoutid = $(this).attr("workoutid");  
            var day = $(this).attr("day");  
            $.ajax({  
-                url:SITEURL+"/controller/day.php",  
+                url:"/controller/day.php",  
                 method:"post",  
                 data:{workoutid:workoutid, day:day},  
                 success:function(data){  
