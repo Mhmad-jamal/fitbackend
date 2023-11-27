@@ -24,6 +24,13 @@ $statment->execute(array(
 		':du_diet' => $diet,
 		':du_user' => $user
 		));
+		$statment = $connect->prepare( 'INSERT INTO users_goal_diet (program_id,user_id) VALUES (:du_diet, :du_user)' );
+
+$statment->execute(array(
+
+		':du_diet' => $diet,
+		':du_user' => $user
+		));
 
 header('Location:' . SITE_URL . '/controller/edit_user.php?id='.$user);
 
