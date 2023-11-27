@@ -54,7 +54,7 @@ foreach ($day2_values as $diet_id) {
     $diets_data_day2[] = $diet_data;
 }
 $diets_data_day3 = [];
-foreach ($day2_values as $diet_id) {
+foreach ($day3_values as $diet_id) {
     // Fetch data for each ID from the "diets" table
     $diet_data = get_diet_per_id($connect, $diet_id);
     
