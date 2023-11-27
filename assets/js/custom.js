@@ -101,7 +101,7 @@ $(document).ready(function() {
     page_id_array.push($(this).attr("id"));
    });
    $.ajax({
-    url:SITEURL+"/controller/reorder.php",  
+    url:"/controller/reorder.php",  
     method:"POST",
     data:{page_id_array:page_id_array, day:day, workoutid:workoutid},
     success:function(data)
