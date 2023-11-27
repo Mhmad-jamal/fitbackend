@@ -24,7 +24,7 @@ $statment->execute(array(
 		':ws_workout' => $workout,
 		':ws_user' => $user
 		));
-		$statment = $connect->prepare("INSERT INTO usesr_goal_workout (workout_id,user)id) VALUES (:ws_workout, :ws_user)");
+		$statment = $connect->prepare("INSERT INTO usesr_goal_workout (workout_id,user_id) VALUES (:ws_workout, :ws_user)");
 
 $statment->execute(array(
 
