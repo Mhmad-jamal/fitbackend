@@ -624,11 +624,20 @@ function get_food_by_goal($connect)
                 }
             }
         } else {
+            $sentence = $connect->prepare("SELECT du_diet FROM `diets_users` WHERE du_user = '$user_id' ORDER BY id DESC LIMIT 1");
+            $sentence->execute();
+            
+            if ($sentence->rowCount() > 0) {
+                $row = $sentence->fetch(PDO::FETCH_ASSOC);
+                $du_diet = $row['du_diet'];
+                $result = get_food_program_by_id_mobile($connect, $du_diet);
+            }else{
             $result = insert_Food($connect, $user_id, null);
           
             if ($result) {
                 $result = get_food_program_by_id_mobile($connect, $result);
             }
+        }
         }
         return $result;
     } else {
