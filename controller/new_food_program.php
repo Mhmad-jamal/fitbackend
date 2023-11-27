@@ -64,8 +64,10 @@ $carbs = $_POST["carbs"] ?? 0;
 $calories = $_POST["calories"] ?? 0;
 $category_id=$_POST["category_id"];
 $name=$_POST["name"];
-$Allergies=json_encode($_POST["Allergies"]);
-$jsonprogram = json_encode($program);
+$Allergies = json_encode($_POST["Allergies"] ?? [0]);
+
+$Allergies = is_array($_POST["Allergies"]) ? json_encode($_POST["Allergies"]) : [0];$jsonprogram = json_encode($program);
+
 
 storeProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name,$Allergies);
 

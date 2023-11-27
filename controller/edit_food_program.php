@@ -78,9 +78,9 @@ if(!$connect){
             $calories = $_POST["calories"] ?? 0;
             $category_id = $_POST["category_id"];
             $name = $_POST["name"];
-            $Allergies = json_encode($_POST["Allergies"] ?? []);
+            $Allergies = json_encode($_POST["Allergies"] ?? [0]);
 
-            $Allergies = is_array($_POST["Allergies"]) ? json_encode($_POST["Allergies"]) : [];
+            $Allergies = is_array($_POST["Allergies"]) ? json_encode($_POST["Allergies"]) : [0];
             $jsonprogram = json_encode($program);
     
             updateProgramFood($connect, $jsonprogram, $fat, $protein, $carbs, $calories, $category_id, $name, $Allergies, $program_id);
