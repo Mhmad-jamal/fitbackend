@@ -20,7 +20,7 @@
                     <div class="col-md-12">
                         <div class="form-block mb-4">
 
-<form enctype="multipart/form-data" action="/controller/edit_workout.php" method="post">
+<form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 
 
 <div class="form-row">
