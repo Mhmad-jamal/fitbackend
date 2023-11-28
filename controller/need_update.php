@@ -17,8 +17,11 @@ if (isset($_POST["user_id"])) {
     // Calculate the date one month ago from today
     $oneMonthAgo = date("Y-m-d", strtotime("-1 month"));
 
-    $query = "SELECT * FROM `users_goal` WHERE `user_id` = '$user_id' AND `created_at` < DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
-    
+    SELECT * 
+    FROM `users_goal` 
+    WHERE `user_id` = '$user_id' 
+          AND `created_at` >= DATE_SUB(CURDATE(), INTERVAL 1 WEEK);
+        
     $user_data = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($user_data) > 0) {
