@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 
 /*--------------------*/
 // App Name: WB Fit Basic/Pro
