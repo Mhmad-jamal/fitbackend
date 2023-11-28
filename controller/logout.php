@@ -8,6 +8,8 @@ $connect = connect($database);
     
 	session_start();
 
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
+
 	session_destroy();
 	$_SESSION = array ();
 

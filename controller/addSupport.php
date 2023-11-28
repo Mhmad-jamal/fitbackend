@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
     
     require '../admin/config.php';
     require '../admin/functions.php';	

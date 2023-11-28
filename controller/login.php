@@ -2,6 +2,8 @@
 
 session_start();
 
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
+
 include('../classes/csrf.php');
 require '../admin/config.php';
 require '../admin/functions.php';

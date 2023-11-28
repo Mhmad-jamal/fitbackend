@@ -1,5 +1,7 @@
 <?php 
 session_start();
+
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
 ob_start(); 
 
 if (isset($_SESSION['manager_email'])){

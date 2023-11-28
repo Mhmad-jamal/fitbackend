@@ -1,6 +1,8 @@
 <?php 
 session_start();
 
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
+
 require '../classes/firebase/vendor/autoload.php';
  
 use Kreait\Firebase\Factory;

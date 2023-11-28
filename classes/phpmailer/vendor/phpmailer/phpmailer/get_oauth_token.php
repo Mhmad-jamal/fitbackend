@@ -60,6 +60,8 @@ require 'vendor/autoload.php';
 
 session_start();
 
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
+
 $providerName = '';
 
 if (array_key_exists('provider', $_GET)) {

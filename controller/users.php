@@ -2,6 +2,8 @@
 
 session_start();
 
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
+
 if (isset($_SESSION['manager_email'])){
     
 require '../admin/config.php';
