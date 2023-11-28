@@ -2,7 +2,7 @@
 
 /* URL PROJECT */
 
-define('SITE_URL', 'http://appadmin.mohannad-theeb.com/');
+define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
 
 
 $database = array(
