@@ -24,11 +24,11 @@ if (isset($_POST["user_id"])) {
         // Check if JSON decoding is successful
         if (is_array($user_old_goal)) {
             foreach ($user_goal as $new_value) {
-                $componentId = $new_value["componentId"];
+                $componentId = $new_value->componentId;
                 $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
 
                 if ($index !== false) {
-                    $user_old_goal[$index]["value"] = $new_value["value"];
+                    $user_old_goal[$index]->value = $new_value["value"];
                 } else {
                     $user_old_goal[] = $new_value;
                 }
