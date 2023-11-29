@@ -15,7 +15,7 @@ if (isset($_POST["user_id"])) {
     // Calculate the date one week ago from today
     $oneWeekAgoTimestamp = strtotime("-1 week");
 
-    $query = "SELECT * FROM `users_goal` WHERE `user_id` = '$user_id' AND `created_at` >= FROM_UNIXTIME($oneWeekAgoTimestamp)";
+    $query = "SELECT * FROM `users_goal` WHERE `user_id` = '$user_id' AND `created_at` <= FROM_UNIXTIME($oneWeekAgoTimestamp)";
     
     $user_data = mysqli_query($conn, $query);
 
