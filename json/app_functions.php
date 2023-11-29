@@ -1,6 +1,7 @@
 <?php
 
 use voku\helper\AntiXSS;
+ define('SITE_URL', 'https://appadmin.mohannad-theeb.com/');
 
 require_once __DIR__ . '../../classes/anti-xss/autoload.php';
 require_once __DIR__ . '../../classes/phpmailer/vendor/phpmailer/phpmailer/src/Exception.php';
