@@ -13,8 +13,27 @@ if ($conn->connect_error) {
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"]; 
     $user_goal = $_POST["user_goal"];
-
-    // Use NOW() function to set the created_at column to the current date and time
+    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
+    $sentence->bindParam(':user_id', $user_id);
+    $sentence->execute();
+    
+    if ($sentence->rowCount() > 0) {
+        // User exists, fetch and update the data
+        $user_data = $sentence->fetch(PDO::FETCH_ASSOC);
+        $user_old_goal = json_decode($user_data["user_goal"], true); // true to get an associative array
+    
+        // Update existing values
+        foreach ($user_goal as $new_value) {
+            $componentId = $new_value["componentId"];
+            $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
+    
+            if ($index !== false) {
+                $user_old_goal[$index]["value"] = $new_value["value"];
+            } else {
+                $user_old_goal[] = $new_value;
+            }
+        }
+    }
     $query = "UPDATE `users_goal` SET `user_goal` = '$user_goal', `created_at` = NOW() WHERE `users_goal`.`user_id` LIKE '$user_id';";
     
     $user_data = mysqli_query($conn, $query);
