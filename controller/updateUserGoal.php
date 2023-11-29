@@ -20,7 +20,12 @@ if (isset($_POST["user_id"])) {
         $user_data = $sentence->fetch_assoc();
         $user_old_goal = json_decode($user_data["user_goal"]);
             $user_goal=json_decode($user_goal);
-            
+            $needUpdat=null;
+            foreach ($user_goal as $key => $value) {
+                if ($value->componentId == 33) {
+                    $needUpdat = $value->value;
+                }
+            }
         // Check if JSON decoding is successful
         if (is_array($user_old_goal)) {
             foreach ($user_goal as $new_value) {
@@ -41,6 +46,14 @@ if (isset($_POST["user_id"])) {
             if ($user_data === TRUE) {
                 $response["status"] = 200;
                 $response["message"] = "User goal updated!";
+                if($needUpdat && $needUpdat> 2){
+                    
+            $workout = insert_workout($conn,$user_id);
+              $food=insert_Food($conn,$user_id);
+
+    
+                }
+
             } else {
                 $response["status"] = 201;
                 $response["message"] = "No need to update goal or an error occurred: " . $conn->error;
