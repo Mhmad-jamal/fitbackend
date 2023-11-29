@@ -14,13 +14,15 @@ if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"];
     $user_goal = $_POST["user_goal"];
 
-    $sentence = $conn->query("SELECT * FROM `users_goal` WHERE user_id = '$user_id'");
+    $sentence = $conn->prepare("SELECT * FROM `users_goal` WHERE user_id = ?");
+    $sentence->bind_param('s', $user_id);
+    $sentence->execute();
 
-    if ($sentence->num_rows > 0) {
-        $user_data = $sentence->fetch_assoc();
+    if ($sentence->get_result()->num_rows > 0) {
+        $user_data = $sentence->get_result()->fetch_assoc();
         $user_old_goal = json_decode($user_data["user_goal"], true);
-            $user_goal=json_decode($user_goal);
-            
+        $user_goal = json_decode($user_goal);
+
         // Check if JSON decoding is successful
         if (is_array($user_old_goal)) {
             foreach ($user_goal as $new_value) {
@@ -28,17 +30,19 @@ if (isset($_POST["user_id"])) {
                 $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
 
                 if ($index !== false) {
-                    $user_old_goal[$index]->value = $new_value->value;
+                    $user_old_goal[$index]['value'] = $new_value->value;
                 } else {
-                    $user_old_goal[] = $new_value;
+                    $user_old_goal[] = (array) $new_value;
                 }
             }
 
-            // Update the user's record in the database using plain interpolation
-            $updateQuery = "UPDATE `users_goal` SET `user_goal` = '" . json_encode($user_old_goal) . "', `created_at` = NOW() WHERE `user_id` = '$user_id'";
-            $user_data = $conn->query($updateQuery);
+            // Update the user's record in the database using prepared statement
+            $updateQuery = "UPDATE `users_goal` SET `user_goal` = ?, `created_at` = NOW() WHERE `user_id` = ?";
+            $updateStatement = $conn->prepare($updateQuery);
+            $updateStatement->bind_param('ss', json_encode($user_old_goal), $user_id);
+            $updateStatement->execute();
 
-            if ($user_data === TRUE) {
+            if ($updateStatement->affected_rows > 0) {
                 $response["status"] = 200;
                 $response["message"] = "User goal updated!";
             } else {
@@ -53,6 +57,9 @@ if (isset($_POST["user_id"])) {
         $response["status"] = 404;
         $response["message"] = "User not found";
     }
+
+    $sentence->close();
+    $updateStatement->close();
 } else {
     $response["status"] = 404;
     $response["message"] = "User ID not provided";
