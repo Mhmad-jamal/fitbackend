@@ -19,8 +19,7 @@ if (isset($_POST["user_id"])) {
     if ($sentence->num_rows > 0) {
         $user_data = $sentence->fetch_assoc();
         $user_old_goal = json_decode($user_data["user_goal"], true);
-var_dump($user_goal);
-die();
+$user_goal=json_decode($user_goal);
         // Check if JSON decoding is successful
         if (is_array($user_old_goal)) {
             foreach ($user_goal as $new_value) {
