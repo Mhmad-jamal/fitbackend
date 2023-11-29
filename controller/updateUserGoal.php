@@ -48,8 +48,8 @@ if (isset($_POST["user_id"])) {
                 $response["message"] = "User goal updated!";
                 if($needUpdat && $needUpdat> 2){
                     
-            $workout = insert_workout($conn,$user_id);
-              $food=insert_Food($conn,$user_id);
+            $workout = insert_workout($conn,$user_id,null);
+              $food=insert_Food($conn,$user_id,null);
 
     
                 }
