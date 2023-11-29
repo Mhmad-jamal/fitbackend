@@ -13,35 +13,28 @@ if ($conn->connect_error) {
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"];
     $user_goal = $_POST["user_goal"];
-    
-    $sentence = $conn->prepare("SELECT * FROM `users_goal` WHERE user_id = ?");
-    $sentence->bind_param('s', $user_id);
-    $sentence->execute();
-    
+
+    $sentence = $conn->query("SELECT * FROM `users_goal` WHERE user_id = '$user_id'");
+
     if ($sentence->num_rows > 0) {
-        // User exists, fetch and update the data
         $user_data = $sentence->fetch_assoc();
-        $user_old_goal = json_decode($user_data["user_goal"], true); // true to get an associative array
-    
-        // Update existing values
+        $user_old_goal = json_decode($user_data["user_goal"], true);
+
         foreach ($user_goal as $new_value) {
             $componentId = $new_value["componentId"];
             $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
-    
+
             if ($index !== false) {
                 $user_old_goal[$index]["value"] = $new_value["value"];
             } else {
                 $user_old_goal[] = $new_value;
             }
         }
-        
-        // Update the user's record in the database using prepared statement
-        $updateQuery = "UPDATE `users_goal` SET `user_goal` = ?, `created_at` = NOW() WHERE `user_id` = ?";
-        $updateStatement = $conn->prepare($updateQuery);
-        $updateStatement->bind_param('ss', json_encode($user_old_goal), $user_id);
-        $updateStatement->execute();
-        
-        if ($updateStatement->affected_rows > 0) {
+
+        $updateQuery = "UPDATE `users_goal` SET `user_goal` = '" . json_encode($user_old_goal) . "', `created_at` = NOW() WHERE `user_id` = '$user_id'";
+        $user_data = $conn->query($updateQuery);
+
+        if ($user_data) {
             $response["status"] = 200;
             $response["message"] = "User goal updated!";
         } else {
