@@ -20,26 +20,33 @@ if (isset($_POST["user_id"])) {
         $user_data = $sentence->fetch_assoc();
         $user_old_goal = json_decode($user_data["user_goal"], true);
 
-        foreach ($user_goal as $new_value) {
-            $componentId = $new_value["componentId"];
-            $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
+        // Check if JSON decoding is successful
+        if (is_array($user_old_goal)) {
+            foreach ($user_goal as $new_value) {
+                $componentId = $new_value["componentId"];
+                $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
 
-            if ($index !== false) {
-                $user_old_goal[$index]["value"] = $new_value["value"];
-            } else {
-                $user_old_goal[] = $new_value;
+                if ($index !== false) {
+                    $user_old_goal[$index]["value"] = $new_value["value"];
+                } else {
+                    $user_old_goal[] = $new_value;
+                }
             }
-        }
 
-        $updateQuery = "UPDATE `users_goal` SET `user_goal` = '" . json_encode($user_old_goal) . "', `created_at` = NOW() WHERE `user_id` = '$user_id'";
-        $user_data = $conn->query($updateQuery);
+            // Update the user's record in the database using plain interpolation
+            $updateQuery = "UPDATE `users_goal` SET `user_goal` = '" . json_encode($user_old_goal) . "', `created_at` = NOW() WHERE `user_id` = '$user_id'";
+            $user_data = $conn->query($updateQuery);
 
-        if ($user_data) {
-            $response["status"] = 200;
-            $response["message"] = "User goal updated!";
+            if ($user_data === TRUE) {
+                $response["status"] = 200;
+                $response["message"] = "User goal updated!";
+            } else {
+                $response["status"] = 201;
+                $response["message"] = "No need to update goal or an error occurred: " . $conn->error;
+            }
         } else {
             $response["status"] = 201;
-            $response["message"] = "No need to update goal or an error occurred.";
+            $response["message"] = "Error decoding existing user goal JSON";
         }
     } else {
         $response["status"] = 404;
