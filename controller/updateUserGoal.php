@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 if (isset($_POST["user_id"])) {
     $user_id = $_POST["user_id"]; 
     $user_goal = $_POST["user_goal"];
-    $sentence = $connect->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
+    $sentence = $conn->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
     $sentence->bindParam(':user_id', $user_id);
     $sentence->execute();
     
