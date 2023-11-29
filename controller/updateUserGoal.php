@@ -54,6 +54,8 @@ try {
                     
                     if ($needUpdate && $needUpdate > 2) {
                         $workout = insert_workout($conn, $user_id, null);
+                        var_dump($workout);
+                        die();
                         $food = insert_Food($conn, $user_id, null);
                     }
                 } else {
