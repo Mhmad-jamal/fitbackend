@@ -4,71 +4,77 @@ require '../admin/config.php';
 require '../admin/functions.php';
 
 $response = array("status" => 0, "message" => "", "data" => null);
-$conn = new mysqli($database['host'], $database['user'], $database['pass'], $database['db']);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+try {
+    $conn = new PDO("mysql:host={$database['host']};dbname={$database['db']}", $database['user'], $database['pass']);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if (isset($_POST["user_id"])) {
-    $user_id = $_POST["user_id"];
-    $user_goal = $_POST["user_goal"];
+    if (isset($_POST["user_id"])) {
+        $user_id = $_POST["user_id"];
+        $user_goal = $_POST["user_goal"];
 
-    $sentence = $conn->query("SELECT * FROM `users_goal` WHERE user_id = '$user_id'");
+        $stmt = $conn->prepare("SELECT * FROM `users_goal` WHERE user_id = :user_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
-    if ($sentence->num_rows > 0) {
-        $user_data = $sentence->fetch_assoc();
-        $user_old_goal = json_decode($user_data["user_goal"]);
-            $user_goal=json_decode($user_goal);
-            $needUpdat=null;
+        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user_data) {
+            $user_old_goal = json_decode($user_data["user_goal"]);
+            $user_goal = json_decode($user_goal);
+            $needUpdate = null;
+
             foreach ($user_goal as $key => $value) {
                 if ($value->componentId == 33) {
-                    $needUpdat = $value->value;
-                }
-            }
-        // Check if JSON decoding is successful
-        if (is_array($user_old_goal)) {
-            foreach ($user_goal as $new_value) {
-                $componentId = $new_value->componentId;
-                $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
-
-                if ($index !== false) {
-                    $user_old_goal[$index]->value = $new_value->value;
-                } else {
-                    $user_old_goal[] = $new_value;
+                    $needUpdate = $value->value;
                 }
             }
 
-            // Update the user's record in the database using plain interpolation
-            $updateQuery = "UPDATE `users_goal` SET `user_goal` = '" . json_encode($user_old_goal) . "', `created_at` = NOW() WHERE `user_id` = '$user_id'";
-            $user_data = $conn->query($updateQuery);
+            if (is_array($user_old_goal)) {
+                foreach ($user_goal as $new_value) {
+                    $componentId = $new_value->componentId;
+                    $index = array_search($componentId, array_column($user_old_goal, 'componentId'));
 
-            if ($user_data === TRUE) {
-                $response["status"] = 200;
-                $response["message"] = "User goal updated!";
-                if($needUpdat && $needUpdat> 2){
+                    if ($index !== false) {
+                        $user_old_goal[$index]->value = $new_value->value;
+                    } else {
+                        $user_old_goal[] = $new_value;
+                    }
+                }
+
+                $updateQuery = "UPDATE `users_goal` SET `user_goal` = :updated_goal, `created_at` = NOW() WHERE `user_id` = :user_id";
+                $updateStmt = $conn->prepare($updateQuery);
+                $updateStmt->bindParam(':updated_goal', json_encode($user_old_goal));
+                $updateStmt->bindParam(':user_id', $user_id);
+                $updateStmt->execute();
+
+                if ($updateStmt->rowCount() > 0) {
+                    $response["status"] = 200;
+                    $response["message"] = "User goal updated!";
                     
-            $workout = insert_workout($conn,$user_id,null);
-              $food=insert_Food($conn,$user_id,null);
-
-    
+                    if ($needUpdate && $needUpdate > 2) {
+                        $workout = insert_workout($conn, $user_id, null);
+                        $food = insert_Food($conn, $user_id, null);
+                    }
+                } else {
+                    $response["status"] = 201;
+                    $response["message"] = "No need to update goal or an error occurred";
                 }
-
             } else {
                 $response["status"] = 201;
-                $response["message"] = "No need to update goal or an error occurred: " . $conn->error;
+                $response["message"] = "Error decoding existing user goal JSON";
             }
         } else {
-            $response["status"] = 201;
-            $response["message"] = "Error decoding existing user goal JSON";
+            $response["status"] = 404;
+            $response["message"] = "User not found";
         }
     } else {
         $response["status"] = 404;
-        $response["message"] = "User not found";
+        $response["message"] = "User ID not provided";
     }
-} else {
-    $response["status"] = 404;
-    $response["message"] = "User ID not provided";
+} catch (PDOException $e) {
+    $response["status"] = 500;
+    $response["message"] = "Connection failed: " . $e->getMessage();
 }
 
 echo json_encode($response);
