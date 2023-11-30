@@ -59,8 +59,7 @@ try {
                         
                         // Fetch the last record
                         $lastRecord = $stmt->fetch(PDO::FETCH_ASSOC);
-                        var_dump($lastRecord);
-                        die();
+                      
                         if ($lastRecord) {
                             $id=$lastRecord['workout_id'];
                           
