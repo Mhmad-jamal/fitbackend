@@ -69,13 +69,19 @@ try {
                 $lastRecord = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 if ($lastRecord) {
-                    // Update the created_at column
                     $updateStmt = $conn->prepare("UPDATE `usesr_goal_workout` SET `created_at` = NOW() WHERE `user_id` = :user_id AND `id` = :record_id");
                     $updateStmt->bindParam(':user_id', $user_id);
                     $updateStmt->bindParam(':record_id', $lastRecord['id']);
                     $updateStmt->execute();
                 
-                 
+                    if ($updateStmt->rowCount() > 0) {
+                        // Update successful
+                        echo "Last record found and created_at updated.";
+                    } else {
+                        // Update failed
+                        echo "Last record found, but failed to update created_at.";
+                    }
+                    die();
                 }
                 
                 
