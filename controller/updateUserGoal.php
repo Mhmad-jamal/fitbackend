@@ -53,9 +53,24 @@ try {
                     $response["message"] = "User goal updated!";
                     
                     if ($needUpdate && $needUpdate > 2) {
-                        $workout = insert_workout($conn, $user_id, null);
+                        $stmt = $conn->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = :user_id ORDER BY created_at DESC LIMIT 1");
+                        $stmt->bindParam(':user_id', $user_id);
+                        $stmt->execute();
+                        
+                        // Fetch the last record
+                        $lastRecord = $stmt->fetch(PDO::FETCH_ASSOC);
+                        
+                        if ($lastRecord) {
+                            $id=$lastRecord['workout_id'];
+                             $workout = insert_workout($conn, $user_id, $id);
                        
                         $food = insert_Food($conn, $user_id, null);
+                        }else{
+                            $workout = insert_workout($conn, $user_id, null);
+                       
+                            $food = insert_Food($conn, $user_id, null);
+                        }
+                       
                     }else{
                         $updateQuery = "UPDATE `users_goal` SET  `created_at` = NOW() WHERE `user_id` = :user_id";
                 $updateStmt = $conn->prepare($updateQuery);
@@ -74,14 +89,7 @@ try {
                     $updateStmt->bindParam(':record_id', $lastRecord['id']);
                     $updateStmt->execute();
                 
-                    if ($updateStmt->rowCount() > 0) {
-                        // Update successful
-                        echo "Last record found and created_at updated.";
-                    } else {
-                        // Update failed
-                        echo "Last record found, but failed to update created_at.";
-                    }
-                    die();
+                
                 }
                 
                 
