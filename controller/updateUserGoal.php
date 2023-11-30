@@ -56,6 +56,30 @@ try {
                         $workout = insert_workout($conn, $user_id, null);
                        
                         $food = insert_Food($conn, $user_id, null);
+                    }else{
+                        $updateQuery = "UPDATE `users_goal` SET  `created_at` = NOW() WHERE `user_id` = :user_id";
+                $updateStmt = $conn->prepare($updateQuery);
+                $updateStmt->bindParam(':user_id', $user_id);
+                $updateStmt->execute();
+                $stmt = $conn->prepare("SELECT * FROM `usesr_goal_workout` WHERE user_id = :user_id ORDER BY created_at DESC LIMIT 1");
+                $stmt->bindParam(':user_id', $user_id);
+                $stmt->execute();
+                
+                // Fetch the last record
+                $lastRecord = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if ($lastRecord) {
+                    // Update the created_at column
+                    $updateStmt = $conn->prepare("UPDATE `usesr_goal_workout` SET `created_at` = NOW() WHERE `user_id` = :user_id AND `id` = :record_id");
+                    $updateStmt->bindParam(':user_id', $user_id);
+                    $updateStmt->bindParam(':record_id', $lastRecord['id']);
+                    $updateStmt->execute();
+                
+                 
+                }
+                
+                
+
                     }
                 } else {
                     $response["status"] = 201;
