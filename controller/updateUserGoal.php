@@ -62,6 +62,8 @@ try {
                         
                         if ($lastRecord) {
                             $id=$lastRecord['workout_id'];
+                            var_dump($id);
+                            die();
                              $workout = insert_workout($conn, $user_id, $id);
                        
                         $food = insert_Food($conn, $user_id, null);
