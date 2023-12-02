@@ -45,6 +45,7 @@ if (isset($_GET['limit']) && !empty($_GET['limit']) && !isset($_GET['page'])) {
 $sentence = $connect->prepare($sqlQuery);
 $sentence->execute();
 foreach ($qResults as $key => $value) {
+    var_dump($value["id"]);
     $program = get_food_program_by_id_mobile($connect, $value['id']);
     if ($program !== false) {
         $qResults[$key] = $program;
