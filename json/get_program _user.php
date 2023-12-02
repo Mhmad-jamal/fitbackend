@@ -47,7 +47,6 @@ $sentence->execute();
 $qResults = $sentence->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($qResults as $key => $value) {
-    var_dump($value["id"]);
     $program = get_food_program_by_id_mobile($connect, $value['id']);
     if ($program !== false) {
         $qResults[$key] = $program;
@@ -58,7 +57,6 @@ foreach ($qResults as $key => $value) {
 
 function get_food_program_by_id_mobile($connect, $id)
 {
-    // Assuming $id is validated and sanitized
     $query = "SELECT program_food.*, categories.category_title AS category_title, 
               categories.category_image AS category_image
               FROM program_food
