@@ -23,16 +23,9 @@ header("Access-Control-Allow-Origin: *");
 
 require './app_core.php';
 
-$sqlQuery = "
-    SELECT program_food.*, categories.category_image
-    FROM program_food
-    LEFT JOIN categories ON program_food.category_id = categories.category_id";
+$sqlQuery = "SELECT * FROM `diets_users` WHERE `du_user` = '" . getParamsUser() . "' ORDER BY `id` DESC";
 
-if (getParamsUser()) {
-    $sqlQuery .= " WHERE program_food.id IN (SELECT diets_users.du_diet FROM diets_users WHERE diets_users.du_user = '" . getParamsUser() . "')";
-}
 
-$sqlQuery .= " ORDER BY program_food.id DESC";
 
 if (isset($_GET['page']) && !empty($_GET['page'])) {
     $sqlQuery .= " LIMIT " . $offset . "," . $limit;
@@ -47,7 +40,7 @@ $sentence->execute();
 $qResults = $sentence->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($qResults as $key => $value) {
-    $program = get_food_program_by_id_mobile($connect, $value['id']);
+    $program = get_food_program_by_id_mobile($connect, $value['du_diet']);
     if ($program !== false) {
         $qResults[$key] = $program;
     }
