@@ -64,12 +64,7 @@
    <label class="control-label">Duration</label>
    <input type="text" value="" name="workout_duration" class="form-control" required>
 
-   <label class="control-label">Price</label>
-   <select class="form-control" name="workout_price">
-   <option value="-" selected>-</option>
-   <option value="free">Free</option>
-   <option value="premium">Premium</option>
-   </select>
+<input type="hidden" name="workout_price" value="free">  
    <label class="control-label">Place</label>
    <select class="form-control" name="place" required="">
    <?php foreach($place_lists as $place_list): ?>
