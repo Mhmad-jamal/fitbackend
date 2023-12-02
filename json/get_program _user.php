@@ -153,7 +153,6 @@ return $program;
         return false;
     }
 }
-var_dump($new_arr);
-die();
-echo json_encode($qResults, JSON_NUMERIC_CHECK);
+
+echo json_encode($new_arr, JSON_NUMERIC_CHECK);
 ?>
