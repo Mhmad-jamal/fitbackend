@@ -41,8 +41,7 @@ $qResults = $sentence->fetchAll(PDO::FETCH_ASSOC);
 $new_arr = array();
 foreach ($qResults as $key => $value) {
     $program = get_food_program_by_id_mobile($connect, $value['du_diet']);
-  echo json_encode($program);
-  die();
+  
     if ($program !== false) {
         array_push($new_arr, $program);
     }
