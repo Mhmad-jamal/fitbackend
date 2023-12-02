@@ -89,6 +89,8 @@ foreach ($day1_values as $diet_id) {
 }
 
 $diets_data_day2 = [];
+var_dump($diets_data_day1);
+die();
 foreach ($day2_values as $diet_id) {
     // Fetch data for each ID from the "diets" table
     $diet_data = get_diet_per_id($connect, $diet_id);
