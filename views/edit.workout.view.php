@@ -67,9 +67,8 @@
 
    <label class="control-label">Equipment</label>
    <select class="form-control" name="workout_equipment" required>
-    <option value="<?php echo $workout['workout_equipment']; ?>"><?php echo $workout['equipment_title']; ?></option>
     <?php foreach($equipments_lists as $equipment_list): ?>
-        <option value="<?php echo $equipment_list['equipment_id']; ?>" <?php echo ($workout['workout_equipment'] == $equipment_list["equipment_id"]) ? "selected" : ""; ?>>
+        <option value="<?php echo $equipment_list['equipment_id']; ?>"  <?php echo ($workout['workout_equipment'] == $equipment_list["equipment_id"]) ? "selected" : ""; ?>>
             <?php echo $equipment_list['equipment_title']; ?>
         </option>
     <?php endforeach; ?>
