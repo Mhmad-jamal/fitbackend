@@ -72,27 +72,8 @@
    <label class="control-label">Duration</label>
    <input type="text" value="<?php echo $workout['workout_duration']; ?>" name="workout_duration" class="form-control" required>
 
-  <label class="control-label">Price</label>
+   <input type="hidden" name="workout_price" value="free">  
 
-  <select class="custom-select form-control" name="workout_price">
-    <?php
-    if($workout['workout_price'] == 'free')
-    {
-      echo '<option value="-">-</option>';
-      echo '<option value="free" selected="selected">Free</option>';
-      echo '<option value="premium">Premium</option>';
-    }
-    else if($workout['workout_price'] == 'premium') {
-      echo '<option value="-">-</option>';
-      echo '<option value="premium" selected="selected">Premium</option>';
-      echo '<option value="free">Free</option>';
-    }else{
-      echo '<option value="-" selected="selected">-</option>';
-      echo '<option value="free">Free</option>';
-      echo '<option value="premium">Premium</option>';
-    }
-    ?>
-  </select>
    <label class="control-label">Place</label>
    <select class="form-control" name="place" required="">
    <?php foreach($place_lists as $place_list): ?>

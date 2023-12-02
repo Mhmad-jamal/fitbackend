@@ -31,17 +31,7 @@
       }
       }
     },
-    { "mData": null , "width": "5%", "className":"status text-center",
-     "mRender" : function (data) {
-      if (data.workout_price == 'free') {
-        return '<span>Free</span>';
-      }else if(data.workout_price == 'premium') {
-        return '<span>Premium</span>';
-      }else{
-        return '<span>-</span>';
-      }
-      }
-    },
+  
     { "mData": null,
     "width": "13%",
     "className": "text-center",
@@ -87,7 +77,6 @@
                 <th>Equipment</th>
                 <th>Duration</th>
                 <th>Status</th>
-                <th>Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
