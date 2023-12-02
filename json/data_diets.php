@@ -80,7 +80,8 @@ $sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 		$fat = isset($row['diet_fat']) ? $row['diet_fat'] : null;
 		$time = isset($row['diet_time']) ? $row['diet_time'] : null;
 		$servings = isset($row['diet_servings']) ? $row['diet_servings'] : null;
-		$price =
+		$price = isset($row['diet_price']) ? $row['diet_price'] : null;
+$link = isset($row['link']) ? $row['link'] : null;
 		
 
 		$data[] = array(
