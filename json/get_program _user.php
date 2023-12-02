@@ -38,11 +38,11 @@ if (isset($_GET['limit']) && !empty($_GET['limit']) && !isset($_GET['page'])) {
 $sentence = $connect->prepare($sqlQuery);
 $sentence->execute();
 $qResults = $sentence->fetchAll(PDO::FETCH_ASSOC);
-
+$new_arr = array();
 foreach ($qResults as $key => $value) {
     $program = get_food_program_by_id_mobile($connect, $value['du_diet']);
     if ($program !== false) {
-        $qResults[$key] = $program;
+        array_push($new_arr, $program);
     }
 }
 
@@ -89,8 +89,7 @@ foreach ($day1_values as $diet_id) {
 }
 
 $diets_data_day2 = [];
-var_dump($diets_data_day1);
-die();
+
 foreach ($day2_values as $diet_id) {
     // Fetch data for each ID from the "diets" table
     $diet_data = get_diet_per_id($connect, $diet_id);
@@ -154,6 +153,7 @@ return $program;
         return false;
     }
 }
-
+var_dump($new_arr);
+die();
 echo json_encode($qResults, JSON_NUMERIC_CHECK);
 ?>
