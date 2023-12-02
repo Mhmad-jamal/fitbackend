@@ -23,7 +23,10 @@ header("Access-Control-Allow-Origin: *");
 
 require './app_core.php';
 
-$sqlQuery = "SELECT * FROM program_food";
+$sqlQuery = "
+    SELECT program_food.*, categories.category_image
+    FROM program_food
+    LEFT JOIN categories ON program_food.category_id = categories.category_id";
 
 if (getParamsUser()) {
     $sqlQuery .= " WHERE program_food.id IN (SELECT diets_users.du_diet FROM diets_users WHERE diets_users.du_user = '" . getParamsUser() . "')";
