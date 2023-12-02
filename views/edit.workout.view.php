@@ -39,11 +39,14 @@
 
    <label class="control-label">Goal</label>
    <select class="form-control" name="workout_goal" required>
-   <option value="<?php echo $workout['workout_goal']; ?>" selected><?php echo $workout['goal_title']; ?></option>
     <?php foreach($goals_lists as $goals_list): ?>
-   <option value="<?php echo $goals_list['goal_id']; ?>"><?php echo $goals_list['goal_title']; ?></option>
+        <option value="<?php echo $goals_list['goal_id']; ?>" <?php echo ($workout['workout_goal'] == $goals_list["goal_id"]) ? "selected" : ""; ?>>
+            <?php echo $goals_list['goal_title']; ?>
+        </option>
     <?php endforeach; ?>
-   </select>
+</select>
+
+
 
    <label class="control-label">Level</label>
    <select class="form-control" name="workout_level" required>
@@ -55,19 +58,23 @@
 
    <label class="control-label">Bodypart</label>
    <select class="form-control" name="workout_bodypart" required>
-   <option value="<?php echo $workout['workout_bodypart']; ?>" selected><?php echo $workout['bodypart_title']; ?></option>
     <?php foreach($bodyparts_lists as $bodypart_list): ?>
-   <option value="<?php echo $bodypart_list['bodypart_id']; ?>"><?php echo $bodypart_list['bodypart_title']; ?></option>
+        <option value="<?php echo $bodypart_list['bodypart_id']; ?>" <?php echo ($workout['workout_bodypart'] == $bodypart_list["bodypart_id"]) ? "selected" : ""; ?>>
+            <?php echo $bodypart_list['bodypart_title']; ?>
+        </option>
     <?php endforeach; ?>
-   </select>
+</select>
 
    <label class="control-label">Equipment</label>
    <select class="form-control" name="workout_equipment" required>
-   <option value="<?php echo $workout['workout_equipment']; ?>" selected><?php echo $workout['equipment_title']; ?></option>
+    <option value="<?php echo $workout['workout_equipment']; ?>"><?php echo $workout['equipment_title']; ?></option>
     <?php foreach($equipments_lists as $equipment_list): ?>
-   <option value="<?php echo $equipment_list['equipment_id']; ?>"><?php echo $equipment_list['equipment_title']; ?></option>
+        <option value="<?php echo $equipment_list['equipment_id']; ?>" <?php echo ($workout['workout_equipment'] == $equipment_list["equipment_id"]) ? "selected" : ""; ?>>
+            <?php echo $equipment_list['equipment_title']; ?>
+        </option>
     <?php endforeach; ?>
-   </select>
+</select>
+
 
    <label class="control-label">Duration</label>
    <input type="text" value="<?php echo $workout['workout_duration']; ?>" name="workout_duration" class="form-control" required>
