@@ -65,7 +65,12 @@ $statment->execute(array(
 		));
 
 
-$statment = $connect->prepare('DELETE FROM exercises_bodyparts WHERE exercise_id = :exercise_id');
+
+
+foreach ($bodyparts_lists as $option_value)
+{
+   $idbodypart = $option_value;
+   $statment = $connect->prepare('DELETE FROM exercises_bodyparts WHERE exercise_id = :exercise_id');
   $statment->bindParam(':exercise_id',$exercise_id);
   $statment->execute();
 
@@ -73,12 +78,8 @@ $statment = $connect->prepare('DELETE FROM exercises_bodyparts WHERE exercise_id
   $statment->bindParam(':bodypart_id', $idbodypart);
   $statment->bindParam(':exercise_id', $exercise_id);
 
-  $statment->execute();
-
-foreach ($bodyparts_lists as $option_value)
-{
-   $idbodypart = $option_value;
    $statment->execute();
+
 }
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
