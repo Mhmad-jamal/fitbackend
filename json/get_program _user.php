@@ -53,7 +53,12 @@ foreach ($qResults as $key => $value) {
     }
 }
 
-
+function get_diet_per_id($connect, $id_diet)
+{
+    $sentence = $connect->query("SELECT  * from diets WHERE diet_id = $id_diet  LIMIT 1");
+    $sentence = $sentence->fetchAll();
+    return ($sentence) ? $sentence : false;
+}
 
 function get_food_program_by_id_mobile($connect, $id)
 {
