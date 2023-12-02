@@ -43,7 +43,8 @@ $sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 	}
 
 	if(getParamsUser()){
-
+var_dump("@@@");
+die();
         $sqlQuery .= " AND diets.diet_id IN (SELECT diets_users.du_diet FROM diets_users WHERE diets_users.du_user = '".getParamsUser()."')";
 	}
 
