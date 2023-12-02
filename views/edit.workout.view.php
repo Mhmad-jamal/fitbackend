@@ -47,11 +47,12 @@
 
    <label class="control-label">Level</label>
    <select class="form-control" name="workout_level" required>
-   <option value="<?php echo $workout['workout_level']; ?>" selected><?php echo $workout['level_title']; ?></option>
-    <?php foreach($levels_lists as $levels_list): ?>
-   <option value="<?php echo $levels_list['level_id']; ?>"><?php echo $levels_list['level_title']; ?></option>
+    <option value="<?php echo $workout['workout_level']; ?>"><?php echo $workout['level_title']; ?></option>
+    <?php foreach ($levels_lists as $levels_list): ?>
+        <option value="<?php echo $levels_list['level_id']; ?>" <?php echo ($workout['workout_level'] == $levels_list['level_id']) ? 'selected' : ''; ?>><?php echo $levels_list['level_title']; ?></option>
     <?php endforeach; ?>
-   </select>
+</select>
+
 
    <label class="control-label">Bodypart</label>
    <select class="form-control" name="workout_bodypart" required>
