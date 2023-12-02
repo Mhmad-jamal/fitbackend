@@ -67,21 +67,21 @@ $sqlQuery = "SELECT * FROM diets WHERE diet_status = 1";
 
 	foreach ($qResults as $row) {
 
-		$id = $row['diet_id'];
-		$title = $row['diet_title'];
-		$description = $row['diet_description'];
-		$ingredients = $row['diet_ingredients'];
-		$instructions = $row['diet_directions'];
-		$image = $row['diet_image'];
-		$category = $row['category_title'];
-		$calories = $row['diet_calories'];
-		$carbs = $row['diet_carbs'];
-		$protein = $row['diet_protein'];
-		$fat = $row['diet_fat'];
-		$time = $row['diet_time'];
-		$servings = $row['diet_servings'];
-		$price = $row['diet_price'];
-		$link = $row['link'];
+		$id = isset($row['diet_id']) ? $row['diet_id'] : null;
+		$title = isset($row['diet_title']) ? $row['diet_title'] : null;
+		$description = isset($row['diet_description']) ? $row['diet_description'] : null;
+		$ingredients = isset($row['diet_ingredients']) ? $row['diet_ingredients'] : null;
+		$instructions = isset($row['diet_directions']) ? $row['diet_directions'] : null;
+		$image = isset($row['diet_image']) ? $row['diet_image'] : null;
+		$category = isset($row['category_title']) ? $row['category_title'] : "";
+		$calories = isset($row['diet_calories']) ? $row['diet_calories'] : null;
+		$carbs = isset($row['diet_carbs']) ? $row['diet_carbs'] : null;
+		$protein = isset($row['diet_protein']) ? $row['diet_protein'] : null;
+		$fat = isset($row['diet_fat']) ? $row['diet_fat'] : null;
+		$time = isset($row['diet_time']) ? $row['diet_time'] : null;
+		$servings = isset($row['diet_servings']) ? $row['diet_servings'] : null;
+		$price =
+		
 
 		$data[] = array(
 			'id'=> $id,
