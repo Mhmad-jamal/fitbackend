@@ -317,7 +317,21 @@ function not_selected_exercises7($connect)
 function get_exercises_list($connect)
 {
 
-    $sentence = $connect->prepare('SELECT exercises.*, GROUP_CONCAT(bodyparts.bodypart_title) AS bodypart_title FROM exercises JOIN exercises_bodyparts ON exercises_bodyparts.exercise_id = exercises.exercise_id JOIN bodyparts ON bodyparts.bodypart_id = exercises_bodyparts.bodypart_id GROUP BY exercises.exercise_id');
+    $sentence = $connect->prepare('SELECT
+    exercises.*,
+    GROUP_CONCAT(bodyparts.bodypart_title) AS bodypart_title,
+    levels.level_title
+FROM
+    exercises
+JOIN
+    exercises_bodyparts ON exercises_bodyparts.exercise_id = exercises.exercise_id
+JOIN
+    bodyparts ON bodyparts.bodypart_id = exercises_bodyparts.bodypart_id
+JOIN
+    levels ON levels.level_id = exercises.exercise_level -- Include the JOIN for levels
+GROUP BY
+    exercises.exercise_id;
+');
     $sentence->execute(array());
     return $sentence->fetchAll();
 }

@@ -83,7 +83,7 @@
    <input type="hidden" value="1" name="day_1">
    <select multiple="multiple" class="my-select form-control" name="exercise_id1[]">
     <?php foreach($exercises_lists1 as $exercises_list1): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list1['exercise_image']; ?>" value="<?php echo $exercises_list1['exercise_id']; ?>"><?php echo $exercises_list1['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list1['exercise_image']; ?>" value="<?php echo $exercises_list1['exercise_id']; ?>"><?php echo $exercises_list1['exercise_title'].'  -  '.$exercises_list1['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -91,7 +91,7 @@
       <input type="hidden" value="2" name="day_2">
    <select multiple="multiple" class="my-select form-control" name="exercise_id2[]">
     <?php foreach($exercises_lists2 as $exercises_list2): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list2['exercise_image']; ?>" value="<?php echo $exercises_list2['exercise_id']; ?>"><?php echo $exercises_list2['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list2['exercise_image']; ?>" value="<?php echo $exercises_list2['exercise_id']; ?>"><?php echo $exercises_list2['exercise_title'].'  -  '.$exercises_list2['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -99,7 +99,7 @@
      <input type="hidden" value="3" name="day_3">
    <select multiple="multiple" class="my-select form-control" name="exercise_id3[]">
     <?php foreach($exercises_lists3 as $exercises_list3): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list3['exercise_image']; ?>" value="<?php echo $exercises_list3['exercise_id']; ?>"><?php echo $exercises_list3['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list3['exercise_image']; ?>" value="<?php echo $exercises_list3['exercise_id']; ?>"><?php echo $exercises_list3['exercise_title'].'  -  '.$exercises_list3['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -107,7 +107,7 @@
      <input type="hidden" value="4" name="day_4">
    <select multiple="multiple" class="my-select form-control" name="exercise_id4[]">
     <?php foreach($exercises_lists4 as $exercises_list4): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list4['exercise_image']; ?>" value="<?php echo $exercises_list4['exercise_id']; ?>"><?php echo $exercises_list4['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list4['exercise_image']; ?>" value="<?php echo $exercises_list4['exercise_id']; ?>"><?php echo $exercises_list4['exercise_title'].'  -  '.$exercises_list4['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -115,7 +115,7 @@
      <input type="hidden" value="5" name="day_5">
    <select multiple="multiple" class="my-select form-control" name="exercise_id5[]">
     <?php foreach($exercises_lists5 as $exercises_list5): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list5['exercise_image']; ?>" value="<?php echo $exercises_list5['exercise_id']; ?>"><?php echo $exercises_list5['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list5['exercise_image']; ?>" value="<?php echo $exercises_list5['exercise_id']; ?>"><?php echo $exercises_list5['exercise_title'].'  -  '.$exercises_list5['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -123,7 +123,7 @@
      <input type="hidden" value="6" name="day_6">
    <select multiple="multiple" class="my-select form-control" name="exercise_id6[]">
     <?php foreach($exercises_lists6 as $exercises_list6): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list6['exercise_image']; ?>" value="<?php echo $exercises_list6['exercise_id']; ?>"><?php echo $exercises_list6['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list6['exercise_image']; ?>" value="<?php echo $exercises_list6['exercise_id']; ?>"><?php echo $exercises_list6['exercise_title'].'  -  '.$exercises_list6['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -131,7 +131,7 @@
      <input type="hidden" value="7" name="day_7">
    <select multiple="multiple" class="my-select form-control" name="exercise_id7[]">
     <?php foreach($exercises_lists7 as $exercises_list7): ?>
-   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list7['exercise_image']; ?>" value="<?php echo $exercises_list7['exercise_id']; ?>"><?php echo $exercises_list7['exercise_title']; ?></option>
+   <option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list7['exercise_image']; ?>" value="<?php echo $exercises_list7['exercise_id']; ?>"><?php echo $exercises_list7['exercise_title'].'  -  '.$exercises_list7['level_title']; ?></option>
     <?php endforeach; ?>
    </select>
 

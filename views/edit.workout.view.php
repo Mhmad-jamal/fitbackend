@@ -117,7 +117,7 @@ $single_name_exercise1 = explode(',', $multiple_name_exercise1);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists1 as $exercises_list1): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list1['exercise_image']; ?>" value="<?php echo $exercises_list1['exercise_id']; ?>"><?php echo $exercises_list1['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list1['exercise_image']; ?>" value="<?php echo $exercises_list1['exercise_id']; ?>"><?php echo $exercises_list1['exercise_title'].' - '.$exercises_list1["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -150,7 +150,7 @@ $single_name_exercise2 = explode(',', $multiple_name_exercise2);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists2 as $exercises_list2): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list2['exercise_image']; ?>" value="<?php echo $exercises_list2['exercise_id']; ?>"><?php echo $exercises_list2['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list2['exercise_image']; ?>" value="<?php echo $exercises_list2['exercise_id']; ?>"><?php echo $exercises_list2['exercise_title'].' - '.$exercises_list2["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -184,7 +184,7 @@ $single_name_exercise3 = explode(',', $multiple_name_exercise3);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists3 as $exercises_list3): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list3['exercise_image']; ?>" value="<?php echo $exercises_list3['exercise_id']; ?>"><?php echo $exercises_list3['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list3['exercise_image']; ?>" value="<?php echo $exercises_list3['exercise_id']; ?>"><?php echo $exercises_list3['exercise_title'].' - '.$exercises_list3["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -218,7 +218,7 @@ $single_name_exercise4 = explode(',', $multiple_name_exercise4);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists4 as $exercises_list4): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list4['exercise_image']; ?>" value="<?php echo $exercises_list4['exercise_id']; ?>"><?php echo $exercises_list4['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list4['exercise_image']; ?>" value="<?php echo $exercises_list4['exercise_id']; ?>"><?php echo $exercises_list4['exercise_title'].' - '.$exercises_list4["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -252,7 +252,7 @@ $single_name_exercise5 = explode(',', $multiple_name_exercise5);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists5 as $exercises_list5): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list5['exercise_image']; ?>" value="<?php echo $exercises_list5['exercise_id']; ?>"><?php echo $exercises_list5['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list5['exercise_image']; ?>" value="<?php echo $exercises_list5['exercise_id']; ?>"><?php echo $exercises_list5['exercise_title'].' - '.$exercises_list5["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -285,7 +285,7 @@ $single_name_exercise6 = explode(',', $multiple_name_exercise6);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists6 as $exercises_list6): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list6['exercise_image']; ?>" value="<?php echo $exercises_list6['exercise_id']; ?>"><?php echo $exercises_list6['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list6['exercise_image']; ?>" value="<?php echo $exercises_list6['exercise_id']; ?>"><?php echo $exercises_list6['exercise_title'].' - '.$exercises_list6["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
@@ -318,7 +318,7 @@ $single_name_exercise7 = explode(',', $multiple_name_exercise7);
 <?php endforeach; ?>
 
 <?php foreach($exercises_lists7 as $exercises_list7): ?>
-<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list7['exercise_image']; ?>" value="<?php echo $exercises_list7['exercise_id']; ?>"><?php echo $exercises_list7['exercise_title']; ?></option>
+<option data-img-src="<?php echo SITE_URL ?>/images/<?php echo $exercises_list7['exercise_image']; ?>" value="<?php echo $exercises_list7['exercise_id']; ?>"><?php echo $exercises_list7['exercise_title'].' - '.$exercises_list7["level_title"]; ?></option>
     <?php endforeach; ?>
    </select>
 
